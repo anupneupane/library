@@ -3,7 +3,13 @@
 <p>
   <b>Title:</b>
   <%= @category.title %>
+  <% @category.topics.each do |t| %>
+  <br>
+  <%= link_to(t.title, t) %>
+  <% end %>
 </p>
+
+
 
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

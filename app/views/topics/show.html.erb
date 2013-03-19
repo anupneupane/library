@@ -3,8 +3,12 @@
 <p>
   <b>Title:</b>
   <%= @topic.title %>
+  <% @topic.links.each do |l| %>
+  <br>
+  <%= link_to(l.url, l.url) %>
+  <% end %>
 </p>
 
 
 <%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Back', @topic.category %>
