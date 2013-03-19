@@ -7,9 +7,9 @@ class Topic < ActiveRecord::Base
     self.save
   end
 
-  def best_link=(link)
-    if link.topic == self 
-      self.best_link_id = link.id
+  def best_link=(link_instance)
+    if link_instance.topic == self 
+      self.best_link_id = link_instance.id
       self.save
     else
       raise "This link doesn't belong to this topic"
