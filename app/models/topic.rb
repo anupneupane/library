@@ -7,11 +7,19 @@ class Topic < ActiveRecord::Base
     self.save
   end
 
-  def best_link(link)
-    if link
-      self.best_link_id = link_id
+  def best_link=(link)
+    if link.topic == self 
+      self.best_link_id = link.id
+      self.save
+    else
+      raise "This link doesn't belong to this topic"
     end
   end
+
+  def best_link
+    Link.find(self.best_link_id)
+  end
+
 
   # def remove_link(url)
   #   l = self.links.find_by_url(url)
