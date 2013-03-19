@@ -3,6 +3,10 @@
 <p>
   <b>Title:</b>
   <%= @topic.title %>
+  <% if @topic.best_link_id %>
+  <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.
+    <% end %>
+  </p>
   <% @topic.links.each do |l| %>
   <br>
   <%= link_to(l.url, l.url) %>
