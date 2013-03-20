@@ -6,7 +6,7 @@ Library::Application.routes.draw do
 
 
   resources :topics
-
+  post 'topics/:id/add-link' => 'topics#add_link'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
