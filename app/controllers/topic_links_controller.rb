@@ -42,13 +42,19 @@ class TopicLinksController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     
-
-    @link = Link.find_or_create_by_url(params[:topic_link][:link_attributes][:url])
-    @topic.topic_links.where(:link_id => @link.id).first || @topic.topic_links.build(:link_id => @link.id)
+    result = (if ! @link = Link.find_by_url(params[:topic_link][:link_attributes][:url])
+      @topic.topic_links.build(params[:topic_link])
+      "link created"
+    elsif ! @topic.includes_link?(@link)
+      @topic.topic_links.build(:link_id => @link.id)
+      "link associated"
+    else
+      "already a link for this topic"
+    end)
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'topic was successfully created.' }
+        format.html { redirect_to @topic, notice: result }
         format.json { render json: @topic, status: :created, location: @topic }
       else
         format.html { render action: "new" }
