@@ -3,4 +3,13 @@ class Score < ActiveRecord::Base
 
   belongs_to :topic
   belongs_to :link
+
+  def increase_score
+    self.score += 1
+  end
+
+  def decrease_score
+    self.score -= 1
+  end
+
 end
