@@ -41,7 +41,10 @@ class TopicLinksController < ApplicationController
   # POST /topic_links.json
   def create
     @topic = Topic.find(params[:topic_id])
-    @topic.topic_links.build(params[:topic_link])
+    
+
+    @link = Link.find_or_create_by_url(params[:topic_link][:link_attributes][:url])
+    @topic.topic_links.where(:link_id => @link.id).first || @topic.topic_links.build(:link_id => @link.id)
 
     respond_to do |format|
       if @topic.save

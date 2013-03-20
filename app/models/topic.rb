@@ -3,7 +3,6 @@ class Topic < ActiveRecord::Base
   has_many :topic_links
   has_many :links, :through => :topic_links
   belongs_to :category
-  accepts_nested_attributes_for :links
 
   def add_new_link(url)
     self.links.build(:url => url)
