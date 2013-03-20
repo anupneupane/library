@@ -12,9 +12,11 @@
 
   <%= render 'topic_links/form' %>
   <b>Other Links:</b>
-  <% @topic.links.each do |l| %>
+  <% @topic.topic_links.each do |tl| %>
   <br>
-  <%= link_to(l.url, l.url) %>
+  <%= link_to(tl.link.url, tl.link.url) %>
+  <%= tl.score %>
+  <%= button_to 'Up Vote', { :action=>"up_vote", :controller=>"topic_links"} %>
   <% end %>
 </p>
 
