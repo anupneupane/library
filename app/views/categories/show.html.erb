@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @category.title %>
+  <b>Category:</b>
+  <%= @category.title %><br/>
+  <b>Topics:</b>
   <% @category.topics.each do |t| %>
   <br>
   <%= link_to(t.title, t) %>

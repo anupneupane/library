@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
+  <b>Category:</b>
+  <%= @topic.category.title %> <br />
+  <b>Topic:</b>
   <%= @topic.title %>
   <% if @topic.best_link_id %>
   <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.
     <% end %>
   </p>
+  <b>Other Links:</b>
   <% @topic.links.each do |l| %>
   <br>
   <%= link_to(l.url, l.url) %>
