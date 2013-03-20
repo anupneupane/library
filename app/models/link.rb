@@ -1,4 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessible :url, :topic_id
-  belongs_to :topic
+  attr_accessible :url
+  has_many :scores
+  has_many :topics, :through => :scores
 end

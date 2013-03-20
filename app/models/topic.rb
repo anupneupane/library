@@ -1,10 +1,21 @@
 class Topic < ActiveRecord::Base
   attr_accessible :title, :category
-  has_many :links
+
+  has_many :scores
+  has_many :links, :through => :scores
+
   belongs_to :category
 
   def add_new_link(url)
     self.links.build(:url => url)
+    self.save
+  end
+
+  def associate_links(*links)
+    links = links.flatten
+    links.each do |l| 
+      self.links << l
+    end
     self.save
   end
 
