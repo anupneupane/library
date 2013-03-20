@@ -87,7 +87,7 @@ class TopicLinksController < ApplicationController
 
   def up_vote
     raise params.inspect
-    @topic_link = TopicLink.find(params[:id])
+    @topic_link = TopicLink.find(params[:topic_link_id])
     @topic_link.increase_score
   end
 

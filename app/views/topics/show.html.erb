@@ -16,7 +16,7 @@
   <br>
   <%= link_to(tl.link.url, tl.link.url) %>
   <%= tl.score %>
-  <%= button_to 'Up Vote', { :action=>"up_vote", :controller=>"topic_links"} %>
+  <%= button_to 'Up Vote', topic_topic_link_up_vote_path(@topic,tl) %>
   <% end %>
 </p>
 
