@@ -1,10 +1,9 @@
 class Topic < ActiveRecord::Base
   attr_accessible :title, :category
-
-  has_many :scores
-  has_many :links, :through => :scores
-
+  has_many :topic_links
+  has_many :links, :through => :topic_links
   belongs_to :category
+  accepts_nested_attributes_for :links
 
   def add_new_link(url)
     self.links.build(:url => url)

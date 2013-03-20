@@ -1,0 +1,21 @@
+ <%= form_for(@topic_link, :url => topic_topic_links_path(@topic)) do |f| %>
+    <% if @topic_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic_link.errors.count, "error") %> prohibited this topic_link from being saved:</h2>
+
+      <ul>
+      <% @topic_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= f.fields_for(:link) do |l| %>
+        <b>Submit A New Link</b><br/>
+        <%= l.label "Url:" %>
+        <%= l.text_field :url %>
+      <% end %>
+        <%= f.submit "Submit Link" %>
+    </div>
+<% end %>

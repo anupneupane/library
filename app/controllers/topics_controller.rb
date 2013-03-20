@@ -14,7 +14,9 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
-    @link = Link.new
+    @topic_link = @topic.topic_links.build
+    @topic_link.build_link
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -72,6 +74,7 @@ class TopicsController < ApplicationController
 
   # PUT /topics/1/add-link
   def add_link
+    raise params.inspect
     @topic = Topic.find(params[:id])
     @topic.links.build(url: params[:link][:url])
 
