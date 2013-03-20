@@ -14,6 +14,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @link = Link.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -64,6 +65,22 @@ class TopicsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /topics/1/add-link
+  def add_link
+    @topic = Topic.find(params[:id])
+    @topic.links.build(url: params[:link][:url])
+
+    respond_to do |format|
+      if @topic.save
+        format.html { redirect_to @topic, notice: 'Link was successfully submitted.' }
+        format.json { render json: @topic, status: :created, location: @topic }
+      else
+        format.html { redirect_to @topic, notice: 'Link was not successfully submitted.' }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end

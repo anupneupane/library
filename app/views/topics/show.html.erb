@@ -9,6 +9,8 @@
   <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.
     <% end %>
   </p>
+
+  <%= render 'add_link_form' %>
   <b>Other Links:</b>
   <% @topic.links.each do |l| %>
   <br>
