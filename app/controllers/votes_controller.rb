@@ -2,8 +2,13 @@ class VotesController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @topic_link = TopicLink.find(params[:link_id])
-    @topic_link.up_vote(1)
- 
+    vote = @topic_link.votes.build(params[:vote])
+    
+    if vote.type == "up"
+      @topic_link.score +=1
+    elsif vote.type == "down"
+      @topic_link.score -=1
+    end
 
     respond_to do |format|
       if @topic_link.save
