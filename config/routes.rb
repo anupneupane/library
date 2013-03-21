@@ -1,16 +1,12 @@
 Library::Application.routes.draw do
   resources :categories
 
-
-  resources :links
-
-
-
   resources :topics do
-    resources :topic_links do
-      post 'up_vote' => "topic_links#up_vote"
+    resources :topic_links, :only => [:new, :create], :path => "links", :as => "links" do
+      resources :votes, :only => [:create, :destroy]
     end
   end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

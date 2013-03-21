@@ -4,7 +4,6 @@ class TopicLink < ActiveRecord::Base
   belongs_to :topic
   belongs_to :link
 
-  
   accepts_nested_attributes_for :link
 
   def increase_score
