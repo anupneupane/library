@@ -10,6 +10,9 @@ gem 'sqlite3'
 group :development do 
   gem 'pry-rails'
   gem 'awesome_print'
+  #gem 'irbtools'
+  #gem 'terminal-notifier'
+  #gem 'boson-more'
 end
 
 # Gems used only for assets and not required
