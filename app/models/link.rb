@@ -5,8 +5,7 @@ class Link < ActiveRecord::Base
 
 
   def normalize_link(url)
-    url = url.downcase
-    url.insert(0,"http://") unless url.include?("http://")
+    url.downcase.insert(0,"http://") unless url.include?("http://")
   end
 
 end
