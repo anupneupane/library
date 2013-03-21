@@ -9,12 +9,10 @@ class TopicLink < ActiveRecord::Base
 
   accepts_nested_attributes_for :link
 
-  def increase_score
-    self.score += 1
+  def up_vote(user_id)
+    self.votes.build(user_id: user_id)
+    self.save
   end
 
-  def decrease_score
-    self.score -= 1
-  end
 
 end

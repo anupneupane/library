@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @topic_link = TopicLink.find(params[:link_id])
-    @topic_link.increase_score
+    @topic_link.up_vote(1)
  
 
     respond_to do |format|
