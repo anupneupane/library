@@ -1,8 +1,10 @@
 class Topic < ActiveRecord::Base
   attr_accessible :title, :category_id
+
+  belongs_to :category
+
   has_many :topic_links
   has_many :links, :through => :topic_links
-  belongs_to :category
 
   def add_new_link(url)
     self.links.build(:url => url)

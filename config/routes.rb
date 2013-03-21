@@ -1,4 +1,10 @@
 Library::Application.routes.draw do
+  resources :votes
+
+
+  resources :users
+
+
   resources :categories
 
   resources :topics do
