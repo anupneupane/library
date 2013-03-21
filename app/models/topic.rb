@@ -19,9 +19,9 @@ class Topic < ActiveRecord::Base
     self.save
   end
 
-  def best_link=(link_instance)
-    if link_instance.topic == self 
-      self.best_link_id = link_instance.id
+  def best_link=(topic_link_instance)
+    if topic_link_instance.topic == self
+      self.best_link_id = topic_link_instance.link.id
       self.save
     else
       raise "This link doesn't belong to this topic"
@@ -29,7 +29,11 @@ class Topic < ActiveRecord::Base
   end
 
   def best_link
-    Link.find(self.best_link_id)
+    begin
+      Link.find(self.best_link_id)
+    rescue
+      nil
+    end
   end
 
   def includes_link?(link)
@@ -44,6 +48,11 @@ class Topic < ActiveRecord::Base
       self.topic_links.build(:link => link)
       return 10
     end
+
+  end
+
+  def order_topic_links_by_score
+    self.topic_links.order(:score).reverse
   end
 
   # def remove_link(url)
