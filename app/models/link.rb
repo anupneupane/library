@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessible :url
+  attr_accessible :url, :title, :description
   has_many :topic_links
   has_many :topics, :through => :topic_links
 

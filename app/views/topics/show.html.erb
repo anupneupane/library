@@ -15,11 +15,13 @@
   <%# raise @topic.topic_links.inspect %>
   <% @topic.topic_links.each do |tl| %>
 
-  <br>
-  <%= link_to(tl.link.url, tl.link.url) %>
-  <%= tl.score %>
-  <%#= raise tl.id.inspect %>
-  <%= button_to 'Up Vote', topic_link_votes_path(@topic, tl) %>
+    <br>
+    <%= tl.link.title %><br/>
+    <%= tl.link.description %><br/>
+    <%= link_to(tl.link.url, tl.link.url) %>
+    <%= tl.score %>
+    <%#= raise tl.id.inspect %>
+    <%= button_to 'Up Vote', topic_link_votes_path(@topic, tl) %>
 
   <% end %>
 </p>

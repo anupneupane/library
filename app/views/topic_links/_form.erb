@@ -13,6 +13,10 @@
     <div class="field">
       <%= f.fields_for(:link) do |l| %>
         <b>Submit A New Link</b><br/>
+        <%= l.label "Title:" %>
+        <%= l.text_field :title %><br>
+        <%= l.label "Description:" %><br/>
+        <%= l.text_area :description, :rows=> 4 %><br/>
         <%= l.label "Url:" %>
         <%= l.text_field :url %>
       <% end %>
