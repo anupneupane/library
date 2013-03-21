@@ -15,7 +15,7 @@ class TopicLink < ActiveRecord::Base
     return v
   end
 
-  def score_vote_kind(vote)
+  def update_score_for(vote)
     self.upvote if vote.kind == "up"
     self.downvote if vote.kind == "down"
   end

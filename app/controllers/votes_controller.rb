@@ -3,12 +3,9 @@ class VotesController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @topic_link = TopicLink.find(params[:link_id])
 
-    if ! Vote.where(user_id: params[:vote][:user_id], topic_link_id: @topic_link.id, kind: params[:vote][:kind] ).first
-
+    if ! Vote.check_existing_vote(params[:vote][:user_id], @topic_link.id, params[:vote][:kind])
       @vote = @topic_link.cast_vote(params[:vote])
-      @topic_link.score_vote_kind(@vote)
-
-    else
+      @topic_link.update_score_for(@vote)
     end
    
     respond_to do |format|
