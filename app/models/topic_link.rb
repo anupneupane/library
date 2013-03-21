@@ -9,9 +9,23 @@ class TopicLink < ActiveRecord::Base
 
   accepts_nested_attributes_for :link
 
-  def up_vote(user_id)
-
+  def cast_vote(params)
+    self.votes.build(params)
   end
+
+  def score_vote_type(vote)
+    self.upvote if vote.type == "up"
+    self.downvote if vote.type == "down"
+  end
+
+  def upvote
+    self.score +=1
+  end
+
+  def downvote
+    self.score -=1
+  end
+
 
 
 end
