@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  attr_accessible :title, :category
+  attr_accessible :title, :category_id
   has_many :topic_links
   has_many :links, :through => :topic_links
   belongs_to :category

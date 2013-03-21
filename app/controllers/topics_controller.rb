@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
-    @topic_link = @topic.topic_links.build
+    @topic_link = TopicLink.new
     @topic_link.build_link
 
 

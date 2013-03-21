@@ -1,4 +1,4 @@
- <%= form_for(@topic_link, :url => topic_topic_links_path(@topic)) do |f| %>
+ <%= form_for(@topic_link, :url => topic_links_path(@topic)) do |f| %>
     <% if @topic_link.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@topic_link.errors.count, "error") %> prohibited this topic_link from being saved:</h2>
