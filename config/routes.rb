@@ -5,8 +5,11 @@ Library::Application.routes.draw do
   resources :links
 
 
+
   resources :topics do
-    resources :topic_links
+    resources :topic_links do
+      post 'up_vote' => "topic_links#up_vote"
+    end
   end
 
   # The priority is based upon order of creation:
