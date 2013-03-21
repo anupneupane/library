@@ -22,13 +22,13 @@
     <%= tl.score %>
 
     <form action="/topics/<%=@topic.id%>/links/<%=tl.id%>/votes" method="post">
-      <input type="hidden" name="vote[type]" value="up">
-      <input type="hidden" name="vote[user_id]" value=1>
+      <input type="hidden" name="vote[kind]" value="up">
+      <input type="hidden" name="vote[user_id]" value=2>
       <input type="submit" value="Vote Up" />
     </form>
     <form action="/topics/<%=@topic.id%>/links/<%=tl.id%>/votes" method="post">
-      <input type="hidden" name="vote[type]" value="down">
-      <input type="hidden" name="vote[user_id]" value=1>
+      <input type="hidden" name="vote[kind]" value="down">
+      <input type="hidden" name="vote[user_id]" value=2>
       <input type="submit" value="Vote Down" />
     </form>
   <% end %>
