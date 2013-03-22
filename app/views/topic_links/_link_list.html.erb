@@ -1,29 +1,28 @@
+<tr class="link_item">
+  <td class="span1">
+    
+  <% if logged_in? %>
+    <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+      <input type="hidden" name="vote[kind]" value="up">
+      <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+      <input type="submit" value="Vote Up" />
+    <% end %>
+  <% end %>
+    
+    <%= tl.score %>
 
-      <tr class="link_item">
-        <td class="span1">
-          
-        <% if logged_in? %>
-          <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-            <input type="hidden" name="vote[kind]" value="up">
-            <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-            <input type="submit" value="Vote Up" />
-          <% end %>
-        <% end %>
-          
-          <%= tl.score %>
+  <% if logged_in? %>
+    <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+      <input type="hidden" name="vote[kind]" value="down">
+      <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+      <input type="submit" value="Vote Down" />
+    <% end %>
+  <% end%>
 
-        <% if logged_in? %>
-          <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-            <input type="hidden" name="vote[kind]" value="down">
-            <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-            <input type="submit" value="Vote Down" />
-          <% end %>
-        <% end%>
-
-        </td>
-        <td class="span8">
-        <%= tl.link.title %><br/>
-        <%= tl.link.description %><br/>
-        <%= link_to(tl.link.url, tl.link.url) %>
-        </td>
-      </tr>
+  </td>
+  <td class="span8">
+  <%= tl.link.title %><br/>
+  <%= tl.link.description %><br/>
+  <%= link_to(tl.link.url, tl.link.url) %>
+  </td>
+</tr>
