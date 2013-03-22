@@ -15,11 +15,10 @@
     <%= render partial: "layouts/menubar", locals: {topic: @topic} %>
     
 
-    <div class="container">
-      <%= notice %>
-      <div class="row">
-        <div class="span9"><%= yield %></div>
-        <div class="span3">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span8"><%= yield %></div>
+        <div class="span3 offset1">
           <%= render partial: "layouts/sidebar" %>          
         </div>
       </div>

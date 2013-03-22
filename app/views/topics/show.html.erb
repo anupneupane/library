@@ -3,10 +3,7 @@
 <div>
 
   <div>
-    <b>Category:</b>
-      <%= @topic.category.title %> <br />
-    <b>Topic:</b>
-      <%= @topic.title %>
+    <h3><%= @topic.title %></h3>
     <% if @topic.best_link %>
       <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
     <% end %>

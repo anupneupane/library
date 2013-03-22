@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+.container-fluid{
+  max-width: 1170px;
+  margin-left:auto;
+  margin-right: auto;
+}
