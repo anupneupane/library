@@ -1,43 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Category:</b>
-  <%= @topic.category.title %> <br />
-  <b>Topic:</b>
-  <%= @topic.title %>
-  <% if @topic.best_link %>
-  <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.
-    
-  </p>
-  <% end %>
+<div>
+
+  <div>
+    <b>Category:</b>
+      <%= @topic.category.title %> <br />
+    <b>Topic:</b>
+      <%= @topic.title %>
+    <% if @topic.best_link %>
+      <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
+    <% end %>
+  </div>
+  
+
   <% if logged_in? %>
    <%= render 'topic_links/form' %>
   <% end %>
 
-  <b>All Links:</b>
-  <% @topic.order_topic_links_by_score.each do |tl| %>
+  <div>
+    <b>All Links:</b>
+    <ul>
 
-    <br>
-    <%= tl.link.title %><br/>
-    <%= tl.link.description %><br/>
-    <%= link_to(tl.link.url, tl.link.url) %>
-    <%= tl.score %>
-    <% if logged_in? %>
-      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-        <input type="hidden" name="vote[kind]" value="up">
-        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-        <input type="submit" value="Vote Up" />
-      <% end %>
+    <% @topic.order_topic_links_by_score.each do |tl| %>
+      <li class="divider">
+        <%= tl.link.title %><br/>
+        <%= tl.link.description %><br/>
+        <%= link_to(tl.link.url, tl.link.url) %>
+        <%= tl.score %>
+        <% if logged_in? %>
+          <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+            <input type="hidden" name="vote[kind]" value="up">
+            <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+            <input type="submit" value="Vote Up" />
+          <% end %>
 
-      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-        <input type="hidden" name="vote[kind]" value="down">
-        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-        <input type="submit" value="Vote Down" />
+          <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+            <input type="hidden" name="vote[kind]" value="down">
+            <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+            <input type="submit" value="Vote Down" />
+          <% end %>
+        <% end%>
+      </li>
     <% end %>
-    <% end %>
-  <% end %>
-</p>
 
+    </ul>
+  </div>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', @topic.category %>
+  <div>
+  <%= link_to 'Edit', edit_topic_path(@topic) %> |
+  <%= link_to 'Back', @topic.category %>
+  </div>
+</div>

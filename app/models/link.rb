@@ -4,7 +4,7 @@ class Link < ActiveRecord::Base
   has_many :topic_links
   has_many :topics, :through => :topic_links
 
-  def normalize_link(url)
+  def self.normalize_url(url)
     url.downcase.insert(0,"http://") unless url.include?("http://")
   end
 

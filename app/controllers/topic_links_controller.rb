@@ -41,7 +41,7 @@ class TopicLinksController < ApplicationController
   # POST /topic_links.json
   def create
     @topic = Topic.find(params[:topic_id])
-    
+    params[:topic_link][:link_attributes][:url] = Link.normalize_url(params[:topic_link][:link_attributes][:url])
     result = (if ! @link = Link.find_by_url(params[:topic_link][:link_attributes][:url])
       @topic.topic_links.build(params[:topic_link])
       "link created"
