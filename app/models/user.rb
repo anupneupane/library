@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-  attr_accessible :username
+  has_secure_password
+  attr_accessible :username, :password, :password_confirmation
+
+  validates_uniqueness_of :username
 
   has_many :votes
   has_many :topic_links, :through => :votes

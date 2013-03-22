@@ -1,9 +1,12 @@
 Library::Application.routes.draw do
+  get "sessions/new"
+
   resources :votes
 
 
   resources :users
 
+  resources :sessions
 
   resources :categories
 
