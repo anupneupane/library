@@ -1,0 +1,23 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="brand">
+      <%= link_to  "Library", :root %> >
+      <%= link_to  "#{topic.category.title}", topic.category %>
+      </div>
+      <div class="nav-collapse">
+        <ul class="nav nav-pills pull-right">
+
+          <li><%= link_to "Categories", categories_path %></li>
+          <li><%= link_to "Topics", topics_path %></li>
+          <% if !logged_in? %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Log In", login_path %></li>
+          <% else %>
+            <li><%= link_to "Log Out", logout_path %></li>
+          <% end %>             
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
