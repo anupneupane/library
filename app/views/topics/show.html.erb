@@ -10,9 +10,11 @@
     
   </p>
   <% end %>
-  <%= render 'topic_links/form' %>
-  <b>Other Links:</b>
-  <%# raise @topic.topic_links.inspect %>
+  <% if logged_in? %>
+   <%= render 'topic_links/form' %>
+  <% end %>
+
+  <b>All Links:</b>
   <% @topic.order_topic_links_by_score.each do |tl| %>
 
     <br>
