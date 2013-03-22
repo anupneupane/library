@@ -4,6 +4,7 @@ class VotesController < ApplicationController
     @topic_link = TopicLink.find(params[:link_id])
 
     if ! Vote.check_existing_vote(params[:vote][:user_id], @topic_link.id, params[:vote][:kind])
+      
       @vote = @topic_link.cast_vote(params[:vote])
       @topic_link.update_score_for(@vote)
     end

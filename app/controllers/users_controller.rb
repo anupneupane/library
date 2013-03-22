@@ -42,9 +42,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      session[:user_id] = @user.id
       redirect_to topics_path, notice: "Thanks!"
     else
-      render "new"
+      render "new", notice: "Error"
     end
   end
 

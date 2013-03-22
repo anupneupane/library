@@ -1,13 +1,11 @@
 Library::Application.routes.draw do
-  get "sessions/new"
+  get "signup" => "users#new"
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  get "logout" => "sessions#destroy"
 
   resources :votes
-
-
   resources :users
-
-  resources :sessions
-
   resources :categories
 
   resources :topics do

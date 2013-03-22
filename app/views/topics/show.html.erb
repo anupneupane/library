@@ -20,17 +20,19 @@
     <%= tl.link.description %><br/>
     <%= link_to(tl.link.url, tl.link.url) %>
     <%= tl.score %>
+    <% if logged_in? %>
+      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+        <input type="hidden" name="vote[kind]" value="up">
+        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+        <input type="submit" value="Vote Up" />
+      <% end %>
 
-    <form action="/topics/<%=@topic.id%>/links/<%=tl.id%>/votes" method="post">
-      <input type="hidden" name="vote[kind]" value="up">
-      <input type="hidden" name="vote[user_id]" value=2>
-      <input type="submit" value="Vote Up" />
-    </form>
-    <form action="/topics/<%=@topic.id%>/links/<%=tl.id%>/votes" method="post">
-      <input type="hidden" name="vote[kind]" value="down">
-      <input type="hidden" name="vote[user_id]" value=2>
-      <input type="submit" value="Vote Down" />
-    </form>
+      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
+        <input type="hidden" name="vote[kind]" value="down">
+        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
+        <input type="submit" value="Vote Down" />
+    <% end %>
+    <% end %>
   <% end %>
 </p>
 
