@@ -72,22 +72,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PUT /topics/1/add-link
-  def add_link
-    raise params.inspect
-    @topic = Topic.find(params[:id])
-    @topic.links.build(url: params[:link][:url])
-
-    respond_to do |format|
-      if @topic.save
-        format.html { redirect_to @topic, notice: 'Link was successfully submitted.' }
-        format.json { render json: @topic, status: :created, location: @topic }
-      else
-        format.html { redirect_to @topic, notice: 'Link was not successfully submitted.' }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /topics/1
   # DELETE /topics/1.json
