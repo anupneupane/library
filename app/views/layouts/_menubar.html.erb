@@ -8,9 +8,9 @@
       </a>
       <div class="brand">
       <%= link_to  "Library" %> 
-      <% if topic %> 
+      <% if topic && topic.category %> 
         >
-        <%= link_to "#{topic.category.title}", topic.category%>
+        <%= link_to "#{topic.category.title}", topic.category %>
       <% end %>
       </div>
       <div class="nav-collapse">

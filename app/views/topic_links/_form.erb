@@ -2,15 +2,13 @@
  <%= render "shared_partials/error_messages", :target => @topic_link %>
    
     <div class="field">
-      <%= f.fields_for(:link) do |l| %>
         <b>Submit A New Link</b><br/>
-        <%= l.label "Title:" %>
-        <%= l.text_field :title %><br>
-        <%= l.label "Description:" %>
-        <%= l.text_area :description, :rows=> 4 %><br/>
-        <%= l.label "Url:" %>
-        <%= l.text_field :url %>
-      <% end %>
+        <%= f.label "Title:" %>
+        <%= f.text_field :title %><br>
+        <%= f.label "Description:" %>
+        <%= f.text_area :description, :rows=> 4 %><br/>
+        <%= label_tag 'link_url', "Url:" %>
+        <%= text_field_tag "link[url]" %>
         <%= f.submit "Submit Link" %>
     </div>
 <% end %>

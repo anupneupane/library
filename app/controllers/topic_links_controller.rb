@@ -41,25 +41,25 @@ class TopicLinksController < ApplicationController
   # POST /topic_links.json
   def create
     @topic = Topic.find(params[:topic_id])
-    params[:topic_link][:link_attributes][:url] = Link.normalize_url(params[:topic_link][:link_attributes][:url])
-    result = (if ! @link = Link.find_by_url(params[:topic_link][:link_attributes][:url])
-      @topic.topic_links.build(params[:topic_link])
-      "link created"
-    elsif ! @topic.includes_link?(@link)
-      @topic.topic_links.build(:link_id => @link.id)
-      "link associated"
+    url = Link.normalize_url(params[:link][:url])
+    @link = Link.find_by_url(url) 
+    @tl = @topic.topic_links.build(params[:topic_link])
+    
+    if @link && @topic.includes_link?(@link)
+      notice = "#{@link.url} is already a link for this topic"
+    elsif @link
+      @tl.link = @link
+      notice = "#{@link.url} is now associated with this topic"
+      @topic.save
     else
-      "already a link for this topic"
-    end)
+      @link = @tl.build_link(url: url)
+      notice = "#{@link.url} has been added to the topic"
+      @topic.save
+    end
 
     respond_to do |format|
-      if @topic.save
-        format.html { redirect_to @topic, notice: result }
-        format.json { render json: @topic, status: :created, location: @topic }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @topic, notice: notice }
+      format.json { render json: @topic, status: :created, location: @topic }
     end
   end
 

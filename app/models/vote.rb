@@ -8,7 +8,11 @@ class Vote < ActiveRecord::Base
 
   def same_as_last_vote?
     last_vote = Vote.where(user_id: user_id, topic_link_id: topic_link_id).order("created_at").last
-    true if (last_vote.kind == self.kind) || false
+    if last_vote
+      true if (last_vote.kind == self.kind) || false
+    else
+      false
+    end
   end
 
 end

@@ -1,13 +1,11 @@
 class TopicLink < ActiveRecord::Base
-  attr_accessible :link_id, :score, :topic_id, :link_attributes
+  attr_accessible :link_id, :score, :topic_id, :title, :description
 
   belongs_to :topic
   belongs_to :link
 
   has_many :votes
   has_many :users, :through => :votes
-
-  accepts_nested_attributes_for :link
 
   def update_score_for(vote)
     self.upvote if vote.kind == "up"

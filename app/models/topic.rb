@@ -29,15 +29,11 @@ class Topic < ActiveRecord::Base
   end
 
   def best_link
-    begin
-      Link.find(self.best_link_id)
-    rescue
-      nil
-    end
+      Link.find(self.best_link_id) || nil
   end
 
   def includes_link?(link)
-    self.topic_links.where(:link_id => link.id).first
+    true if (self.topic_links.where(:link_id => link.id).first) || false
   end
 
   def reject_or_associate(link)
