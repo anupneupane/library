@@ -1,22 +1,20 @@
 <tr class="link_item">
   <td class="span1 link_score">
-    <% if logged_in? %>
-      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-        <input type="hidden" name="vote[kind]" value="up">
-        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-        <%= image_submit_tag "upvote.png"%>
-      <% end %>
+    <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
+      <%= hidden_field(:vote, :kind, value: "up") %>
+      <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
+      <%= image_submit_tag "upvote.png"%>
     <% end %>
-      
-      <%= tl.score %>
+    
+    <%= tl.score %>
 
-    <% if logged_in? %>
-      <%= form_tag topic_link_votes_path(topic_id:@topic.id, link_id:tl.id) do %>
-        <input type="hidden" name="vote[kind]" value="down">
-        <input type="hidden" name="vote[user_id]" value="<%= session[:user_id]%>">
-        <%= image_submit_tag "downvote.png"%>
-      <% end %>
-      <% end%>
+  
+    <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
+      <%= hidden_field(:vote, :kind, value: "down") %>
+      <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
+      <%= image_submit_tag "downvote.png"%>
+
+    <% end%>
   </td>
   <td class="span8 link_info">
   <p class="title"><%= link_to(tl.link.title.titleize, tl.link.url) %></p>

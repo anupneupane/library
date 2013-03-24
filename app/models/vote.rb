@@ -4,8 +4,11 @@ class Vote < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic_link
 
-  def self.check_existing_vote(user_id, topic_link_id, kind)
-    self.where(user_id: user_id, topic_link_id: topic_link_id, kind: kind).first
+  validates_presence_of :user_id
+
+  def same_as_last_vote?
+    last_vote = Vote.where(user_id: user_id, topic_link_id: topic_link_id).order("created_at").last
+    true if (last_vote.kind == self.kind) || false
   end
 
 end
