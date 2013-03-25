@@ -1,4 +1,7 @@
-set :application, "library-app"
+require 'bundler/capistrano' # for bundler support
+
+
+set :application, "library"
 set :repository,  "git@github.com:flatiron-school/library.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -6,6 +9,8 @@ set :scm, :git # You can set :scm explicitly or Capistrano will make an intellig
 
 set :user, 'deploy'
 set :deploy_to, "/home/#{user}/#{application}"
+
+default_run_options[:pty] = true
 
 role :web, "198.211.103.217"                          # Your HTTP server, Apache/etc
 role :app, "198.211.103.217"                          # This may be the same as your `Web` server
