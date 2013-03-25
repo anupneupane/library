@@ -30,4 +30,9 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+  
+  task :symlink_configs, :roles => :app do
+    run "ln -nfs #{shared_path}/databse.yml #{release_path}"
+    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}"
+  end
 end
