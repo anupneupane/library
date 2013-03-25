@@ -1,8 +1,13 @@
-set :application, "library-app"
+require 'bundler/capistrano' # for bundler support
+
+set :application, "library"
 set :repository,  "git@github.com:flatiron-school/library.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+
+default_run_options[:pty] = true
+
 
 set :user, 'deploy'
 set :deploy_to, "/home/#{user}/#{application}"
