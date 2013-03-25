@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   attr_accessible :title
   has_many :topics
-
+  validates_presence_of :title
 
   def add_new_topic(title)
     self.topics.build(:title => title)
