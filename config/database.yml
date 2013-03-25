@@ -23,5 +23,6 @@ production:
   database: library_production
   username: libary_db
   password: flatiron
+  host: localhost
   pool: 5
   timeout: 5000
