@@ -6,6 +6,8 @@ class Topic < ActiveRecord::Base
   has_many :topic_links
   has_many :links, :through => :topic_links
 
+  validates_presence_of :title
+
   def add_new_link(url)
     self.links.build(:url => url)
     self.save
