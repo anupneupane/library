@@ -21,7 +21,7 @@ role :db,  "198.211.103.217", :primary => true # This is where Rails migrations 
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
-
+before "deploy:assets:precompile", "deploy:symlink_configs"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
@@ -34,7 +34,7 @@ namespace :deploy do
   end
   
   task :symlink_configs, :roles => :app do
-    run "ln -nfs #{shared_path}/databse.yml #{release_path}"
-    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}"
+    run "ln -nfs #{shared_path}/databse.yml #{release_path}/config"
+    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}/config"
   end
 end
