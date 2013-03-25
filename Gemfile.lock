@@ -34,6 +34,8 @@ GEM
     better_errors (0.7.2)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -44,6 +46,7 @@ GEM
       execjs
     coffee-script-source (1.6.1)
     commonjs (0.2.6)
+    debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -137,6 +140,7 @@ DEPENDENCIES
   awesome_print
   bcrypt-ruby
   better_errors
+  binding_of_caller
   coffee-rails (~> 3.2.1)
   jquery-rails
   less-rails

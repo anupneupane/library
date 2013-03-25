@@ -13,6 +13,7 @@ group :development do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'sqlite3'
+  gem 'binding_of_caller'
 end
 
 group :production do
