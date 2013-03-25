@@ -7,6 +7,8 @@ class TopicLink < ActiveRecord::Base
   has_many :votes
   has_many :users, :through => :votes
 
+  validates_presence_of :title
+
   def update_score_for(vote)
     self.upvote if vote.kind == "up"
     self.downvote if vote.kind == "down"
