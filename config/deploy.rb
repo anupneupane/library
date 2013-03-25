@@ -11,6 +11,7 @@ default_run_options[:pty] = true
 
 set :user, 'deploy'
 set :deploy_to, "/home/#{user}/#{application}"
+set :use_sudo, false
 
 default_run_options[:pty] = true
 
