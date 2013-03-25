@@ -44,17 +44,16 @@ class TopicLinksController < ApplicationController
     url = Link.normalize_url(params[:link][:url])
     @link = Link.find_by_url(url) 
     @tl = @topic.topic_links.build(params[:topic_link])
+
     
     if @link && @topic.includes_link?(@link)
       notice = "#{@link.url} is already a link for this topic"
     elsif @link
       @tl.link = @link
-      notice = "#{@link.url} is now associated with this topic"
-      @topic.save
+      notice = ("#{@link.url} is now associated with this topic" if @tl.save) || "Make sure you enter a title and description"
     else
       @link = @tl.build_link(url: url)
-      notice = "#{@link.url} has been added to the topic"
-      @topic.save
+      notice = ("#{@link.url} has been added to the topic" if @tl.save) || "Make sure you enter a title and description"
     end
 
     respond_to do |format|

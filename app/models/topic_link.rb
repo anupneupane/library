@@ -10,6 +10,7 @@ class TopicLink < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :description
 
+
   def update_score_for(vote)
     self.upvote if vote.kind == "up"
     self.downvote if vote.kind == "down"
