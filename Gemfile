@@ -8,7 +8,8 @@ gem 'rails', '3.2.12'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 
-group :development do 
+group :development do
+  gem 'better_errors'
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'sqlite3'
