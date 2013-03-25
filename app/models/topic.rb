@@ -29,7 +29,7 @@ class Topic < ActiveRecord::Base
   end
 
   def best_link
-      Link.find(self.best_link_id) || nil
+      Link.find(self.best_link_id) unless self.best_link_id == nil
   end
 
   def includes_link?(link)
