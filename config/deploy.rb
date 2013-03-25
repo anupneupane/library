@@ -1,4 +1,5 @@
 require 'bundler/capistrano' # for bundler support
+load "deploy/assets"
 
 set :application, "library"
 set :repository,  "git@github.com:flatiron-school/library.git"
@@ -35,7 +36,7 @@ namespace :deploy do
   end
   
   task :symlink_configs, :roles => :app do
-    run "cp #{shared_path}/databse.yml #{release_path}/config"
-    run "cp #{shared_path}/api_keys.yml #{release_path}/config"
+    run "ln -nfs #{shared_path}/datbase.yml #{release_path}/config"
+    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}/config"
   end
 end
