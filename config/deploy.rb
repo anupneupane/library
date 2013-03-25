@@ -1,11 +1,13 @@
 require 'bundler/capistrano' # for bundler support
 
-
 set :application, "library"
 set :repository,  "git@github.com:flatiron-school/library.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+
+default_run_options[:pty] = true
+
 
 set :user, 'deploy'
 set :deploy_to, "/home/#{user}/#{application}"
@@ -29,5 +31,10 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+  
+  task :symlink_configs, :roles => :app do
+    run "ln -nfs #{shared_path}/databse.yml #{release_path}"
+    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}"
   end
 end
