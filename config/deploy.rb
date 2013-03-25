@@ -35,7 +35,7 @@ namespace :deploy do
   end
   
   task :symlink_configs, :roles => :app do
-    run "ln -nfs #{shared_path}/databse.yml #{release_path}/config"
-    run "ln -nfs #{shared_path}/api_keys.yml #{release_path}/config"
+    run "cp #{shared_path}/databse.yml #{release_path}/config"
+    run "cp #{shared_path}/api_keys.yml #{release_path}/config"
   end
 end
