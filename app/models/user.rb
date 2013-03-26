@@ -38,5 +38,4 @@ class User < ActiveRecord::Base
     true if self.role_name == :admin
   end
 
-
 end
