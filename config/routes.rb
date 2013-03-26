@@ -11,7 +11,7 @@ Library::Application.routes.draw do
   resources :categories
 
   resources :topics do
-    resources :topic_links, :only => [:new, :create], :path => "links", :as => "links" do
+    resources :topic_links, :only => [:new, :create, :edit, :update, :destroy], :path => "links", :as => "links" do
       resources :votes, :only => [:create, :destroy]
     end
   end
