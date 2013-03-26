@@ -38,4 +38,8 @@ class User < ActiveRecord::Base
     true if self.role_name == :admin
   end
 
+  def role_name
+    User.user_roles.key(self.role)
+  end
+
 end
