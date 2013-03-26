@@ -42,4 +42,9 @@ class User < ActiveRecord::Base
     User.user_roles.key(self.role)
   end
 
+  def can_edit_or_destroy?
+    true if self.admin? unless self == nil
+  end
+
+
 end
