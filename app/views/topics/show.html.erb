@@ -3,7 +3,8 @@
 <div>
 
   <div>
-    <h3><%= @topic.title %></h3>
+    <h3><%= @topic.title %></h3></ br>
+    <%= link_to 'Edit Topic', edit_topic_path(@topic) %>
     <% if @topic.best_link %>
       <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
     <% end %>
@@ -11,15 +12,11 @@
   
 
   <% if logged_in? %>
-   <%= render 'topic_links/form' %>
+    <%= render 'topic_links/form' %>
   <% end %>
 
   <div>
     <%= render partial: "links_table", locals:{:links => @topic.order_topic_links_by_score} %>
   </div>
 
-  <div>
-  <%= link_to 'Edit', edit_topic_path(@topic) %> |
-  <%= link_to 'Back', @topic.category %>
-  </div>
 </div>
