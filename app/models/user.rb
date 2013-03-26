@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :votes
   has_many :topic_links, :through => :votes
+  has_many :topics
 
   has_secure_password
   

@@ -2,6 +2,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title, :category_id
 
   belongs_to :category
+  belongs_to :user
 
   has_many :topic_links
   has_many :links, :through => :topic_links
