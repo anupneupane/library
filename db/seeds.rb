@@ -18,7 +18,11 @@ users = User.create([
   { :username => "laura",
     :email => "laura.brown@flatironschool.com",
     :role => 10,
-    :password => "flatiron"}
+    :password => "flatiron"},
+    { :username => "basic",
+    :email => "basic@basic.com",
+    :role => 0,
+    :password => "basic"}
   ])
 
 categories = Category.create([
