@@ -15,13 +15,12 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
 
-  def current_user_logged_in?
-    true if current_user != nil
+  def authorize
+    redirect_to login_path, alert: "Not authorized, please login" if current_user.nil?
   end
-  helper_method :current_user_logged_in?
 
 end

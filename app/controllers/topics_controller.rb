@@ -1,6 +1,10 @@
 class TopicsController < ApplicationController
+  before_filter :authorize, only: [:create]
+
   # GET /topics
   # GET /topics.json
+  
+
   def index
     @topics = Topic.all
 
