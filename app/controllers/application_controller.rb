@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
     !logged_in? || !current_user.admin?
   end
 
+  def creator?
+  end
+
   def admin_authorize
     redirect_to root_path, notice: "Need admin privileges" if is_admin?
   end

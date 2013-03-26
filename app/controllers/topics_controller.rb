@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :admin_authorize, only: [:create]
+  before_filter :admin_authorize, only: [:edit]
 
   # GET /topics
   # GET /topics.json

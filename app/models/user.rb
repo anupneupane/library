@@ -43,8 +43,12 @@ class User < ActiveRecord::Base
     User.user_roles.key(self.role)
   end
 
+  def can_create_edit_or_destroy?(topic)
+    true if (self.admin? unless self == nil) || self.id == topic.user_id
+  end
+
   def can_edit_or_destroy?
-    true if self.admin? unless self == nil
+    true if self.admin? unless self == nil 
   end
 
 
