@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   def logged_in?
     true if current_user
   end
-
   helper_method :logged_in?
 
   def current_user
@@ -20,19 +19,25 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  def is_admin?
-    !logged_in? || !current_user.admin?
+  def has_admin_privileges?
+    current_user && current_user.admin?
   end
-
-  def creator?
-  end
+  helper_method :has_admin_privileges?
 
   def admin_authorize
-    redirect_to root_path, notice: "Need admin privileges" if is_admin?
+    redirect_to root_path, notice: "Need admin privileges" unless has_admin_privileges?
   end
 
   def creator_authorize
     redirect_to login_path, alert: "Not authorized, please login" if current_user.nil?
   end
 
+  # no longer necessary
+  # def is_admin?
+  #   !logged_in? || !current_user.admin?
+  # end
+
+
+  # def creator?
+  # end
 end
