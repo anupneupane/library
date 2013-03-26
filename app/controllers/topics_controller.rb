@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :authorize, only: [:create]
+  before_filter :admin_authorize, only: [:create]
 
   # GET /topics
   # GET /topics.json
@@ -47,6 +47,7 @@ class TopicsController < ApplicationController
   # POST /topics.json
   def create
     @topic = Topic.new(params[:topic])
+    @topic.user_id = current_user.id
 
     respond_to do |format|
       if @topic.save

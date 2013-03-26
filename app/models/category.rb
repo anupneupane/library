@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
 
   def add_new_topic(title)
     self.topics.build(:title => title)
+    raise params.inspect
     self.save
   end
 
