@@ -22,5 +22,21 @@ class User < ActiveRecord::Base
     :admin => 10
   }
 
+  def self.user_roles
+    USER_ROLES
+  end
+
+  def set_as_admin 
+    self.role = USER_ROLES[:admin]
+  end
+
+  def set_as_basic 
+    self.role = USER_ROLES[:basic]
+  end
+
+  def admin?
+    true if self.role_name == :admin
+  end
+
 
 end
