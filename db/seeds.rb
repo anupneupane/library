@@ -6,6 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+users = User.create([
+  { :username => "john",
+    :email => "john.ferguson@flatironschool.com",
+    :role => 10,
+    :password => "flatiron"},
+  { :username => "rahul",
+    :email => "rahul.seshan@flatironschool.com",
+    :role => 10,
+    :password => "flatiron"},
+  { :username => "laura",
+    :email => "laura.brown@flatironschool.com",
+    :role => 10,
+    :password => "flatiron"}
+  ])
+
 categories = Category.create([
                               {title: "Flatiron School"},
                               {title: "Funny"},
