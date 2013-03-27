@@ -1,6 +1,10 @@
+<% if @topic.links.length > 0 %>
 <b>All Links:</b>
 <table class="topic_links">
 
 <%= render partial: "topic_links/link_list", collection: links, as: :tl%>
 
 </table>
+<% else %>
+ <b> There are no links for this topic yet!</b>
+<% end %>
