@@ -1,9 +1,8 @@
 class TopicLinksController < ApplicationController
-
+  before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :load_topic_link, :only => [:update, :destroy, :edit]
   before_filter :authorize_topic_link, :only => [:update, :destroy, :edit]
-  before_filter :logged_in?, :only => [:new]
-
+  
   # GET /topic_links
   # GET /topic_links.json
   def index
@@ -101,6 +100,7 @@ class TopicLinksController < ApplicationController
     end
 
     def authorize_topic_link
-      redirect_to login_path, alert: "Not authorized, please login" if (! @topic_link.authorize?(current_user))
+      redirect_to root_path, alert: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
     end
+
 end

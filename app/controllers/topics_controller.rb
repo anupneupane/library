@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
+  before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :load_topic, :only => [:update, :destroy, :edit]
   before_filter :authorize_topic, :only => [:update, :destroy, :edit]
-  before_filter :logged_in?, :only => [:new]
 
   # GET /topics
   # GET /topics.json
@@ -95,6 +95,6 @@ class TopicsController < ApplicationController
     end
 
     def authorize_topic
-      redirect_to login_path, alert: "Not authorized, please login" if ( ! logged_in? || ! @topic.authorize?(current_user))
+      redirect_to login_path, alert: "You are not authorized to do that!" if ! @topic.authorize?(current_user)
     end
 end

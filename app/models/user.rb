@@ -41,23 +41,4 @@ class User < ActiveRecord::Base
     self.role_name == :admin
   end
 
-  ###This method
-  def creator?(item)
-    self.id == item.user_id
-  end
-
-  def admin_or_creator?(item)
-    self.admin? || self.creator?(item)
-  end
-
-  def can_create_edit_or_destroy?(topic)
-    true if (self.admin? unless self == nil) || self.id == topic.user_id
-  end
-
-  
-  def can_edit_or_destroy?
-    true if self.admin? unless self == nil 
-  end
-
-
 end
