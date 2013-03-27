@@ -17,7 +17,12 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span8"><%= yield %></div>
+        <div class="span8">
+          <% if flash[:notice] %>
+            <p id="notice"><%= flash[:notice] %></p>
+          <% end %>
+          <%= yield %>
+        </div>
         <div class="span3 offset1">
           <%= render partial: "layouts/sidebar" %>          
         </div>

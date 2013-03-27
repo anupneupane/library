@@ -100,7 +100,7 @@ class TopicLinksController < ApplicationController
     end
 
     def tl_admin_or_creator
-      redirect_to root_path, alert: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
+      redirect_to root_path, notice: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
     end
 
 end

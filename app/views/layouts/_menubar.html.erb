@@ -9,8 +9,8 @@
       <div class="brand">
       <%= link_to  "Library", root_path %> 
     
-        <%= link_to @category.title, @category  if @category%>
-        <%= link_to @topic.title, @category  if @topic%>
+        <%= %(\> #{link_to @category.title, @category}).html_safe  if @category%>
+        <%= %(\> #{link_to @topic.title, @category}).html_safe if @topic%>
 
       </div>
       <div class="nav-collapse">

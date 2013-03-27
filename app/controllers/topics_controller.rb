@@ -96,6 +96,6 @@ class TopicsController < ApplicationController
     end
 
     def topic_admin_or_creator
-      redirect_to login_path, alert: "You are not authorized to do that!" if ! @topic.authorize?(current_user)
+      redirect_to @topic, notice: "You are not authorized to do that!" if ! @topic.authorize?(current_user)
     end
 end
