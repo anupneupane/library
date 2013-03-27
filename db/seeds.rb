@@ -79,65 +79,65 @@ links = Link.create([
                       ])
 
 topics = Topic.create([
-                        {title: "Best place to eat near school", category_id: 1}, #1
-                        {title: "Best shit that Avi says", category_id: 1}, #2
-                        {title: "Funniest cat videos", category_id: 2}, #3
-                        {title: "Best songs/albums to listen to while coding", category_id: 3}, #4
-                        {title: 'Objects', category_id: 1}, #5
-                        {title: 'Classes', category_id: 1}, #6
-                        {title: "Variables", category_id: 1}, #7
-                        {title: "Strings", category_id: 1}, #8
-                        {title: 'Numbers', category_id: 1}, #9
-                        {title: 'Arrays', category_id: 1}, #10
-                        {title: 'Hashes', category_id: 1}, #11
-                        {title: 'Methods', category_id: 1}, #12
-                        {title: 'Loops', category_id: 1}, #13
-                        {title: 'Blocks', category_id: 1}, #14
-                        {title: 'Modules', category_id: 1} #15
+                        {title: "Best place to eat near school", category_id: 1, user_id: 1}, #1
+                        {title: "Best shit that Avi says", category_id: 1, user_id: 1}, #2
+                        {title: "Funniest cat videos", category_id: 2, user_id: 1}, #3
+                        {title: "Best songs/albums to listen to while coding", category_id: 3, user_id: 1}, #4
+                        {title: 'Objects', category_id: 1, user_id: 2}, #5
+                        {title: 'Classes', category_id: 1, user_id: 2}, #6
+                        {title: "Variables", category_id: 1, user_id: 2}, #7
+                        {title: "Strings", category_id: 1, user_id: 2}, #8
+                        {title: 'Numbers', category_id: 1, user_id: 3}, #9
+                        {title: 'Arrays', category_id: 1, user_id: 3}, #10
+                        {title: 'Hashes', category_id: 1, user_id: 3}, #11
+                        {title: 'Methods', category_id: 1, user_id: 3}, #12
+                        {title: 'Loops', category_id: 1, user_id: 4}, #13
+                        {title: 'Blocks', category_id: 1, user_id: 4}, #14
+                        {title: 'Modules', category_id: 1, user_id: 4} #15
                         ])
 
 topic_links = TopicLink.create([
-                                {link_id: 1, topic_id: 1, title: "Shake Shack", description: "Burgers, fries"},
-                                {link_id: 2, topic_id: 1, title: "Kobeyaki", description: "Japanese Chipotle"},
-                                {link_id: 3, topic_id: 2, title: "Pandas", description: "Avi explaining why he doesn't like pandas"},
-                                {link_id: 4, topic_id: 2, title: "Art and programming", description: "Typical Avi eloquence"},
-                                {link_id: 5, topic_id: 5, title: "Objects", description: "Objects"},
-                                {link_id: 6, topic_id: 8, title: "Strings", description: "Strings"},
-                                {link_id: 7, topic_id: 9, title: "Numbers", description: "Numnbers"},
-                                {link_id: 8, topic_id: 10, title: "Arrays", description: "Arrays"},
-                                {link_id: 9, topic_id: 11, title: "Hashes", description: "Hashes"},
-                                {link_id: 10, topic_id: 12, title: "Methods", description: "Methods"},
-                                {link_id: 11, topic_id: 13, title: "Loops", description: "Loops"},
-                                {link_id: 12, topic_id: 14, title: "Blocks", description: "Blocks"},
-                                {link_id: 13, topic_id: 15, title: "Modules", description: "Modules"},
-                                {link_id: 14, topic_id: 5, title: "Objects", description: "Objects"},
-                                {link_id: 15, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 16, topic_id: 5, title: "Objects", description: "Objects"},
-                                {link_id: 17, topic_id: 5, title: "Objects", description: "Objects"},
-                                {link_id: 18, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 19, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 20, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 21, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 22, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 23, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 24, topic_id: 7, title: "Variables", description: "Variables"},
-                                {link_id: 25, topic_id: 7, title: "Variables", description: "Variables"},
-                                {link_id: 26, topic_id: 6, title: "Classes", description: "Classes"},
-                                {link_id: 27, topic_id: 7, title: "Variables", description: "Variables"},
-                                {link_id: 28, topic_id: 8, title: "Strings", description: "Strings"}, 
-                                {link_id: 29, topic_id: 8, title: "Strings", description: "Strings"},
-                                {link_id: 30, topic_id: 8, title: "Strings", description: "Strings"},
-                                {link_id: 31, topic_id: 8, title: "Strings", description: "Strings"},
-                                {link_id: 32, topic_id: 8, title: "Strings", description: "Strings"},
-                                {link_id: 33, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 34, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 35, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 36, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 37, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 38, topic_id: 9, title: "Numbers", description: "Numbers"},
-                                {link_id: 39, topic_id: 10, title: "Arrays", description: "Arrays"},
-                                {link_id: 40, topic_id: 15, title: "Modules", description: "Modules"},
-                                {link_id: 41, topic_id: 14, title: "Blocks", description: "Blocks"},
-                                {link_id: 42, topic_id: 12, title: "Methods", description: "Methods"},
-                                {link_id: 43, topic_id: 11, title: "Hashes", description: "Hashes"}
+                                {link_id: 1, topic_id: 1, user_id: 1, title: "Shake Shack", description: "Burgers, fries"},
+                                {link_id: 2, topic_id: 1, user_id: 1, title: "Kobeyaki", description: "Japanese Chipotle"},
+                                {link_id: 3, topic_id: 2, user_id: 1, title: "Pandas", description: "Avi explaining why he doesn't like pandas"},
+                                {link_id: 4, topic_id: 2, user_id: 1, title: "Art and programming", description: "Typical Avi eloquence"},
+                                {link_id: 5, topic_id: 5, user_id: 1, title: "Objects", description: "Objects"},
+                                {link_id: 6, topic_id: 8, user_id: 1, title: "Strings", description: "Strings"},
+                                {link_id: 7, topic_id: 9, user_id: 1, title: "Numbers", description: "Numnbers"},
+                                {link_id: 8, topic_id: 10, user_id: 2, title: "Arrays", description: "Arrays"},
+                                {link_id: 9, topic_id: 11, user_id: 3, title: "Hashes", description: "Hashes"},
+                                {link_id: 10, topic_id: 12, user_id: 4, title: "Methods", description: "Methods"},
+                                {link_id: 11, topic_id: 13, user_id: 1, title: "Loops", description: "Loops"},
+                                {link_id: 12, topic_id: 14, user_id: 2, title: "Blocks", description: "Blocks"},
+                                {link_id: 13, topic_id: 15, user_id: 3, title: "Modules", description: "Modules"},
+                                {link_id: 14, topic_id: 5, user_id: 4, title: "Objects", description: "Objects"},
+                                {link_id: 15, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
+                                {link_id: 16, topic_id: 5, user_id: 2, title: "Objects", description: "Objects"},
+                                {link_id: 17, topic_id: 5, user_id: 3, title: "Objects", description: "Objects"},
+                                {link_id: 18, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
+                                {link_id: 19, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
+                                {link_id: 20, topic_id: 6, user_id: 2, title: "Classes", description: "Classes"},
+                                {link_id: 21, topic_id: 6, user_id: 3, title: "Classes", description: "Classes"},
+                                {link_id: 22, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
+                                {link_id: 23, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
+                                {link_id: 24, topic_id: 7, user_id: 2, title: "Variables", description: "Variables"},
+                                {link_id: 25, topic_id: 7, user_id: 3, title: "Variables", description: "Variables"},
+                                {link_id: 26, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
+                                {link_id: 27, topic_id: 7, user_id: 1, title: "Variables", description: "Variables"},
+                                {link_id: 28, topic_id: 8, user_id: 2, title: "Strings", description: "Strings"}, 
+                                {link_id: 29, topic_id: 8, user_id: 3, title: "Strings", description: "Strings"},
+                                {link_id: 30, topic_id: 8, user_id: 4, title: "Strings", description: "Strings"},
+                                {link_id: 31, topic_id: 8, user_id: 1, title: "Strings", description: "Strings"},
+                                {link_id: 32, topic_id: 8, user_id: 2, title: "Strings", description: "Strings"},
+                                {link_id: 33, topic_id: 9, user_id: 3, title: "Numbers", description: "Numbers"},
+                                {link_id: 34, topic_id: 9, user_id: 4, title: "Numbers", description: "Numbers"},
+                                {link_id: 35, topic_id: 9, user_id: 1, title: "Numbers", description: "Numbers"},
+                                {link_id: 36, topic_id: 9, user_id: 2, title: "Numbers", description: "Numbers"},
+                                {link_id: 37, topic_id: 9, user_id: 3, title: "Numbers", description: "Numbers"},
+                                {link_id: 38, topic_id: 9, user_id: 4, title: "Numbers", description: "Numbers"},
+                                {link_id: 39, topic_id: 10, user_id: 1, title: "Arrays", description: "Arrays"},
+                                {link_id: 40, topic_id: 15, user_id: 2, title: "Modules", description: "Modules"},
+                                {link_id: 41, topic_id: 14, user_id: 3, title: "Blocks", description: "Blocks"},
+                                {link_id: 42, topic_id: 12, user_id: 4, title: "Methods", description: "Methods"},
+                                {link_id: 43, topic_id: 11, user_id: 1, title: "Hashes", description: "Hashes"}
                                 ])
