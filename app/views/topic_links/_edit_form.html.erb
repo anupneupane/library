@@ -1,0 +1,18 @@
+ <%= form_for(@topic_link, :url => topic_link_path(@topic_link.topic, @topic_link)) do |f| %>
+ <%= render "shared_partials/error_messages", :target => @topic_link %>
+   
+    <div class="field">
+        <b>Submit A New Link</b><br/>
+        <%= f.label "Title:" %>
+        <%= f.text_field :title %><br>
+        <%= f.label "Description:" %>
+        <%= f.text_area :description, :rows=> 4 %><br/>
+        <%= f.fields_for(:link) do |l| %>
+          <%= l.label "Url:" %>
+          <%= l.text_field :url %>
+        <% end %>
+    </div>
+    <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

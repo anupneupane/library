@@ -1,4 +1,9 @@
 class TopicLinksController < ApplicationController
+
+  before_filter :load_topic_link, :only => [:update, :destroy, :edit]
+  before_filter :authorize_topic_link, :only => [:update, :destroy, :edit]
+
+
   # GET /topic_links
   # GET /topic_links.json
   def index
@@ -68,7 +73,7 @@ class TopicLinksController < ApplicationController
 
     respond_to do |format|
       if @topic_link.update_attributes(params[:topic_link])
-        format.html { redirect_to @topic_link, notice: 'TopicLink was successfully updated.' }
+        format.html { redirect_to @topic_link.topic, notice: 'TopicLink was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -88,5 +93,12 @@ class TopicLinksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+    def load_topic_link
+      @topic_link = TopicLink.find(params[:topic_link_id] || params[:id])
+    end
 
+    def authorize_topic_link
+      redirect_to login_path, alert: "Not authorized, please login" if ! @topic_link.authorize?(current_user)
+    end
 end
