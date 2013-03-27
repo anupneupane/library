@@ -3,9 +3,10 @@ class TopicLink < ActiveRecord::Base
 
   belongs_to :topic
   belongs_to :link
+  belongs_to :user #owner
 
   has_many :votes
-  has_many :users, :through => :votes
+  has_many :voters, through: :votes, class_name: 'User', foreign_key: 'topic_link_id', source: :user
 
   validates_presence_of :title
   validates_presence_of :description
