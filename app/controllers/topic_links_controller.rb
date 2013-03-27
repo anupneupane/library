@@ -50,7 +50,9 @@ class TopicLinksController < ApplicationController
     @tl = @topic.topic_links.build(params[:topic_link])
     @tl.user = current_user
     
-    if @link && @topic.includes_link?(@link)
+    if url == "http://"
+      notice = "URL field may not be blank."
+    elsif @link && @topic.includes_link?(@link)
       notice = "#{@link.url} is already a link for this topic"
     elsif @link
       @tl.link = @link
