@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_filter :load_topic, :only => [:update, :destroy, :edit]
-  before_filter :authorize_topic, :only => [:new, :update, :destroy, :edit]
+  before_filter :authorize_topic, :only => [:update, :destroy, :edit]
+  before_filter :logged_in?, :only => [:new]
 
   # GET /topics
   # GET /topics.json
