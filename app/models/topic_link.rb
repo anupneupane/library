@@ -1,5 +1,5 @@
 class TopicLink < ActiveRecord::Base
-  attr_accessible :link_id, :score, :topic_id, :title, :description, :link_attributes
+  attr_accessible :link_id, :score, :topic_id, :title, :description, :link_attributes, :user_id
   
   belongs_to :topic
   belongs_to :link

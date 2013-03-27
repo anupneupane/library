@@ -88,9 +88,10 @@ class TopicLinksController < ApplicationController
   def destroy
     @topic_link = TopicLink.find(params[:id])
     @topic_link.destroy
+    @topic = @topic_link.topic
 
     respond_to do |format|
-      format.html { redirect_to topic_links_url }
+      format.html { redirect_to @topic }
       format.json { head :no_content }
     end
   end
@@ -100,6 +101,6 @@ class TopicLinksController < ApplicationController
     end
 
     def authorize_topic_link
-      redirect_to login_path, alert: "Not authorized, please login" if ! @topic_link.authorize?(current_user)
+      redirect_to login_path, alert: "Not authorized, please login" if (! @topic_link.authorize?(current_user))
     end
 end
