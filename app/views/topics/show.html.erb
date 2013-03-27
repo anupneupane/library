@@ -4,9 +4,10 @@
 
   <div>
     <h3><%= @topic.title %></h3>
-    <%= link_to 'Edit Topic', edit_topic_path(@topic) %>
-    <br>
-    <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if @topic.authorize?(current_user) %>
+      <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
+      <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
     <% if @topic.best_link %>
       <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
     <% end %>
@@ -15,6 +16,8 @@
 
   <% if logged_in? %>
     <%= render 'topic_links/form' %>
+  <% else %>
+    <p><%= link_to "Please log in to add a link", login_path %></p> 
   <% end %>
 
   <div>
