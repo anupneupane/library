@@ -12,14 +12,18 @@
   <tr>
 
     <td><b><%= link_to category.title, category %></b></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if has_admin_privileges? %>
+      <td><%= link_to 'Edit', edit_category_path(category) %></td>
+      <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<div class="actions">
-  <%= button_to 'Create New Category', new_category_path, :method => "get" %>
-</div>
+<% if logged_in? && current_user.admin? %>
+  <div class="actions">
+    <%= button_to 'Create New Category', new_category_path, :method => "get" %>
+  </div>
+<% end %>

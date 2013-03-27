@@ -11,8 +11,10 @@ gem 'bcrypt-ruby'
 group :development do
   gem 'better_errors'
   gem 'pry-rails'
+  gem 'pry-debugger'
   gem 'awesome_print'
   gem 'sqlite3'
+  gem 'binding_of_caller'
 end
 
 group :production do

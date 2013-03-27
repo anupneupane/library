@@ -20,5 +20,10 @@
   <p class="title"><%= link_to(tl.title.titleize, tl.link.url) %></p>
   <%= tl.description %><br/>
   <%= link_to(tl.link.url, tl.link.url) %>
+  <p>Link submitted by <%= tl.user.username %></p>
+  <% if tl.authorize?(current_user) %>
+    <%= link_to "Edit", edit_topic_link_path(@topic, tl) %> |
+    <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%>
+  <% end %>
   </td>
 </tr>

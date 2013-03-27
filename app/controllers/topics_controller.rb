@@ -1,4 +1,8 @@
 class TopicsController < ApplicationController
+  before_filter :check_if_logged_in, :except => [:show, :index]
+  before_filter :load_topic, :only => [:update, :destroy, :edit]
+  before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
+
   # GET /topics
   # GET /topics.json
   def index
@@ -14,6 +18,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @category = @topic.category
     @topic_link = TopicLink.new
     @topic_link.build_link
 
@@ -43,6 +48,7 @@ class TopicsController < ApplicationController
   # POST /topics.json
   def create
     @topic = Topic.new(params[:topic])
+    @topic.user_id = current_user.id
 
     respond_to do |format|
       if @topic.save
@@ -83,4 +89,13 @@ class TopicsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def load_topic
+      @topic = Topic.find(params[:topic_id] || params[:id])
+    end
+
+    def topic_admin_or_creator
+      redirect_to @topic, notice: "You are not authorized to do that!" if ! @topic.authorize?(current_user)
+    end
 end

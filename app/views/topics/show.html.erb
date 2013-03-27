@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <div>
 
   <div>
     <h3><%= @topic.title %></h3>
+    <% if @topic.authorize?(current_user) %>
+      <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
+      <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
     <% if @topic.best_link %>
       <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
     <% end %>
@@ -11,15 +13,13 @@
   
 
   <% if logged_in? %>
-   <%= render 'topic_links/form' %>
+    <%= render 'topic_links/form' %>
+  <% else %>
+    <p><%= link_to "Please log in to add a link", login_path %></p> 
   <% end %>
 
   <div>
     <%= render partial: "links_table", locals:{:links => @topic.order_topic_links_by_score} %>
   </div>
 
-  <div>
-  <%= link_to 'Edit', edit_topic_path(@topic) %> |
-  <%= link_to 'Back', @topic.category %>
-  </div>
 </div>

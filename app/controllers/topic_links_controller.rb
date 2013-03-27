@@ -1,4 +1,8 @@
 class TopicLinksController < ApplicationController
+  before_filter :check_if_logged_in, :except => [:show, :index]
+  before_filter :load_topic_link, :only => [:update, :destroy, :edit]
+  before_filter :tl_admin_or_creator, :only => [:update, :destroy, :edit]
+  
   # GET /topic_links
   # GET /topic_links.json
   def index
@@ -44,6 +48,7 @@ class TopicLinksController < ApplicationController
     url = Link.normalize_url(params[:link][:url])
     @link = Link.find_by_url(url) 
     @tl = @topic.topic_links.build(params[:topic_link])
+    @tl.user = current_user
     
     if @link.url == "http://"
       notice = "URL field may not be blank."
@@ -70,7 +75,7 @@ class TopicLinksController < ApplicationController
 
     respond_to do |format|
       if @topic_link.update_attributes(params[:topic_link])
-        format.html { redirect_to @topic_link, notice: 'TopicLink was successfully updated.' }
+        format.html { redirect_to @topic_link.topic, notice: 'TopicLink was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -84,11 +89,20 @@ class TopicLinksController < ApplicationController
   def destroy
     @topic_link = TopicLink.find(params[:id])
     @topic_link.destroy
+    @topic = @topic_link.topic
 
     respond_to do |format|
-      format.html { redirect_to topic_links_url }
+      format.html { redirect_to @topic }
       format.json { head :no_content }
     end
   end
+  private
+    def load_topic_link
+      @topic_link = TopicLink.find(params[:topic_link_id] || params[:id])
+    end
+
+    def tl_admin_or_creator
+      redirect_to root_path, notice: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
+    end
 
 end

@@ -1,17 +1,27 @@
 class Topic < ActiveRecord::Base
-  attr_accessible :title, :category_id
+  attr_accessible :title, :category_id, :user_id
 
   belongs_to :category
+  belongs_to :user
 
   has_many :topic_links
   has_many :links, :through => :topic_links
 
   validates_presence_of :title
 
+  def authorize?(user)
+    user && (user.admin? || (self.user_id==user.id && has_no_topic_links?))
+  end
+
   def add_new_link(url)
     self.links.build(:url => url)
     self.save
   end
+
+  def has_no_topic_links?
+    self.links.length == 0
+  end
+
 
   def associate_links(*links)
     links = links.flatten

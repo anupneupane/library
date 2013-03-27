@@ -3,10 +3,11 @@ class Category < ActiveRecord::Base
   has_many :topics
   validates_presence_of :title
 
-  def add_new_topic(title)
-    self.topics.build(:title => title)
-    self.save
-  end
+  # Never used in controller or view.  Remove?
+  # def add_new_topic(title)
+  #   self.topics.build(:title => title)
+  #   self.save
+  # end
 
   def associate_topics(*topics)
     topics = topics.flatten
