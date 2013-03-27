@@ -18,6 +18,7 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @category = @topic.category
     @topic_link = TopicLink.new
     @topic_link.build_link
 
