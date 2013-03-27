@@ -103,4 +103,6 @@ class TopicLinksController < ApplicationController
     def authorize_topic_link
       redirect_to login_path, alert: "Not authorized, please login" if (! @topic_link.authorize?(current_user))
     end
+
+    
 end
