@@ -49,6 +49,7 @@ class TopicLinksController < ApplicationController
     url = Link.normalize_url(params[:link][:url])
     @link = Link.find_by_url(url) 
     @tl = @topic.topic_links.build(params[:topic_link])
+    @tl.user = current_user
     
     if @link && @topic.includes_link?(@link)
       notice = "#{@link.url} is already a link for this topic"
@@ -87,9 +88,10 @@ class TopicLinksController < ApplicationController
   def destroy
     @topic_link = TopicLink.find(params[:id])
     @topic_link.destroy
+    @topic = @topic_link.topic
 
     respond_to do |format|
-      format.html { redirect_to topic_links_url }
+      format.html { redirect_to @topic }
       format.json { head :no_content }
     end
   end
@@ -99,6 +101,6 @@ class TopicLinksController < ApplicationController
     end
 
     def authorize_topic_link
-      redirect_to login_path, alert: "Not authorized, please login" if ! @topic_link.authorize?(current_user)
+      redirect_to login_path, alert: "Not authorized, please login" if (! @topic_link.authorize?(current_user))
     end
 end
