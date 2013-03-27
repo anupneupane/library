@@ -3,8 +3,10 @@
 <div>
 
   <div>
-    <h3><%= @topic.title %></h3></ br>
+    <h3><%= @topic.title %></h3>
     <%= link_to 'Edit Topic', edit_topic_path(@topic) %>
+    <br>
+    <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% if @topic.best_link %>
       <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
     <% end %>
