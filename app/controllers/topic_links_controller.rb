@@ -2,7 +2,7 @@ class TopicLinksController < ApplicationController
 
   before_filter :load_topic_link, :only => [:update, :destroy, :edit]
   before_filter :authorize_topic_link, :only => [:update, :destroy, :edit]
-
+  before_filter :logged_in?, :only => [:new]
 
   # GET /topic_links
   # GET /topic_links.json
