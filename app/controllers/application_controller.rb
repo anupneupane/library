@@ -20,12 +20,18 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def has_admin_privileges?
-    current_user && current_user.admin?
+    logged_in? && current_user.admin?
   end
   helper_method :has_admin_privileges?
 
-  def admin_authorize
-    redirect_to root_path, notice: "Need admin privileges" unless has_admin_privileges?
-  end
+  private
+
+    def check_if_admin
+      redirect_to root_path, notice: "Need admin privileges" unless has_admin_privileges?
+    end
+
+    def check_if_logged_in
+      redirect_to login_path, notice: "Please Log In" unless logged_in?
+    end
 
 end
