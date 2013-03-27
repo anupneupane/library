@@ -14,7 +14,11 @@ class TopicLink < ActiveRecord::Base
   validates_presence_of :description
 
   def authorize?(user)
-    user && (user.admin? || self.user_id==user.id)
+    user && (user.admin? || (self.user_id==user.id && is_score_zero?))
+  end
+
+  def is_score_zero?
+    self.score == 0
   end
 
   def update_score_for(vote)
