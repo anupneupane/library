@@ -9,6 +9,10 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :title
 
+  def authorize?(user)
+    user && (user.admin? || self.user_id==user.id)
+  end
+
   def add_new_link(url)
     self.links.build(:url => url)
     self.save

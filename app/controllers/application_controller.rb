@@ -28,16 +28,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, notice: "Need admin privileges" unless has_admin_privileges?
   end
 
-  def creator_authorize
-    redirect_to login_path, alert: "Not authorized, please login" if current_user.nil?
-  end
-
-  # no longer necessary
-  # def is_admin?
-  #   !logged_in? || !current_user.admin?
-  # end
-
-
-  # def creator?
-  # end
 end

@@ -1,10 +1,9 @@
 class TopicsController < ApplicationController
-  before_filter :admin_authorize, only: [:edit]
+  before_filter :load_topic, :only => [:update, :destroy, :edit]
+  before_filter :authorize_topic, :only => [:update, :destroy, :edit]
 
   # GET /topics
   # GET /topics.json
-  
-
   def index
     @topics = Topic.all
 
@@ -88,4 +87,13 @@ class TopicsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def load_topic
+      @topic = Topic.find(params[:topic_id] || params[:id])
+    end
+
+    def authorize_topic
+      redirect_to login_path, alert: "Not authorized, please login" if ! @topic.authorize?(current_user)
+    end
 end
