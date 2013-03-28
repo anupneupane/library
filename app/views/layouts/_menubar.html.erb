@@ -33,9 +33,8 @@
 
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-            <%= %(\> #{link_to @category.title, @category}).html_safe  if @category%>
-            <%= %(\> #{link_to @topic.title, @category}).html_safe if @topic%>
+            <li><%= link_to @category.title, @category if @category%></li>
+            <li><%= link_to @topic.title, @category if @topic%></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
