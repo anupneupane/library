@@ -83,17 +83,17 @@ topics = Topic.create([
                         {title: "Best shit that Avi says", category_id: 1, user_id: 1}, #2
                         {title: "Funniest cat videos", category_id: 2, user_id: 1}, #3
                         {title: "Best songs/albums to listen to while coding", category_id: 3, user_id: 1}, #4
-                        {title: 'Objects', category_id: 1, user_id: 2}, #5
-                        {title: 'Classes', category_id: 1, user_id: 2}, #6
-                        {title: "Variables", category_id: 1, user_id: 2}, #7
-                        {title: "Strings", category_id: 1, user_id: 2}, #8
-                        {title: 'Numbers', category_id: 1, user_id: 3}, #9
-                        {title: 'Arrays', category_id: 1, user_id: 3}, #10
-                        {title: 'Hashes', category_id: 1, user_id: 3}, #11
-                        {title: 'Methods', category_id: 1, user_id: 3}, #12
-                        {title: 'Loops', category_id: 1, user_id: 4}, #13
-                        {title: 'Blocks', category_id: 1, user_id: 4}, #14
-                        {title: 'Modules', category_id: 1, user_id: 4} #15
+                        {title: 'Objects', category_id: 4, user_id: 2}, #5
+                        {title: 'Classes', category_id: 4, user_id: 2}, #6
+                        {title: "Variables", category_id: 4, user_id: 2}, #7
+                        {title: "Strings", category_id: 4, user_id: 2}, #8
+                        {title: 'Numbers', category_id: 4, user_id: 3}, #9
+                        {title: 'Arrays', category_id: 4, user_id: 3}, #10
+                        {title: 'Hashes', category_id: 4, user_id: 3}, #11
+                        {title: 'Methods', category_id: 4, user_id: 3}, #12
+                        {title: 'Loops', category_id: 4, user_id: 4}, #13
+                        {title: 'Blocks', category_id: 4, user_id: 4}, #14
+                        {title: 'Modules', category_id: 4, user_id: 4} #15
                         ])
 
 topic_links = TopicLink.create([
