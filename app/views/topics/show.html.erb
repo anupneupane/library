@@ -2,6 +2,7 @@
 
   <div>
     <h3><%= @topic.title %></h3>
+    <p>Topic submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
     <% if @topic.authorize?(current_user) %>
       <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
       <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
