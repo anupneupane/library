@@ -16,3 +16,13 @@
   margin-left:auto;
   margin-right: auto;
 }
+.navbar .nav > li > a.brand, .navbar .nav > li > a.brand:visited{
+  color:#1570A6 !important; 
+  font-size: 1.6em !important;
+  padding: 14px 15px 16px 15px !important;
+  width:auto !important;
+}
+
+.navbar-inner{
+  padding: 0 0 0 0 !important;
+}
