@@ -1,7 +1,44 @@
-<p>
+1<p>
   <b>Username:</b>
   <%= @user.username %>
 </p>
+
+<table>
+  <tr>
+    <th>Submitted Topics</th>
+  </tr>
+
+<% @user.topics.each do |topic| %>
+<tr>
+    <td><%= link_to topic.title, topic %></td>
+<% end %>
+</tr>
+</table>
+<br>
+<table>
+  <tr>
+    <th>Submitted Links (Goes to Parent Topic. Change?)</th>
+  </tr>
+
+<% @user.topic_links.each do |tl| %>
+<tr>
+    <td><%= link_to tl.title, topic_path(tl.topic_id) %> </td>
+<% end %>
+</tr>
+</table>
+<br>
+<table>
+  <tr>
+    <th>Topics Voted On</th>
+  </tr>
+
+<% @user.votes.each do |vote| %>
+<tr>
+  <!-- Can't figure out proper paths and how to display things right now -->
+    <td><%= link_to vote.topic_link.title, topic_path(vote.topic_link_id)%> </td>
+<% end %>
+</tr>
+</table>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
