@@ -6,7 +6,7 @@ Library::Application.routes.draw do
 
   root :to => 'topics#index'
 
-  resources :votes
+  resources :votes, only: :create
   resources :users
   resources :categories
 
