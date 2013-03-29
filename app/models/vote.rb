@@ -1,18 +1,22 @@
 class Vote < ActiveRecord::Base
-  attr_accessible :topic_link_id, :user_id, :kind
+  attr_accessible :topic_link_id, :user_id, :kind, :status
 
   belongs_to :user
   belongs_to :topic_link
 
   validates_presence_of :user_id
 
-  def same_as_last_vote?
-    last_vote = Vote.where(user_id: user_id, topic_link_id: topic_link_id).order("created_at").last
-    if last_vote
-      true if (last_vote.kind == self.kind) || false
-    else
-      false
-    end
+  def self.find_prior_vote(user_id, topic_link_id)
+    self.where(user_id: user_id, topic_link_id: topic_link_id).first
+  end
+
+  def update_vote(submitted_vote_status)
+    self.status += submitted_vote_status
+    self.save
+  end
+
+  def same_as_submitted_vote?(submitted_vote_status)
+    self.status == submitted_vote_status
   end
 
 end
