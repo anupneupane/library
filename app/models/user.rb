@@ -41,4 +41,8 @@ class User < ActiveRecord::Base
     self.role_name == :admin
   end
 
+  def topics_voted
+    (self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq) if self.votes.count>0
+  end
+
 end

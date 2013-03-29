@@ -8,21 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
+ *= require bootstrap
+ *= require font-awesome
+ *= require prettyPhoto
+ *= require slider
+ *= flexslider
+ *= require style
+ *= require green
+ *= require bootstrap-responsive
+ *= require topics
  */
-.container-fluid{
-  max-width: 1170px;
-  margin-left:auto;
-  margin-right: auto;
-}
-.navbar .nav > li > a.brand, .navbar .nav > li > a.brand:visited{
-  color:#1570A6 !important; 
-  font-size: 1.6em !important;
-  padding: 14px 15px 16px 15px !important;
-  width:auto !important;
-}
-
-.navbar-inner{
-  padding: 0 0 0 0 !important;
-}

@@ -1,38 +1,44 @@
-  <!-- Navigation bar starts -->
-<header>
-  <div class="navbar">
-   <div class="navbar-inner">
-     <div class="container-fluid">
+<!-- Navigation bar starts -->
+<div class="navbar">
+ <div class="navbar-inner">
+   <div class="container">
+     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+       <span>Menu</span>
+     </a>
+     <div class="nav-collapse collapse">
+       <ul class="nav">
 
-       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-         <span>Menu</span>
-       </a>
-       <div class="nav-collapse collapse">
-         <ul class="nav">
-        <li class><%= link_to 'Library', root_path, class: 'brand' %></li>
-           <!-- Refer Bootstrap navbar doc -->
-           <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <% Category.all.each do |c| %>
+
+          <li class><%= link_to 'Library', root_path %></li>
+
+
+         <!-- Refer Bootstrap navbar doc -->
+         <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% Category.all.each do |c| %>
                 <li><%= link_to c.title, category_path(c) %></li>
                 <% end %>
-              </ul>
-           </li>
-           <% if @category %>                   
+            </ul>
+         </li> 
+
+
+         <% if @category %>                   
            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=@category.title%> Topics<b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=@category.title%> Topics <b class="caret"></b></a>
               <ul class="dropdown-menu">
               <% @category.topics.each do |t| %>
                 <li><%= link_to t.title, topic_path(t) %></li>
               <% end %>
               </ul>
            </li>
-           <% end %>
-           <li><%= link_to 'Submit a Topic', new_topic_path %></li>
-         </ul>
+         <% end %>
+         <li><%= link_to 'Submit a Topic', new_topic_path %>
+          </ul>
          <ul class="nav pull-right">
-           <% if !logged_in? %>
+         
+
+         <% if !logged_in? %>
             <li><%= link_to "Sign Up", signup_path %></li>
             <li><%= link_to "Log In", login_path %></li>
           <% else %>
@@ -44,19 +50,10 @@
               </ul>
             </li>
           <% end %> 
-         </ul>
-       </div>
-      </div>
-   </div>
-  </div>
-</header>
 
-  <!-- Navigation bar ends -->
 
-     
-
-    
-
-          
-                       
-
+       </ul>
+     </div>
+    </div>
+ </div>
+</div>

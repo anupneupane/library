@@ -1,26 +1,10 @@
-<div>
+<h2><%= @topic.title %></h2>
+<p class="big grey">submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
 
-  <div>
-    <h3><%= @topic.title %></h3>
-    <p>Topic submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
-    <% if @topic.authorize?(current_user) %>
-      <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
-      <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
-    <% if @topic.best_link %>
-      <p> The best link for this topic is <%= link_to(@topic.best_link.url, @topic.best_link.url)%>.</p>
-    <% end %>
-  </div>
-  
-
-  <% if logged_in? %>
-    <%= render 'topic_links/form' %>
-  <% else %>
-    <p><%= link_to "Please log in to add a link", login_path %></p> 
+  <% if @topic.authorize?(current_user) %>
+    <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
+    <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
+<hr />
 
-  <div>
-    <%= render partial: "links_table", locals:{:links => @topic.order_topic_links_by_score} %>
-  </div>
-
-</div>
+<%= render partial: 'links_table', locals: {links: @topic.topic_links} %>

@@ -1,10 +1,17 @@
-<% if @topic.links.length > 0 %>
-<b>All Links:</b>
-<table class="topic_links">
+<div class="row tasks">
+  <div class="span12">
 
-<%= render partial: "topic_links/link_list", collection: links, as: :tl%>
+    <% if @topic.links.length > 0 %>
+      <b>All Links:</b>
+      <table class="topic_links">
 
-</table>
-<% else %>
- <b> There are no links for this topic yet!</b>
-<% end %>
+      <%= render partial: "topic_links/link_list", collection: links, as: :tl%>
+
+      </table>
+      
+    <% else %>
+       <b> There are no links for this topic yet!</b>
+
+    <% end %>
+  </div>
+</div>

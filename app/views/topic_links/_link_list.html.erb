@@ -1,5 +1,5 @@
 <tr class="link_item">
-  <td class="span1 link_score">
+  <td class="link_score task">
     <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
       <%= hidden_field(:vote, :kind, value: "up") %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
@@ -7,23 +7,26 @@
     <% end %>
     
     <%= tl.score %>
-
   
     <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
       <%= hidden_field(:vote, :kind, value: "down") %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
       <%= image_submit_tag "downvote.png"%>
-
     <% end%>
   </td>
-  <td class="span8 link_info">
-  <p class="title"><%= link_to(tl.title.titleize, tl.link.url) %></p>
-  <%= tl.description %><br/>
-  <%= link_to(tl.link.url, tl.link.url) %>
-  <p>Link submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></p>
-  <% if tl.authorize?(current_user) %>
-    <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> |
-    <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
-  <% end %>
+  <td class="link_info task">
+    <h6><%= link_to(tl.title.titleize, tl.link.url) %></h6>
+   
+    <p><%= tl.description %></p>
+    
+
+     <div class="tmeta"><i class="icon-calendar"></i> <%= tl.created_at.strftime('%B %d, %Y') %> - <i class="icon-user"></i> Link submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
+
+    <% if tl.authorize?(current_user) %>
+      <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> | 
+        <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
+    <% end %>
   </td>
 </tr>
+
+
