@@ -74,15 +74,31 @@ class TopicLinksController < ApplicationController
   # PUT /topic_links/1
   # PUT /topic_links/1.json
   def update
-# this line below was deleted
-    @topic_link = TopicLink.find(params[:id])
+    number_of_associations = TopicLink.where(:link_id => params[:topic_link][:link_attributes][:id]).length
+    @existing_topic_link = TopicLink.find(params[:id])
+    submitted_link_url = params[:topic_link][:link_attributes][:url]
+    @existing_link_url = Link.find_by_url(submitted_link_url)
+    if number_of_associations == 1
+      @existing_topic_link.update_attributes(:title => params[:topic_link][:title], :description => params[:topic_link][:description])
+      if @existing_link_url
+        @existing_topic_link.link_id = Link.find_by_url(submitted_link_url)
+      else
+        @existing_link.update_attributes(:url => params[:topic_link][:link_attributes][:url])
+      end
+    end
+    # elsif number_of_associations > 1
 
-# just added all this code for redundant links
-    @current_topic_link = TopicLink.find(params[:id])
-    @current_link = @current_topic_link.link
-    @current_link_topic_links = @current_link.topic_links
-    @input_url_link = Link.find_by_url(params[:topic_link][:link_attributes][:url]).first
-    @matching_topic_links = @input_url_link.topic_links
+
+    
+    # @current_link_topic_links = @current_link.topic_links
+
+
+# # this line below was deleted
+#     @topic_link = TopicLink.find(params[:id])
+
+# # just added all this code for redundant links
+#     @input_url_link = Link.find_by_url(params[:topic_link][:link_attributes][:url]).first
+#     @matching_topic_links = @input_url_link.topic_links
 
 # if input url is nil (input url does not yet exist in database)
 #   if current link topic links . length == 1 (current/old url has no other associations)
