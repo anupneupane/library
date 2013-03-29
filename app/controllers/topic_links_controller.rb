@@ -36,6 +36,9 @@ class TopicLinksController < ApplicationController
     end
   end
 
+ # when editing a topic link, want to check if edited topic_link already exists.  if it already
+ # exists, then we want to make the edited link_link_id = to the existing topic_link_link_id
+
   # GET /topic_links/1/edit
   def edit
     @topic_link = TopicLink.find(params[:id])
@@ -71,7 +74,28 @@ class TopicLinksController < ApplicationController
   # PUT /topic_links/1
   # PUT /topic_links/1.json
   def update
+# this line below was deleted
     @topic_link = TopicLink.find(params[:id])
+
+# just added all this code for redundant links
+    @current_topic_link = TopicLink.find(params[:id])
+    @current_link = @current_topic_link.link
+    @current_link_topic_links = @current_link.topic_links
+    @input_url_link = Link.find_by_url(params[:topic_link][:link_attributes][:url]).first
+    @matching_topic_links = @input_url_link.topic_links
+
+# if input url is nil (input url does not yet exist in database)
+#   if current link topic links . length == 1 (current/old url has no other associations)
+#     change current link url to input url
+#   elsif length > 1 (current/old url has other associations)
+#     create new link with input url and associate with current topic link
+#   elsif input url exists in database (returns an instance)
+#     associate this link instance with current topic_link
+# if current (old) link has no other associations
+#   delete it
+# else
+#   don't delete it
+# end
 
     respond_to do |format|
       if @topic_link.update_attributes(params[:topic_link])

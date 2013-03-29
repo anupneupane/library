@@ -21,6 +21,11 @@ class TopicLink < ActiveRecord::Base
     user && (user.admin? || (self.user_id==user.id && is_score_zero?))
   end
 
+  # just added for checking redundant links
+  def includes_link?(link)
+    true if (self.topic_links.where(:link_id => link.id).first) || false
+  end
+
   def update_score(vote)
     self.score += vote
     self.save
