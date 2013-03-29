@@ -24,6 +24,7 @@ class TopicLink < ActiveRecord::Base
   def update_score(vote)
     self.score += vote
     self.save
+    self.topic.best_link = self.topic.order_topic_links_by_score.first
   end
 
 end

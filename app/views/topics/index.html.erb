@@ -11,7 +11,7 @@
       <p class="category">Category: <%= link_to topic.category.title, category_path(topic.category) %></p>
       <p>Links: <%= link_to topic.topic_links.length, topic %> 
         <% if topic.best_link != nil %>
-          | Best Link: <%= link_to topic.topic_links.find_by_id(topic.best_link_id).title, topic %>
+          | Best Link: <%= link_to(topic.topic_links.find_by_id(topic.best_link_id).title, topic.links.find_by_id(topic.best_link_id).url) %>
         <% end %>
       </p>
     </td>
