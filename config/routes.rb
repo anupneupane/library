@@ -4,7 +4,7 @@ Library::Application.routes.draw do
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
 
-  root :to => 'topics#index'
+  root :to => 'categories#index'
 
   resources :votes, only: :create
   resources :users
