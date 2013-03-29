@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329111536) do
+ActiveRecord::Schema.define(:version => 20130329181452) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20130329111536) do
     t.integer  "topic_link_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "kind"
     t.integer  "status"
   end
 

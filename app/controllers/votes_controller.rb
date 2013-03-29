@@ -7,7 +7,7 @@ class VotesController < ApplicationController
 
     if @prior_vote and @prior_vote.same_as_submitted_vote?(submitted_vote_status)
       respond_to do |format|
-        format.html { redirect_to @topic, notice: "You have already #{params[:vote][:kind]}voted this link." }
+        format.html { redirect_to @topic, notice: "You have already #{@prior_vote.vote_kind} voted on this link." }
         format.json { render json: @topic, status: :created, location: @topic }
       end 
     else

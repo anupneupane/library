@@ -1,5 +1,5 @@
 class Vote < ActiveRecord::Base
-  attr_accessible :topic_link_id, :user_id, :kind, :status
+  attr_accessible :topic_link_id, :user_id, :status
 
   belongs_to :user
   belongs_to :topic_link
@@ -19,6 +19,14 @@ class Vote < ActiveRecord::Base
     self.status == submitted_vote_status
   end
 
+  def vote_kind
+    if self.status == 1
+      "up"
+    elsif self.status == -1
+      "down"
+    end
+  end
+  
 end
 
 
