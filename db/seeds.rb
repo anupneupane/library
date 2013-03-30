@@ -26,10 +26,11 @@ users = User.create([
   ])
 
 categories = Category.create([
-                              {title: "Flatiron School"},
-                              {title: "Funny"},
-                              {title: "Music"},
-                              {title: "Prework"}
+                              {title: "Flatiron School"}, #1
+                              {title: "Funny"}, #2
+                              {title: "Music"}, #3
+                              {title: "Prework"}, #4
+                              {title: "Social"} #5
                               ])
 
 links = Link.create([
@@ -75,7 +76,8 @@ links = Link.create([
                       {url: 'http://ruby-doc.org/core-2.0/Module.html'}, #40
                       {url: 'http://www.ruby-doc.org/docs/ProgrammingRuby/html/tut_containers.html'}, #41
                       {url: 'http://ruby-doc.org/core-2.0/Method.html'}, #42
-                      {url: 'http://ruby-doc.org/core-2.0/Hash.html'} #43
+                      {url: 'http://ruby-doc.org/core-2.0/Hash.html'}, #43
+                      {url: 'http://myspace.com'} #44
                       ])
 
 topics = Topic.create([
@@ -93,7 +95,10 @@ topics = Topic.create([
                         {title: 'Methods', category_id: 4, user_id: 3}, #12
                         {title: 'Loops', category_id: 4, user_id: 4}, #13
                         {title: 'Blocks', category_id: 4, user_id: 4}, #14
-                        {title: 'Modules', category_id: 4, user_id: 4} #15
+                        {title: 'Modules', category_id: 4, user_id: 4}, #15
+                        {title: 'Best Social Network', category_id: 5, user_id: 4}, #16
+                        {title: 'Best Place to Find Local Bands', category_id: 3, user_id: 4}, #17
+                        {title: 'Best site to meet people', category_id: 5, user_id: 3} #18
                         ])
 
 topic_links = TopicLink.create([
@@ -101,43 +106,48 @@ topic_links = TopicLink.create([
                                 {link_id: 2, topic_id: 1, user_id: 1, title: "Kobeyaki", description: "Japanese Chipotle"},
                                 {link_id: 3, topic_id: 2, user_id: 1, title: "Pandas", description: "Avi explaining why he doesn't like pandas"},
                                 {link_id: 4, topic_id: 2, user_id: 1, title: "Art and programming", description: "Typical Avi eloquence"},
-                                {link_id: 5, topic_id: 5, user_id: 1, title: "Objects", description: "Objects"},
-                                {link_id: 6, topic_id: 8, user_id: 1, title: "Strings", description: "Strings"},
-                                {link_id: 7, topic_id: 9, user_id: 1, title: "Numbers", description: "Numnbers"},
-                                {link_id: 8, topic_id: 10, user_id: 2, title: "Arrays", description: "Arrays"},
-                                {link_id: 9, topic_id: 11, user_id: 3, title: "Hashes", description: "Hashes"},
-                                {link_id: 10, topic_id: 12, user_id: 4, title: "Methods", description: "Methods"},
-                                {link_id: 11, topic_id: 13, user_id: 1, title: "Loops", description: "Loops"},
-                                {link_id: 12, topic_id: 14, user_id: 2, title: "Blocks", description: "Blocks"},
-                                {link_id: 13, topic_id: 15, user_id: 3, title: "Modules", description: "Modules"},
-                                {link_id: 14, topic_id: 5, user_id: 4, title: "Objects", description: "Objects"},
-                                {link_id: 15, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
-                                {link_id: 16, topic_id: 5, user_id: 2, title: "Objects", description: "Objects"},
-                                {link_id: 17, topic_id: 5, user_id: 3, title: "Objects", description: "Objects"},
-                                {link_id: 18, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
-                                {link_id: 19, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
-                                {link_id: 20, topic_id: 6, user_id: 2, title: "Classes", description: "Classes"},
-                                {link_id: 21, topic_id: 6, user_id: 3, title: "Classes", description: "Classes"},
-                                {link_id: 22, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
-                                {link_id: 23, topic_id: 6, user_id: 1, title: "Classes", description: "Classes"},
-                                {link_id: 24, topic_id: 7, user_id: 2, title: "Variables", description: "Variables"},
-                                {link_id: 25, topic_id: 7, user_id: 3, title: "Variables", description: "Variables"},
-                                {link_id: 26, topic_id: 6, user_id: 4, title: "Classes", description: "Classes"},
-                                {link_id: 27, topic_id: 7, user_id: 1, title: "Variables", description: "Variables"},
-                                {link_id: 28, topic_id: 8, user_id: 2, title: "Strings", description: "Strings"}, 
-                                {link_id: 29, topic_id: 8, user_id: 3, title: "Strings", description: "Strings"},
-                                {link_id: 30, topic_id: 8, user_id: 4, title: "Strings", description: "Strings"},
-                                {link_id: 31, topic_id: 8, user_id: 1, title: "Strings", description: "Strings"},
-                                {link_id: 32, topic_id: 8, user_id: 2, title: "Strings", description: "Strings"},
-                                {link_id: 33, topic_id: 9, user_id: 3, title: "Numbers", description: "Numbers"},
-                                {link_id: 34, topic_id: 9, user_id: 4, title: "Numbers", description: "Numbers"},
-                                {link_id: 35, topic_id: 9, user_id: 1, title: "Numbers", description: "Numbers"},
-                                {link_id: 36, topic_id: 9, user_id: 2, title: "Numbers", description: "Numbers"},
-                                {link_id: 37, topic_id: 9, user_id: 3, title: "Numbers", description: "Numbers"},
-                                {link_id: 38, topic_id: 9, user_id: 4, title: "Numbers", description: "Numbers"},
-                                {link_id: 39, topic_id: 10, user_id: 1, title: "Arrays", description: "Arrays"},
-                                {link_id: 40, topic_id: 15, user_id: 2, title: "Modules", description: "Modules"},
-                                {link_id: 41, topic_id: 14, user_id: 3, title: "Blocks", description: "Blocks"},
-                                {link_id: 42, topic_id: 12, user_id: 4, title: "Methods", description: "Methods"},
-                                {link_id: 43, topic_id: 11, user_id: 1, title: "Hashes", description: "Hashes"}
+                                {link_id: 5, topic_id: 5, user_id: 1, title: "Treehouse Course on Ruby Objects, Classes, and Variables", description: "Video course on Treehouse to learn about Objects, Classes, and Variables in Ruby"},
+                                {link_id: 5, topic_id: 6, user_id: 1, title: "Treehouse Course on Ruby Objects, Classes, and Variables", description: "Video course on Treehouse to learn about Objects, Classes, and Variables in Ruby"},
+                                {link_id: 5, topic_id: 7, user_id: 1, title: "Treehouse Course on Ruby Objects, Classes, and Variables", description: "Video course on Treehouse to learn about Objects, Classes, and Variables in Ruby"},
+                                {link_id: 6, topic_id: 8, user_id: 1, title: "Team Treehouse Presents Videos About Strings", description: "An in depth look at strings from Treehouse"},
+                                {link_id: 7, topic_id: 9, user_id: 1, title: "Team Treehouse: Ruby Foundations: Numbers", description: "How to code with numbers in ruby"},
+                                {link_id: 8, topic_id: 10, user_id: 2, title: "Team Treehouse: Ruby Foundations: Arrays", description: "Understanding Arrays in Ruby"},
+                                {link_id: 9, topic_id: 11, user_id: 3, title: "Team Treehouse: Ruby Foundations: Hashes", description: "How to use Hashes in Ruby"},
+                                {link_id: 10, topic_id: 12, user_id: 4, title: "Team Treehouse: Ruby Foundations: Methods", description: "An exploration of how to use Methods"},
+                                {link_id: 11, topic_id: 13, user_id: 1, title: "Team Treehouse: Ruby Foundations: Loops", description: "Loops, Iteration, in Ruby"},
+                                {link_id: 12, topic_id: 14, user_id: 2, title: "Team Treehouse: Ruby Foundations: Blocks", description: "Understanding Blocks"},
+                                {link_id: 13, topic_id: 15, user_id: 3, title: "Team Treehouse: Ruby Foundations: Modules", description: "An explanation of when to use Modules as wrappers"},
+                                {link_id: 14, topic_id: 5, user_id: 4, title: "Class: Object (Ruby 1.9.3)", description: "Official Ruby Documentation on Objects"},
+                                {link_id: 15, topic_id: 6, user_id: 1, title: "Ruby Classes and Objects", description: "Tutorials Point provides a good overview of Ruby Classes and Objects"},
+                                {link_id: 16, topic_id: 5, user_id: 2, title: "Do You Understand Ruby Objects, Messages and Blocks?", description: "A good introductory explanation of Ruby Objects"},
+                                {link_id: 17, topic_id: 5, user_id: 3, title: "Skilldrick: Understanding the Ruby object model", description: "Detailed explanation with visuals of ruby objects"},
+                                {link_id: 18, topic_id: 6, user_id: 4, title: "Ruby Class Tutorial | Juixe Techknow", description: "An intro tutorial on Ruby classes"},
+                                {link_id: 19, topic_id: 6, user_id: 1, title: "Ruby Best Practices- Fun with Class.new", description: "Clear explanation of best practices for dealing with classes in Ruby"},
+                                {link_id: 20, topic_id: 6, user_id: 2, title: "Programming Ruby: The Pragmatic Programmer's Guide", description: "An Overview of Working with Classes, Objects and Variables"},
+                                {link_id: 21, topic_id: 6, user_id: 3, title: "RubyMonk - Ruby Primer - Classes", description: "Quiz style site about Ruby Classes"},
+                                {link_id: 22, topic_id: 6, user_id: 4, title: "Classes in Ruby Using Getters and Setters", description: "How getters and setters work in ruby"},
+                                {link_id: 23, topic_id: 6, user_id: 1, title: "Introducing Classes", description: "An Intro to Classes from About.com"},
+                                {link_id: 24, topic_id: 7, user_id: 2, title: "Understanding Ruby Variables - Techotopia", description: "An explanation of Variables"},
+                                {link_id: 25, topic_id: 7, user_id: 3, title: "Variables | The Bastards Book of Ruby", description: "A great explanation of variables in Ruby"},
+                                {link_id: 26, topic_id: 6, user_id: 4, title: "Class and Instance Variables In Ruby // RailsTips by John Nunemaker", description: "Class Variables and Instance Variables covered in detail"},
+                                {link_id: 27, topic_id: 7, user_id: 1, title: "Instance variables", description: "Very brief explanation of instance variables"},
+                                {link_id: 28, topic_id: 8, user_id: 2, title: "Class: String (Ruby 2.0)", description: "Very detailed documentation about Ruby Strings"}, 
+                                {link_id: 29, topic_id: 8, user_id: 3, title: "Strings in Ruby", description: "Thorough explanation of Strings in Ruby and the methods to use with them"},
+                                {link_id: 30, topic_id: 8, user_id: 4, title: "Strings | The Bastards Book of Ruby", description: "How to work with Strings in Ruby"},
+                                {link_id: 31, topic_id: 8, user_id: 1, title: "Ruby Strings", description: "Details on all the methods available for Strings in Ruby"},
+                                {link_id: 32, topic_id: 8, user_id: 2, title: "Strings", description: "Rails API Documentation about Strings"},
+                                {link_id: 33, topic_id: 9, user_id: 3, title: "Numbers in Ruby: Ruby Study Notes - Best Ruby Guide, Ruby Tutorial", description: "How to work with Numbers and their operators"},
+                                {link_id: 34, topic_id: 9, user_id: 4, title: "Class: Integer (Ruby 2.0)", description: "Integers from Official Ruby Documentation"},
+                                {link_id: 35, topic_id: 9, user_id: 1, title: "Numbers | The Bastards Book of Ruby", description: "Ruby's basic data objects for counting and math"},
+                                {link_id: 36, topic_id: 9, user_id: 2, title: "Ruby's Class Hierarchy for Numbers", description: "About.com explaining Numbers"},
+                                {link_id: 37, topic_id: 9, user_id: 3, title: "Numbers", description: "Using Numbers in Ruby"},
+                                {link_id: 38, topic_id: 9, user_id: 4, title: "Exercise 3: Numbers And Math: Learn Ruby The Hard Way", description: "Exercises from learn ruby the hard way"},
+                                {link_id: 39, topic_id: 10, user_id: 1, title: "Class: Array (Ruby 2.0)", description: "Ruby-Doc Info on Arrays"},
+                                {link_id: 40, topic_id: 15, user_id: 2, title: "Class: Module (Ruby 2.0)", description: "Ruby documentation about Modules"},
+                                {link_id: 41, topic_id: 14, user_id: 3, title: "Programming Ruby: The Pragmatic Programmer's Guide", description: "Containers, Blocks, and Iterators Explained"},
+                                {link_id: 42, topic_id: 12, user_id: 4, title: "Class: Method (Ruby 2.0)", description: "Ruby docs about Methods"},
+                                {link_id: 43, topic_id: 11, user_id: 1, title: "Class: Hash (Ruby 2.0)", description: "Ruby docs about Hashes"},
+                                {link_id: 44, topic_id: 16, user_id: 2, title: "Myspace | Social Entertainment", description: "A place to connect with people"},
+                                {link_id: 44, topic_id: 17, user_id: 3, title: "Myspace | Social Entertainment", description: "Find great bands in your area"},
+                                {link_id: 44, topic_id: 18, user_id: 2, title: "Myspace | Social Entertainment", description: "Tons of people on Myspace. Sign up"}
                                 ])
