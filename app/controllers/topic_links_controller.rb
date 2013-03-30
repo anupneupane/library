@@ -74,53 +74,40 @@ class TopicLinksController < ApplicationController
   # PUT /topic_links/1
   # PUT /topic_links/1.json
   def update
-    number_of_associations = TopicLink.where(:link_id => params[:topic_link][:link_attributes][:id]).length
+# if submitted link already exists within topic (@topic.includes_link(submittedlink), then 
+# notice = "#{@link.url} is already a link for this topic"
+# else
+# Run through scenarios and notice = 'Link was successfully updated.'
+
     @existing_topic_link = TopicLink.find(params[:id])
+    @existing_topic_link.update_attributes(title: params[:topic_link][:title], description: params[:topic_link][:description])
+    number_of_times_submitted_link_repeats_in_database = TopicLink.where(link_id: params[:topic_link][:link_attributes][:id]).length
     submitted_link_url = params[:topic_link][:link_attributes][:url]
-    @existing_link_url = Link.find_by_url(submitted_link_url)
-    if number_of_associations == 1
-      @existing_topic_link.update_attributes(:title => params[:topic_link][:title], :description => params[:topic_link][:description])
-      if @existing_link_url
-        @existing_topic_link.link_id = Link.find_by_url(submitted_link_url)
+    @existing_link = Link.find_by_url(submitted_link_url)
+
+    if number_of_times_submitted_link_repeats_in_database == 1
+      if @existing_link
+        Link.find_by_id(@existing_topic_link.link_id).destroy
+        @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
       else
-        @existing_link.update_attributes(:url => params[:topic_link][:link_attributes][:url])
+        Link.find_by_id(params[:topic_link][:link_attributes][:id]).update_attributes(url: submitted_link_url)
+      end
+    else
+      if @existing_link
+        @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
+      else
+        @link = Link.new(url: submitted_link_url)
+        @link.save
+        @existing_topic_link.update_attributes(link_id: @link.id)
       end
     end
-    # elsif number_of_associations > 1
-
-
-    
-    # @current_link_topic_links = @current_link.topic_links
-
-
-# # this line below was deleted
-#     @topic_link = TopicLink.find(params[:id])
-
-# # just added all this code for redundant links
-#     @input_url_link = Link.find_by_url(params[:topic_link][:link_attributes][:url]).first
-#     @matching_topic_links = @input_url_link.topic_links
-
-# if input url is nil (input url does not yet exist in database)
-#   if current link topic links . length == 1 (current/old url has no other associations)
-#     change current link url to input url
-#   elsif length > 1 (current/old url has other associations)
-#     create new link with input url and associate with current topic link
-#   elsif input url exists in database (returns an instance)
-#     associate this link instance with current topic_link
-# if current (old) link has no other associations
-#   delete it
-# else
-#   don't delete it
-# end
 
     respond_to do |format|
-      if @topic_link.update_attributes(params[:topic_link])
-        format.html { redirect_to @topic_link.topic, notice: 'TopicLink was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @topic_link.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @topic_link.topic, notice: 'Link was successfully updated.' }
+      format.json { head :no_content }
+    # else
+    #     format.html { render action: "edit" }
+    #     format.json { render json: @topic_link.errors, status: :unprocessable_entity }
     end
   end
 
