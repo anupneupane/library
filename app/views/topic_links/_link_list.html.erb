@@ -21,6 +21,15 @@
   <%= tl.description %><br/>
   <%= link_to(tl.link.url, tl.link.url) %>
   <p>Link submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></p>
+  <p>votes by
+    <% tl.votes.each do |v|%>
+      <% if v.status == 1 %>
+        <% User.where(id: v.user_id).each do |u| %>
+          <%= link_to u.username, user_path(u.id) %>
+        <% end %> 
+      <% end %>
+    <% end %>
+  </p>
   <% if tl.authorize?(current_user) %>
     <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> |
     <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
