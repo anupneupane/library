@@ -1,7 +1,3 @@
-1<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
 
 <table>
   <tr>
@@ -14,7 +10,9 @@
 <% end %>
 </tr>
 </table>
-<br>
+
+
+
 <table>
   <tr>
     <th>Submitted Links (Goes to Parent Topic. Change?)</th>
@@ -26,16 +24,18 @@
 <% end %>
 </tr>
 </table>
-<br>
+
+
+
 <table>
   <tr>
     <th>Topics Voted On</th>
   </tr>
 
-<% @user.votes.each do |vote| %>
+<% @user.topics_voted.each do |t| %>
 <tr>
   <!-- Can't figure out proper paths and how to display things right now -->
-    <td><%= link_to vote.topic_link.title, topic_path(vote.topic_link_id)%> </td>
+    <td><%= link_to t.title, topic_path(t)%> </td>
 <% end %>
 </tr>
 </table>
