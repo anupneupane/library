@@ -3,6 +3,7 @@ Library::Application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
+  get '/auth/twitter/callback', :to => 'users#twitter_auth'
 
   root :to => 'site#index'
 

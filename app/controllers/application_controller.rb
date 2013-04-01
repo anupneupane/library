@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    true if current_user
+    !!current_user
   end
   helper_method :logged_in?
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329181452) do
+ActiveRecord::Schema.define(:version => 20130401205214) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -43,6 +43,23 @@ ActiveRecord::Schema.define(:version => 20130329181452) do
     t.integer  "best_link_id"
     t.integer  "category_id"
     t.integer  "user_id"
+  end
+
+  create_table "twitter_auths", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "twitter_id"
+    t.string   "twitter_handle"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "token"
+    t.string   "secret"
+  end
+
+  create_table "twitter_friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -7,6 +7,8 @@ gem 'rails', '3.2.12'
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'omniauth-twitter'
+gem 'grackle'
 
 group :development do
   gem 'better_errors'

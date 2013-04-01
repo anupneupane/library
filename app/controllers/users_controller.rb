@@ -65,6 +65,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def twitter_auth
+    auth = env['omniauth.auth']
+    current_user.link_twitter(auth)
+    redirect_to root_path
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

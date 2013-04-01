@@ -63,9 +63,4 @@ class Topic < ActiveRecord::Base
     self.topic_links.order(:score).reverse
   end
 
-  # def remove_link(url)
-  #   l = self.links.find_by_url(url)
-  #   l.destroy
-  # end
-
 end
