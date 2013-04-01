@@ -32,7 +32,7 @@
     <th>Topics Voted On</th>
   </tr>
 
-<% @user.topics_voted do |t| %>
+<% @user.topics_voted.each do |t| %>
 <tr>
   <!-- Can't figure out proper paths and how to display things right now -->
     <td><%= link_to t.title, topic_path(t)%> </td>
