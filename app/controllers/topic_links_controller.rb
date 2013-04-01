@@ -55,6 +55,8 @@ class TopicLinksController < ApplicationController
     
     if url == "http://" || url == "https://"
       notice = "URL field may not be blank."
+    elsif Link.check_suffix(url) == false
+      flash[:notice] = "Invalid URL"
     elsif @link && @topic.includes_link?(@link)
       notice = "#{@link.url} is already a link for this topic"
     elsif @link
