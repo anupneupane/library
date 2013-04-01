@@ -36,6 +36,9 @@ class TopicLinksController < ApplicationController
     end
   end
 
+ # when editing a topic link, want to check if edited topic_link already exists.  if it already
+ # exists, then we want to make the edited link_link_id = to the existing topic_link_link_id
+
   # GET /topic_links/1/edit
   def edit
     @topic_link = TopicLink.find(params[:id])
@@ -50,7 +53,7 @@ class TopicLinksController < ApplicationController
     @tl = @topic.topic_links.build(params[:topic_link])
     @tl.user = current_user
     
-    if url == "http://"
+    if url == "http://" || url == "https://"
       notice = "URL field may not be blank."
     elsif @link && @topic.includes_link?(@link)
       notice = "#{@link.url} is already a link for this topic"
@@ -71,15 +74,42 @@ class TopicLinksController < ApplicationController
   # PUT /topic_links/1
   # PUT /topic_links/1.json
   def update
-    @topic_link = TopicLink.find(params[:id])
-
-    respond_to do |format|
-      if @topic_link.update_attributes(params[:topic_link])
-        format.html { redirect_to @topic_link.topic, notice: 'TopicLink was successfully updated.' }
-        format.json { head :no_content }
-      else
+    submitted_link_url = Link.normalize_url(params[:topic_link][:link_attributes][:url])
+    @existing_link = Link.find_by_url(submitted_link_url)
+    @topic = Topic.find(params[:topic_id])
+    if submitted_link_url == "http://" || submitted_link_url == "https://"
+      respond_to do |format|
         format.html { render action: "edit" }
         format.json { render json: @topic_link.errors, status: :unprocessable_entity }
+      end
+    elsif @existing_link && @topic.includes_link?(@existing_link)
+      respond_to do |format|
+        format.html { redirect_to @topic_link.topic, notice: "#{@existing_link.url} is already a link for this topic" }
+        format.json { head :no_content }
+      end
+    else
+      @existing_topic_link = TopicLink.find(params[:id])
+      number_of_times_submitted_link_repeats_in_database = TopicLink.where(link_id: params[:topic_link][:link_attributes][:id]).length
+      @existing_topic_link.update_attributes(title: params[:topic_link][:title], description: params[:topic_link][:description])
+      if number_of_times_submitted_link_repeats_in_database == 1
+        if @existing_link
+          Link.find_by_id(@existing_topic_link.link_id).destroy
+          @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
+        else
+          Link.find_by_id(params[:topic_link][:link_attributes][:id]).update_attributes(url: submitted_link_url)
+        end
+      else
+        if @existing_link
+          @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
+        else
+          @link = Link.new(url: submitted_link_url)
+          @link.save
+          @existing_topic_link.update_attributes(link_id: @link.id)
+        end
+      end
+      respond_to do |format|
+        format.html { redirect_to @topic_link.topic, notice: "Link was successfully updated." }
+        format.json { head :no_content }
       end
     end
   end
@@ -88,8 +118,11 @@ class TopicLinksController < ApplicationController
   # DELETE /topic_links/1.json
   def destroy
     @topic_link = TopicLink.find(params[:id])
+    @link = Link.find_by_id(@topic_link.link_id)
+    number_of_times_link_repeats_in_topic_links = TopicLink.where(link_id: @topic_link.link_id).length
     @topic_link.destroy
     @topic = @topic_link.topic
+    @link.destroy if number_of_times_link_repeats_in_topic_links == 1
 
     respond_to do |format|
       format.html { redirect_to @topic }

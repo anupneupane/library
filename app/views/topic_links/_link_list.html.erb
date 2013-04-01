@@ -1,7 +1,7 @@
 <tr class="link_item">
   <td class="link_score task">
     <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
-      <%= hidden_field(:vote, :kind, value: "up") %>
+      <%= hidden_field(:vote, :status, value: 1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
       <%= image_submit_tag "upvote.png"%>
     <% end %>
@@ -9,7 +9,7 @@
     <%= tl.score %>
   
     <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
-      <%= hidden_field(:vote, :kind, value: "down") %>
+      <%= hidden_field(:vote, :status, value: -1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
       <%= image_submit_tag "downvote.png"%>
     <% end%>
