@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'nokogiri'
 
 group :development do
   gem 'better_errors'
