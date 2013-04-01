@@ -5,6 +5,9 @@
     <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
     <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
+<br>
+<%= render partial: 'topic_links/form' %>
+
 <hr />
 
 <%= render partial: 'links_table', locals: {links: @topic.topic_links} %>
