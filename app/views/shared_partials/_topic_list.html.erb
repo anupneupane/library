@@ -1,0 +1,22 @@
+<table class="topic_links">
+  <div>
+    <% target.each do |topic| %>
+    <tr class="link_item">
+      <td>
+        <p class="title"><%= link_to topic.title, topic %></p>
+        <p>Created by: <%= link_to topic.user.username, user_path(topic.user_id) %> | Submitted: <%= time_ago_in_words(topic.created_at) %> ago</p>
+        <p class="category">Category: <%= link_to topic.category.title, category_path(topic.category) %></p>
+        <p>Links: <%= link_to topic.topic_links.length, topic %> 
+          <% if topic.best_link != nil %>
+          | Best Link: <%= link_to(topic.topic_links.find_by_id(topic.best_link_id).title, topic.links.find_by_id(topic.best_link_id).url) %>
+          <% end %>
+        </p>
+      </td>
+      <% if has_admin_privileges? %>
+        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </div>
+</table>

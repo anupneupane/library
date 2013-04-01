@@ -2,3 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table.topic_links{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
+tr.link_item{
+  width:100%;
+}
