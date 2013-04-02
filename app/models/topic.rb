@@ -6,6 +6,7 @@ class Topic < ActiveRecord::Base
 
   has_many :topic_links
   has_many :links, :through => :topic_links
+  has_one :best_link, class_name: TopicLink
 
   validates_presence_of :title
 
@@ -33,15 +34,11 @@ class Topic < ActiveRecord::Base
 
   def best_link=(topic_link_instance)
     if topic_link_instance.topic == self
-      self.best_link_id = topic_link_instance.link.id
+      self.best_link = topic_link_instance
       self.save
     else
       raise "This link doesn't belong to this topic"
     end
-  end
-
-  def best_link
-      Link.find(self.best_link_id) unless self.best_link_id == nil
   end
 
   def includes_link?(link)

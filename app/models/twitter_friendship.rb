@@ -5,9 +5,9 @@ class TwitterFriendship < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :friend_id
 
 
-  def self.form_friendship(user, friend)
+  def self.first_or_create_friendship(user, friend)
     user = user.id if (! user.is_a? Fixnum)
     friend = friend.id if (! friend.is_a? Fixnum)
-    TwitterFriendship.create(user_id: user, friend_id: friend)
+    TwitterFriendship.where(user_id: user, friend_id: friend).first_or_create
   end
 end

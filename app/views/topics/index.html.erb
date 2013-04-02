@@ -10,8 +10,8 @@
       <p>Created by: <%= link_to topic.user.username, user_path(topic.user_id) %> | Created at: <%= time_ago_in_words(topic.created_at) %> ago</p>
       <p class="category">Category: <%= link_to topic.category.title, category_path(topic.category) %></p>
       <p>Links: <%= link_to topic.topic_links.length, topic %> 
-        <% if topic.best_link != nil %>
-          | Best Link: <%= link_to(topic.topic_links.find_by_id(topic.best_link_id).title, topic.links.find_by_id(topic.best_link_id).url) %>
+        <% if bestlink = topic.best_link %>
+          | Best Link: <%= link_to(bestlink.title, bestlink.link.url) %>
         <% end %>
       </p>
     </td>

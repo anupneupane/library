@@ -42,6 +42,7 @@ class TopicLinksController < ApplicationController
   # GET /topic_links/1/edit
   def edit
     @topic_link = TopicLink.find(params[:id])
+    @category = @topic_link.topic.category
   end
 
   # POST /topic_links
@@ -117,18 +118,18 @@ class TopicLinksController < ApplicationController
   # DELETE /topic_links/1
   # DELETE /topic_links/1.json
   def destroy
-    @topic_link = TopicLink.find(params[:id])
+    @topic_link = TopicLink.find_by_id(params[:id])
     @link = Link.find_by_id(@topic_link.link_id)
-    number_of_times_link_repeats_in_topic_links = TopicLink.where(link_id: @topic_link.link_id).length
-    @topic_link.destroy
     @topic = @topic_link.topic
-    @link.destroy if number_of_times_link_repeats_in_topic_links == 1
+    @topic_link.destroy
+    @link.destroy if TopicLink.where(link_id: @topic_link.link_id).length == 0
 
     respond_to do |format|
       format.html { redirect_to @topic }
       format.json { head :no_content }
     end
   end
+
   private
     def load_topic_link
       @topic_link = TopicLink.find(params[:topic_link_id] || params[:id])
@@ -137,5 +138,4 @@ class TopicLinksController < ApplicationController
     def tl_admin_or_creator
       redirect_to root_path, notice: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
     end
-
 end
