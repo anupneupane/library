@@ -1,15 +1,13 @@
 <div class="features-four">
   <div class="row">
     <% target.each do |topic| %>
-    <div class="span4">
+    <div class="span6">
       <div class="f-block b-white">
-        <h4><%= link_to topic.title, topic %></h4>
-        <p>Submitted by: <%= link_to topic.user.username, user_path(topic.user_id) %> | <%= time_ago_in_words(topic.created_at) %> ago</p>
-        <p>Category: <%= link_to topic.category.title, category_path(topic.category) %></p>
-        <p>Links: <%= link_to topic.topic_links.length, topic %></p>
-        <% if topic.best_link != nil %>
-          <p>Best Link: <%= link_to(topic.topic_links.find_by_id(topic.best_link_id).title, topic.links.find_by_id(topic.best_link_id).url) %></p>
-          <% end %>
+        <h3><%= link_to topic.title, topic %></h3>
+        <% if topic.best_link != nil && topic.best_link.score != 0 %>
+          <h5>Best Link: <%= link_to topic.best_link.title, topic.best_link.link.url %></h5>
+          <p>Score: <%= topic.best_link.score %> | Submitted by: <%= topic.best_link.user.username %></p>
+        <% end %>
         <% if has_admin_privileges? %>
           <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
           <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
