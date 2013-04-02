@@ -1,5 +1,7 @@
 <h1>Listing topics</h1>
 <%= button_to 'Create New Topic', new_topic_path, :method => "get" %>
 
+
 <%= render partial: 'shared_partials/topic_list', locals: {target: @topics } %>
+
 <br />

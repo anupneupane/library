@@ -1,0 +1,7 @@
+<tr>
+  <td>
+    <p>Link: <%= link_to i.title, i.link.url%></p>
+    <p>Topic: <%= link_to i.topic.title, topic_path(i.id) %></p>
+    <p>Category: <%= link_to i.topic.category.title, category_path(i.topic.category_id) %></p>
+  </td>
+</tr>

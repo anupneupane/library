@@ -34,7 +34,7 @@ class Topic < ActiveRecord::Base
 
   def best_link=(topic_link_instance)
     if topic_link_instance.topic == self
-      self.best_link_id = topic_link_instance.id
+      self.best_link = topic_link_instance
       self.save
     else
       raise "This link doesn't belong to this topic"
@@ -59,10 +59,5 @@ class Topic < ActiveRecord::Base
   def order_topic_links_by_score
     self.topic_links.order(:score).reverse
   end
-
-  # def remove_link(url)
-  #   l = self.links.find_by_url(url)
-  #   l.destroy
-  # end
 
 end
