@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Up Votes</th>
+  </tr>
+  <% @user.up_votes.each do |v| %>
+  <tr>
+    <td>
+      <p>Link: <%= link_to v.topic_link.title, v.topic_link.link.url%></p>
+      <p>Topic: <%= link_to v.topic_link.topic.title, topic_path(v.topic_link.id) %></p>
+      <p>Category: <%= link_to v.topic_link.topic.category.title, category_path(v.topic_link.topic.category_id) %></p>
+    </td>
+  <% end %>
+  </tr>
+</table>

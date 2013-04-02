@@ -45,4 +45,12 @@ class User < ActiveRecord::Base
     self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
   end
 
+  def up_votes
+    self.votes.select{ |v| v.status == 1}
+  end
+
+  def down_votes
+    self.votes.select{ |v| v.status == -1}
+  end
+
 end

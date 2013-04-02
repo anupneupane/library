@@ -5,7 +5,7 @@
       <b>All Links:</b>
       <table class="topic_links">
 
-      <%= render partial: "topic_links/link_list", collection: links, as: :tl%>
+      <%= render partial: "topic_links/link_list", collection: links.order("score DESC"), as: :tl%>
 
       </table>
       

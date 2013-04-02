@@ -1,19 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Library</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
-  <title>Tasks - Motro Mania</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="">
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-
-    <%= javascript_include_tag "application" %>
-
- 
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <!-- HTML5 Support for IE -->
   <!--[if lt IE 9]>
   <script src="js/html5shim.js"></script>
@@ -24,22 +20,16 @@
 </head>
 
 <body>
-
-<%= render partial: 'layouts/menubar' %>
-
-<div class="content">
-  <div class="container">
-
-    <%= yield %>
-
-    <div class="border"></div>
-<!--  render partial: 'layouts/products'  -->
-
+  <%= render partial: 'layouts/menubar' %>
+  <div class="content">
+    <div class="container">
+      <%= render 'shared_partials/flash_messages' %>
+      <%= yield %>
+      <div class="border"></div>
+      <!--  render partial: 'layouts/products'  -->
+    </div>
   </div>
-</div>
-
-<!-- render partial: 'layouts/social' -->
-<!-- render partial: 'layouts/footer' -->
-
+  <!-- render partial: 'layouts/social' -->
+  <!-- render partial: 'layouts/footer' -->
 </body>
 </html>
