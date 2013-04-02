@@ -1,29 +1,7 @@
 <h1>Listing topics</h1>
+<%= button_to 'Create New Topic', new_topic_path, :method => "get" %>
 
-<table>
 
-<div>
-  <% @topics.each do |topic| %>
-  <tr>
-    <td>
-      <p class="title"><%= link_to topic.title, topic %></p>
-      <p>Created by: <%= link_to topic.user.username, user_path(topic.user_id) %> | Created at: <%= time_ago_in_words(topic.created_at) %> ago</p>
-      <p class="category">Category: <%= link_to topic.category.title, category_path(topic.category) %></p>
-      <p>Links: <%= link_to topic.topic_links.length, topic %> 
-        <% if bestlink = topic.best_link %>
-          | Best Link: <%= link_to(bestlink.title, bestlink.link.url) %>
-        <% end %>
-      </p>
-    </td>
-    <% if has_admin_privileges? %>
-          <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-          <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
-  </tr>
-  <% end %>
-</div>
-</table>
+<%= render partial: 'shared_partials/topic_list', locals: {target: @topics } %>
 
 <br />
-
-<%= button_to 'Create New Topic', new_topic_path, :method => "get" %>

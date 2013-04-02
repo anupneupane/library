@@ -74,4 +74,13 @@ class User < ActiveRecord::Base
   def self.find_by_twitter_id(id)
     User.joins(:twitter_auth).where("twitter_auths.twitter_id = :id", id: id).first || nil
   end
+
+  def up_votes
+    self.votes.select{ |v| v.status == 1}.collect{|v| v.topic_link}
+  end
+
+  def down_votes
+    self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
+  end
+
 end

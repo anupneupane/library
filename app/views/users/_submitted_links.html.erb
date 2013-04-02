@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Submitted Links</th>
+  </tr>
+  <% @user.topic_links.each do |tl| %>
+  <tr>
+    <td>
+      <p><%= link_to tl.title, tl.link.url %></p>
+      <p>Topic: <%= link_to tl.topic.title, topic_path(tl.topic_id) %></p>
+      <p>Category: <%= link_to tl.topic.category.title, category_path(tl.topic.category_id) %></p>
+    </td> 
+  </tr>
+  <% end %>
+</table>

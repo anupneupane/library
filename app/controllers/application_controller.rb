@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-
-
   def has_admin_privileges?
     logged_in? && current_user.admin?
   end
