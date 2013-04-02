@@ -1,6 +1,6 @@
 Library::Application.routes.draw do
   root :to => 'categories#index'
-  
+
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
@@ -9,7 +9,7 @@ Library::Application.routes.draw do
   
 
   resources :votes, only: :create
-  resources :users
+  resources :users, except: :index
   resources :categories
 
   resources :topics do
