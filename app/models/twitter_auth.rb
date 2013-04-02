@@ -12,7 +12,9 @@ class TwitterAuth < ActiveRecord::Base
   end
 
   def self.matching_twitter_auths(twitter_ids)
-    TwitterAuth.includes(:user).where('twitter_id in (:twitter_ids)', twitter_ids: twitter_ids)
+
+    TwitterAuth.includes(:user).includes(:friends).where('twitter_id in (:twitter_ids)', twitter_ids: twitter_ids)
+
   end
 
   def find_and_save_friends

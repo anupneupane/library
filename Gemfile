@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'omniauth-twitter'
 gem 'grackle'
+gem 'nokogiri'
+gem 'public_suffix'
 
 group :development do
   gem 'better_errors'

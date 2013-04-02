@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class TopicLink < ActiveRecord::Base
   attr_accessible :link_id, :score, :topic_id, :title, :description, :link_attributes, :user_id
   
@@ -30,6 +32,12 @@ class TopicLink < ActiveRecord::Base
     self.score += vote
     self.save
     self.topic.best_link = self.topic.order_topic_links_by_score.first
+  end
+
+  def scrape(url)
+    web_address = open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
+    page = Nokogiri::HTML(web_address)
+    self.title = page.css("title").text
   end
 
 end
