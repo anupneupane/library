@@ -1,7 +1,5 @@
 <p>
-  <b>Category:</b>
-  <%= @category.title %><br/>
-  <b>Topics:</b>
+  <h2 class="category_title"><%= @category.title %></h2><hr>
   <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
 </p>
 

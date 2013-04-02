@@ -12,8 +12,9 @@
  *= require font-awesome
  *= require prettyPhoto
  *= require slider
- *= flexslider
+ *= require flexslider
  *= require style
+ *= require categories
  *= require green
  *= require bootstrap-responsive
  *= require topics
