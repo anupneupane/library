@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   end
 
   def twitter_handle
-    (auth.twitter_handle if self.authenticated_with_twitter?) || nil
+    (self.twitter_auth.twitter_handle if self.authenticated_with_twitter?) || nil
   end
 
   def self.find_by_twitter_id(id)

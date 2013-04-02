@@ -20,7 +20,7 @@ class TwitterAuth < ActiveRecord::Base
   end
 
   def self.extract_user_ids(twitter_auth_instances)
-    twitter_auth_instances.collect{|i| i.id}
+    twitter_auth_instances.collect{|i| i.user_id}
   end
 
   def find_and_save_friends
