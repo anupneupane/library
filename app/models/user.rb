@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     self.role_name == :admin
   end
 
+  def authenticated_with_twitter?
+    !! self.twitter_auth
+  end
+
   def topics_voted
     self.voted_topic_links.collect{ |tl| tl.topic }.uniq
   end
@@ -60,11 +64,11 @@ class User < ActiveRecord::Base
   end
 
   def twitter_id
-    self.twitter_auth.twitter_id || nil
+    (self.twitter_auth.twitter_id if self.authenticated_with_twitter?) || nil
   end
 
   def twitter_handle
-    self.twitter_auth.twitter_handle || nil
+    (auth.twitter_handle if self.authenticated_with_twitter?) || nil
   end
 
   def self.find_by_twitter_id(id)
