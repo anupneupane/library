@@ -1,0 +1,10 @@
+<table>
+  <tr>
+    <th>Submitted Topics</th>
+  </tr>
+  <% @user.topics.each do |topic| %>
+  <tr>
+    <td><%= link_to topic.title, topic %></td>
+  </tr>
+  <% end %>
+</table>

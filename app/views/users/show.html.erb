@@ -1,28 +1,7 @@
-<table>
-  <tr>
-    <th>Submitted Topics</th>
-  </tr>
-
-<% @user.topics.each do |topic| %>
-<tr>
-    <td><%= link_to topic.title, topic %></td>
-<% end %>
-</tr>
-</table>
+<%= render 'submitted_topics' %>
+<%= render 'submitted_links' %>
 
 
-
-<table>
-  <tr>
-    <th>Submitted Links (Goes to Parent Topic. Change?)</th>
-  </tr>
-
-<% @user.topic_links.each do |tl| %>
-<tr>
-    <td><%= link_to tl.title, topic_path(tl.topic_id) %> </td>
-<% end %>
-</tr>
-</table>
 
 <table>
   <tr>
@@ -38,5 +17,4 @@
 </table>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Update Account', edit_user_path(@user) %>
