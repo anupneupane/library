@@ -1,6 +1,6 @@
-<%= render 'submitted_topics' %>
-<%= render 'submitted_links' %>
-<%= render 'up_voted_links' %>
-<%= render 'down_voted_links' %>
+<%= render partial: 'submitted_topics', locals: {submitted_topics: @user.topics} %>
+<%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links} %>
+<%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes} %>
+<%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes} %>
 
 <%= link_to 'Update Account', edit_user_path(@user) %>
