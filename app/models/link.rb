@@ -1,7 +1,10 @@
+# require 'public_suffix'
+
 class Link < ActiveRecord::Base
   attr_accessible :url, :title, :description
-  validates_presence_of :url
+  # validates :url, :presence => true, :url => true
 
+  include PublicSuffix
   has_many :topic_links
   has_many :topics, :through => :topic_links
 
@@ -14,4 +17,13 @@ class Link < ActiveRecord::Base
     end
   end
 
+  def self.check_suffix(url)
+    uri = URI.parse(url)
+    begin
+      domain = PublicSuffix.parse(uri.host)
+      true
+    rescue PublicSuffix::DomainInvalid
+      false
+    end
+  end
 end

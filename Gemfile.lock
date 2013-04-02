@@ -78,6 +78,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.7.1)
+    nokogiri (1.5.6)
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -89,6 +90,7 @@ GEM
       pry (~> 0.9.10)
     pry-rails (0.2.2)
       pry (>= 0.9.10)
+    public_suffix (1.2.1)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -155,9 +157,11 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   less-rails
+  nokogiri
   pg
   pry-debugger
   pry-rails
+  public_suffix
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
   sqlite3

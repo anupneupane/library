@@ -54,15 +54,17 @@ class TopicLinksController < ApplicationController
     @tl.user = current_user
     
     if url == "http://" || url == "https://"
-      notice = "URL field may not be blank."
+      flash[:error] = "URL field may not be blank."
+    elsif Link.check_suffix(url) == false
+      flash[:error] = "Invalid URL"
     elsif @link && @topic.includes_link?(@link)
-      notice = "#{@link.url} is already a link for this topic"
+      flash[:error] = "#{@link.url} is already a link for this topic"
     elsif @link
       @tl.link = @link
-      notice = ("#{@link.url} is now associated with this topic" if @tl.save) || "Make sure you enter a title and description"
+      flash[:notice] = ("#{@link.url} is now associated with this topic" if @tl.save) || "Make sure you enter a title and description"
     else
       @link = @tl.build_link(url: url)
-      notice = ("#{@link.url} has been added to the topic" if @tl.save) || "Make sure you enter a title and description"
+      flash[:notice] = ("#{@link.url} has been added to the topic" if @tl.save) || "Make sure you enter a title and description"
     end
 
     respond_to do |format|
