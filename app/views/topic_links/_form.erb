@@ -1,16 +1,14 @@
-<a href="#myModal" role="button" class="btn" data-toggle="modal">
-  Add a New Link
-</a>
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Add a New Link</a>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <% if logged_in? %>
     <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-     <h3 id="myModalLabel">Submit a Link</h3>
-</div>
-<div class="modal-body">
- <%= form_for(@topic_link, :url => topic_links_path(@topic)) do |f| %>
- <%= render "shared_partials/error_messages", :target => @topic_link %>
-   
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Submit a Link</h3>
+    </div>
+    <div class="modal-body">
+        <%= form_for(@topic_link, :url => topic_links_path(@topic)) do |f| %>
+        <%= render "shared_partials/error_messages", :target => @topic_link %>
     <div class="field">
         <%= label_tag 'link_url', "Url:" %>
         <%= text_field_tag "link[url]" %>
@@ -21,5 +19,14 @@
         <%= f.submit "Submit" %>
     </div>
     </div>
-<% end %>
+        <% end %>
+    <% else %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Please Log In</h3>
+    </div>
+    <div class="modal-body">
+        <%= render 'sessions/form' %>
+    </div>
+    <% end %>
 </div>
