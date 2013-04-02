@@ -60,8 +60,7 @@ class User < ActiveRecord::Base
       token: auth_hash['credentials']['token'],
       secret: auth_hash['credentials']['secret']
     )
-    @twit_auth.save
-    @twit_auth.find_and_save_friends
+    @twit_auth.find_and_save_friends if @twit_auth.save
   end
 
   def twitter_id
