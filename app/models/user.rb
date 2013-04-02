@@ -41,16 +41,17 @@ class User < ActiveRecord::Base
     self.role_name == :admin
   end
 
-  def topics_voted
-    self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
-  end
-
   def up_votes
-    self.votes.select{ |v| v.status == 1}
+    self.votes.select{ |v| v.status == 1}.collect{|v| v.topic_link}
   end
 
   def down_votes
     self.votes.select{ |v| v.status == -1}
+  end
+
+  #not currently being used 4/2/13
+  def topics_voted
+    self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
   end
 
 end
