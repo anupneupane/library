@@ -4,14 +4,14 @@
     <div class="span6">
       <div class="f-block b-white">
         <h3><%= link_to topic.title, topic %></h3>
-        <% if topic.best_link != nil && topic.best_link.score != 0 %>
+        <% if topic.has_best_link? %>
           <h5>Best Link: <%= link_to topic.best_link.title, topic.best_link.link.url %></h5>
           <p>Score: <%= topic.best_link.score %> | Submitted by: <%= topic.best_link.user.username %></p>
         <% end %>
         <% if has_admin_privileges? %>
           <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
           <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>      
+        <% end %>
       </div>
     </div>
     <% end %>

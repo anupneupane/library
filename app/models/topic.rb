@@ -10,6 +10,10 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :title
 
+  def has_best_link?
+    self.best_link != nil && self.best_link.score != 0
+  end
+
   def authorize?(user)
     user && (user.admin? || (self.user_id==user.id && has_no_topic_links?))
   end
@@ -26,7 +30,7 @@ class Topic < ActiveRecord::Base
 
   def associate_links(*links)
     links = links.flatten
-    links.each do |l| 
+    links.each do |l|
       self.links << l
     end
     self.save

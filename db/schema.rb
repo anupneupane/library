@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401205214) do
+ActiveRecord::Schema.define(:version => 20130403150218) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20130401205214) do
     t.integer  "user_id"
   end
 
+  add_index "topic_links", ["topic_id"], :name => "index_topic_links_on_topic_id"
+
   create_table "topics", :force => true do |t|
     t.string   "title"
     t.datetime "created_at",   :null => false
@@ -44,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20130401205214) do
     t.integer  "category_id"
     t.integer  "user_id"
   end
+
+  add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
 
   create_table "twitter_auths", :force => true do |t|
     t.integer  "user_id"

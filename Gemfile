@@ -11,6 +11,7 @@ gem 'omniauth-twitter'
 gem 'grackle'
 gem 'nokogiri'
 gem 'public_suffix'
+gem 'will_paginate'
 
 group :development do
   gem 'quiet_assets'
