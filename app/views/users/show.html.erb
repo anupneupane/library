@@ -1,6 +1,14 @@
-<%= render partial: 'submitted_topics', locals: {submitted_topics: @user.topics} %>
-<%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links} %>
-<%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes} %>
-<%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes} %>
+<% if @user == current_user %>
+
+  <% if current_user.authenticated_with_twitter? %>
+  <p> You are connected to Twitter as <%= current_user.twitter_handle %>
+  <% else %>
+    <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
+  <% end %>
+  <% end %>
+<%= render partial: 'submitted_topics', locals: {submitted_topics: @user.topics} if @user.topics.length > 0%>
+<%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links} if @user.topic_links.length > 0%>
+<%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes.compact} if @user.up_votes.length > 0%>
+<%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes.compact} if @user.down_votes.length > 0%>
 
 <%= link_to 'Update Account', edit_user_path(@user) %>
