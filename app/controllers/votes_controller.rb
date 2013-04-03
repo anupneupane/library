@@ -8,16 +8,9 @@ class VotesController < ApplicationController
     if @prior_vote && @prior_vote.same_as_submitted_vote?(submitted_vote_status)
       notice = "You have already #{@prior_vote.vote_kind} voted on this link." 
     else
-      if @prior_vote == nil 
-        @topic_link.update_score(submitted_vote_status)
-        @topic_link.votes.build(params[:vote]).save
-      else
-        @topic_link.update_score(submitted_vote_status)
-        @prior_vote.update_vote(submitted_vote_status)
-      end
+      @topic_link.cast_vote(@prior_vote, params[:vote], submitted_vote_status)
       notice = "Vote successful."      
     end
-    # binding.pry
     @topic.best_link = @topic.order_topic_links_by_score.first
     @topic.save
     respond_to do |format|
