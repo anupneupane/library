@@ -13,6 +13,7 @@
 <% end %>
 </table>
 
+<%= will_paginate @categories %>
 <br />
 
 <% if logged_in? && current_user.admin? %>

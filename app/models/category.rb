@@ -1,10 +1,10 @@
 class Category < ActiveRecord::Base
   attr_accessible :title
-  has_many :topics
+  has_many :topics, :order => "topic.title ASC"
   validates_presence_of :title
 
   #Both methods were originally added to interface with the app
-  #in the terminal. They are never used in controller or view. 
+  #in the terminal. They are never used in controller or view.
   #Remove?
   #
   # def add_new_topic(title)
@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
   # def associate_topics(*topics)
   #   topics = topics.flatten
   #   topics.each do |t|
-  #     topic = Topic.find(t) 
+  #     topic = Topic.find(t)
   #     self.topics << topic
   #   end
   #   self.save

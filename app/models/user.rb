@@ -48,10 +48,6 @@ class User < ActiveRecord::Base
     !! self.twitter_auth
   end
 
-  def topics_voted
-    self.voted_topic_links.collect{ |tl| tl.topic }.uniq
-  end
-
   def link_twitter(auth_hash)
     @twit_auth = TwitterAuth.find_or_initialize_by_user_id(self.id)
     @twit_auth.update_attributes(
@@ -82,6 +78,11 @@ class User < ActiveRecord::Base
 
   def down_votes
     self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
+  end
+
+  #not currently being used 4/2/13
+  def topics_voted
+    self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
   end
 
 end
