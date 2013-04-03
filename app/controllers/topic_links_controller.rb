@@ -29,7 +29,6 @@ class TopicLinksController < ApplicationController
   # GET /topic_links/new.json
   def new
     @topic_link = TopicLink.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @topic_link }
@@ -42,21 +41,29 @@ class TopicLinksController < ApplicationController
   # GET /topic_links/1/edit
   def edit
     @topic_link = TopicLink.find(params[:id])
+    @topic = @topic_link.topic
     @category = @topic_link.topic.category
+    @link = @topic_link.link
+    @request_url = {url: topic_link_path(@topic.id, @topic_link)}
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @topic_link }
+    end
   end
 
   # POST /topic_links
   # POST /topic_links.json
   def create
     @link = Link.new(url: params[:link][:url].strip.downcase)
+    @link.prepend_http
     @topic = Topic.find(params[:topic_id])  
     @topic_link = TopicLink.new(params[:topic_link])
     @topic_link.topic = @topic
-    @topic_link.link = @link
     @topic_link.user = current_user
 
-    if @link.prepend_http && @link.valid? 
-      @topic_link.new_associate_or_reject
+    if @link.valid? 
+      @topic_link.link = @link
+      @topic_link.create_associate_or_reject_link
       redirect_to @topic
     else 
       flash[:error] = "Invalid URL"
@@ -67,43 +74,24 @@ class TopicLinksController < ApplicationController
   # PUT /topic_links/1
   # PUT /topic_links/1.json
   def update
-    submitted_link_url = Link.normalize_url(params[:topic_link][:link_attributes][:url])
-    @existing_link = Link.find_by_url(submitted_link_url)
+    @submitted_link = Link.new(url: params[:link][:url].strip.downcase)
+    @submitted_link.prepend_http
     @topic = Topic.find(params[:topic_id])
-    if submitted_link_url == "http://" || submitted_link_url == "https://"
-      respond_to do |format|
-        format.html { render action: "edit" }
-        format.json { render json: @topic_link.errors, status: :unprocessable_entity }
+    @topic_link = TopicLink.find(params[:id])
+    @topic_link.update_attributes(params[:topic_link])
+    @link = @topic_link.link
+
+    if @submitted_link.valid? 
+      @topic_link.link = @submitted_link
+      @topic_link.create_associate_or_reject_link
+      if @link.topic_links.length <1
+        @link.destroy
       end
-    elsif @existing_link && @topic.includes_link?(@existing_link)
-      respond_to do |format|
-        format.html { redirect_to @topic_link.topic, notice: "#{@existing_link.url} is already a link for this topic" }
-        format.json { head :no_content }
-      end
-    else
-      @existing_topic_link = TopicLink.find(params[:id])
-      number_of_times_submitted_link_repeats_in_database = TopicLink.where(link_id: params[:topic_link][:link_attributes][:id]).length
-      @existing_topic_link.update_attributes(title: params[:topic_link][:title], description: params[:topic_link][:description])
-      if number_of_times_submitted_link_repeats_in_database == 1
-        if @existing_link
-          Link.find_by_id(@existing_topic_link.link_id).destroy
-          @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
-        else
-          Link.find_by_id(params[:topic_link][:link_attributes][:id]).update_attributes(url: submitted_link_url)
-        end
-      else
-        if @existing_link
-          @existing_topic_link.update_attributes(link_id: Link.find_by_url(submitted_link_url).id)
-        else
-          @link = Link.new(url: submitted_link_url)
-          @link.save
-          @existing_topic_link.update_attributes(link_id: @link.id)
-        end
-      end
-      respond_to do |format|
-        format.html { redirect_to @topic_link.topic, notice: "Link was successfully updated." }
-        format.json { head :no_content }
-      end
+      redirect_to @topic
+    else 
+      flash[:error] = "Invalid URL"
+      @request_url = {url: topic_link_path(@topic.id, @topic_link)}
+      render 'topic_links/edit'
     end
   end
 

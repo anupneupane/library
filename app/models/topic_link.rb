@@ -39,7 +39,7 @@ class TopicLink < ActiveRecord::Base
     self.title = page.css("title").text
   end
 
-  def new_associate_or_reject
+  def create_associate_or_reject_link
     existing_link = Link.find_by_url(self.link.url)
     if existing_link && self.topic.includes_link?(existing_link) #link exists and already belongs to this topic
       
