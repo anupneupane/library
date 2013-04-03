@@ -17,6 +17,13 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "channel_id"
+  end
+
+  create_table "channels", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "links", :force => true do |t|

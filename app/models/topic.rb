@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
 
   has_many :topic_links
   has_many :links, :through => :topic_links
-  has_one :best_link, class_name: TopicLink
+  belongs_to :best_link, class_name: 'TopicLink'
 
   validates_presence_of :title
 
@@ -27,14 +27,6 @@ class Topic < ActiveRecord::Base
     self.links.length == 0
   end
 
-  def associate_links(*links)
-    links = links.flatten
-    links.each do |l|
-      self.links << l
-    end
-    self.save
-  end
-
   def includes_link?(link)
     true if (self.topic_links.where(:link_id => link.id).first) || false
   end
@@ -47,11 +39,35 @@ class Topic < ActiveRecord::Base
       self.topic_links.build(:link => link)
       return 10
     end
-
   end
 
   def order_topic_links_by_score
-    self.topic_links.order(:score).reverse
+    self.topic_links.all(:order => "score desc, updated_at desc")
   end
+
+  #  def associate_links(*links)
+  #   links = links.flatten
+  #   links.each do |l| 
+  #     self.links << l
+  #   end
+  #   self.save
+  # end
+
+   # def best_link
+  #   TopicLink.find_by_id(self.best_link_id)
+  # end
+
+  # def best_link=(topic_link_instance)
+  #   self.best_link_id = topic_link_instance.id
+  #   self.save
+  # end
+
+  #   if topic_link_instance.topic == self
+  #     self.best_link = topic_link_instance
+  #     self.save
+  #   else
+  #     raise "This link doesn't belong to this topic"
+  #   end
+  # end
 
 end
