@@ -22,6 +22,8 @@ group :development do
   gem 'awesome_print'
   gem 'sqlite3'
   gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'thin'
 end
 
 group :production do

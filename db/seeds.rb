@@ -25,20 +25,25 @@ users = User.create([
     :password => "basic"}
   ])
 
+channels = Channel.create([
+                            {title: "Flatiron School"},
+                            {title: "Electronics"}
+                          ])
+
 categories = Category.create([
-                              {title: "Flatiron School"}, #1
-                              {title: "Funny"}, #2
-                              {title: "Music"}, #3
-                              {title: "Prework"}, #4
-                              {title: "TVs"}, #5
-                              {title: "Cameras"}, #6
-                              {title: "Laptops"}, #7
-                              {title: "Headphones"}, #8
-                              {title: "Smartphones"}, #9
-                              {title: "Theater Audio"}, #10
-                              {title: "Projectors"}, #11
-                              {title: "Printers"}, #12
-                              {title: "Tablets"} #13
+                              {title: "Social", channel_id: 1}, #1
+                              {title: "Funny", channel_id: 1}, #2
+                              {title: "Music", channel_id: 1}, #3
+                              {title: "Prework", channel_id: 1}, #4
+                              {title: "TVs", channel_id: 2}, #5
+                              {title: "Cameras", channel_id: 2}, #6
+                              {title: "Laptops", channel_id: 2}, #7
+                              {title: "Headphones", channel_id: 2}, #8
+                              {title: "Smartphones", channel_id: 2}, #9
+                              {title: "Theater Audio", channel_id: 2}, #10
+                              {title: "Projectors", channel_id: 2}, #11
+                              {title: "Printers", channel_id: 2}, #12
+                              {title: "Tablets", channel_id: 2} #13
                               ])
 
 links = Link.create([
@@ -108,11 +113,7 @@ links = Link.create([
                       {url: 'http://www.amazon.com/exec/obidos/ASIN/B0036TGGJQ/thewire06-20'}, #64
                       {url: 'http://www.amazon.com/exec/obidos/ASIN/B007M4ZGZG/thewire06-20'}, #65
                       {url: 'http://www.amazon.com/exec/obidos/ASIN/B007PRHNHO/thewire06-20'}, #66
-                      {url: 'http://www.google.com/nexus/#/7'}, #67
-                      {url: ''}, #68
-                      {url: ''}, #69
-                      {url: ''}, #70
-
+                      {url: 'http://www.google.com/nexus/#/7'} #67
                       ])
 
 topics = Topic.create([

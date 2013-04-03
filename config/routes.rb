@@ -1,4 +1,7 @@
 Library::Application.routes.draw do
+  resources :channels
+
+
   root :to => 'categories#index'
 
   get "signup" => "users#new"

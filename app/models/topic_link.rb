@@ -14,23 +14,30 @@ class TopicLink < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
-  def is_score_zero?
-    self.score == 0
-  end
-
   def authorize?(user)
     user && (user.admin? || (self.user_id==user.id && is_score_zero?))
   end
 
-  # just added for checking redundant links
-  def includes_link?(link)
-    true if (self.topic_links.where(:link_id => link.id).first) || false
+  def is_score_zero?
+    self.score == 0
   end
 
   def update_score(vote)
     self.score += vote
     self.save
-    self.topic.best_link = self.topic.order_topic_links_by_score.first
+  end
+
+  def has_no_prior_vote?(prior_vote)
+    prior_vote.nil?
+  end
+
+  def cast_vote(prior_vote_instance, submit_params, submit_status)
+    self.update_score(submit_status)
+    if self.has_no_prior_vote?(prior_vote_instance)
+      self.votes.build(submit_params).save
+    else
+      prior_vote_instance.update_vote(submit_status)
+    end
   end
 
   def scrape(url)
