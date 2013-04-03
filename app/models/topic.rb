@@ -4,8 +4,8 @@ class Topic < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  has_many :topic_links
-  has_many :links, :through => :topic_links
+  has_many :topic_links, dependent: :destroy
+  has_many :links, through: :topic_links
   has_one :best_link, class_name: TopicLink
 
   validates_presence_of :title
@@ -36,7 +36,7 @@ class Topic < ActiveRecord::Base
   end
 
   def includes_link?(link)
-    true if (self.topic_links.where(:link_id => link.id).first) || false
+    true if self.topic_links.find_by_link_id(link.id) || false
   end
 
   def reject_or_associate(link)

@@ -1,4 +1,4 @@
-# require 'public_suffix'
+  # require 'public_suffix'
 
 class Link < ActiveRecord::Base
   attr_accessible :url, :title, :description
@@ -8,22 +8,20 @@ class Link < ActiveRecord::Base
   has_many :topic_links
   has_many :topics, :through => :topic_links
 
-  def self.normalize_url(url)
-    url = url.downcase
-    if (url.include?("http://") || url.include?("https://"))
-      url
-    else
-      url.insert(0,"http://")
-    end
+  def prepend_http
+    self.url.insert(0,"http://") if ! self.url.start_with?("http://" ,"https://")
   end
 
-  def self.check_suffix(url)
-    uri = URI.parse(url)
+  def valid?
+    self.prepend_http 
     begin
-      domain = PublicSuffix.parse(uri.host)
+      uri = URI.parse(self.url)
+      PublicSuffix.parse(uri.host)
       true
-    rescue PublicSuffix::DomainInvalid
+    rescue
       false
     end
   end
+
 end
+  

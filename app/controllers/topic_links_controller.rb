@@ -48,29 +48,19 @@ class TopicLinksController < ApplicationController
   # POST /topic_links
   # POST /topic_links.json
   def create
-    @topic = Topic.find(params[:topic_id])
-    url = Link.normalize_url(params[:link][:url])
-    @link = Link.find_by_url(url) 
-    @tl = @topic.topic_links.build(params[:topic_link])
-    @tl.user = current_user
-    
-    if url == "http://" || url == "https://"
-      flash[:error] = "URL field may not be blank."
-    elsif Link.check_suffix(url) == false
-      flash[:error] = "Invalid URL"
-    elsif @link && @topic.includes_link?(@link)
-      flash[:error] = "#{@link.url} is already a link for this topic"
-    elsif @link
-      @tl.link = @link
-      flash[:notice] = ("#{@link.url} is now associated with this topic" if @tl.save) || "Make sure you enter a title and description"
-    else
-      @link = @tl.build_link(url: url)
-      flash[:notice] = ("#{@link.url} has been added to the topic" if @tl.save) || "Make sure you enter a title and description"
-    end
+    @link = Link.new(url: params[:link][:url].strip.downcase)
+    @topic = Topic.find(params[:topic_id])  
+    @topic_link = TopicLink.new(params[:topic_link])
+    @topic_link.topic = @topic
+    @topic_link.link = @link
+    @topic_link.user = current_user
 
-    respond_to do |format|
-      format.html { redirect_to @topic, notice: notice }
-      format.json { render json: @topic, status: :created, location: @topic }
+    if @link.prepend_http && @link.valid? 
+      @topic_link.new_associate_or_reject
+      redirect_to @topic
+    else 
+      flash[:error] = "Invalid URL"
+      render 'topics/show'
     end
   end
 

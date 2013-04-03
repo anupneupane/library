@@ -12,8 +12,7 @@ class TopicLink < ActiveRecord::Base
   has_many :votes
   has_many :voters, through: :votes, class_name: 'User', foreign_key: 'topic_link_id', source: :user
 
-  validates_presence_of :title
-  validates_presence_of :description
+  validates_presence_of :title, :description
 
   def is_score_zero?
     self.score == 0
@@ -38,6 +37,17 @@ class TopicLink < ActiveRecord::Base
     web_address = open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
     page = Nokogiri::HTML(web_address)
     self.title = page.css("title").text
+  end
+
+  def new_associate_or_reject
+    existing_link = Link.find_by_url(self.link.url)
+    if existing_link && self.topic.includes_link?(existing_link) #link exists and already belongs to this topic
+      
+      false #don't save it
+    else
+      self.link = existing_link if existing_link #link exists but does not belong to this topic
+      self.save #link is completely new, just save it
+    end
   end
 
 end
