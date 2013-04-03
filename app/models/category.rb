@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :title
+  attr_accessible :title, :channel_id
   has_many :topics
   validates_presence_of :title
 

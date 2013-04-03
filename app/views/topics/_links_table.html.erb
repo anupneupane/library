@@ -4,8 +4,7 @@
     <% if @topic.links.length > 0 %>
       <b>All Links:</b>
       <table class="topic_links">
-
-      <%= render partial: "topic_links/link_list", collection: links.order("score DESC"), as: :tl%>
+      <%= render partial: "topic_links/link_list", collection: links.order("score DESC, updated_at DESC"), as: :tl%>
 
       </table>
       
