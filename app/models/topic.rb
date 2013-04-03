@@ -11,7 +11,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title
 
   def has_best_link?
-    self.best_link != nil && self.best_link.score != 0
+    self.best_link != nil && self.best_link.score > 0
   end
 
   def authorize?(user)
@@ -27,22 +27,12 @@ class Topic < ActiveRecord::Base
     self.links.length == 0
   end
 
-
   def associate_links(*links)
     links = links.flatten
     links.each do |l|
       self.links << l
     end
     self.save
-  end
-
-  def best_link=(topic_link_instance)
-    if topic_link_instance.topic == self
-      self.best_link = topic_link_instance
-      self.save
-    else
-      raise "This link doesn't belong to this topic"
-    end
   end
 
   def includes_link?(link)

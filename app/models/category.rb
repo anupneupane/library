@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   attr_accessible :title
-  has_many :topics, :order => "topic.title ASC"
+  has_many :topics
   validates_presence_of :title
 
   #Both methods were originally added to interface with the app
