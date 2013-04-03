@@ -13,6 +13,8 @@ gem 'nokogiri'
 gem 'public_suffix'
 
 group :development do
+  gem 'quiet_assets'
+  gem 'thin'
   gem 'better_errors'
   gem 'pry-rails'
   gem 'pry-debugger'
