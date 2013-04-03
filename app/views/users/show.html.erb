@@ -1,6 +1,6 @@
 <% if @user == current_user %>
 
-  <% if current_user.authenticated_with_twitter? %>
+  <% if @user.authenticated_with_twitter? %>
   <p> You are connected to Twitter as <%= current_user.twitter_handle %>
   <% else %>
     <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
