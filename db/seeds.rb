@@ -27,12 +27,13 @@ users = User.create([
 
 channels = Channel.create([
                             {title: "Flatiron School"},
-                            {title: "Electronics"}
+                            {title: "Electronics"},
+                            {title: "Funny"}
                           ])
 
 categories = Category.create([
                               {title: "Social", channel_id: 1}, #1
-                              {title: "Funny", channel_id: 1}, #2
+                              {title: "Videos", channel_id: 3}, #2
                               {title: "Music", channel_id: 1}, #3
                               {title: "Prework", channel_id: 1}, #4
                               {title: "TVs", channel_id: 2}, #5

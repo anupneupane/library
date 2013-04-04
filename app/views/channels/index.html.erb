@@ -1,23 +1,15 @@
-<h1>Listing channels</h1>
+<%= render partial: 'channels/top_navbar' %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @channels.each do |channel| %>
-  <tr>
-    <td><%= channel.title %></td>
-    <td><%= link_to 'Show', channel %></td>
-    <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
-    <td><%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Channel', new_channel_path %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <%= render partial: 'channels/left_navbar' %>    
+    <div class="span9">
+      <div class="hero-unit">
+        <h1>Welcome to Library</h1>
+        <p>Find the bestest link EVER for any topic</p>
+        <p>Choose a channel from the navigation bar on the left</p>
+      </div>
+    </div><!--/span-->
+  </div><!--/row-->
+  <hr>
+</div><!--/.fluid-container-->

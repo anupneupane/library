@@ -2,7 +2,7 @@ Library::Application.routes.draw do
   resources :channels
 
 
-  root :to => 'categories#index'
+  root :to => 'channels#index'
 
   get "signup" => "users#new"
   get "login" => "sessions#new"

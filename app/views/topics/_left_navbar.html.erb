@@ -1,0 +1,10 @@
+<div class="span2">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Related Topics</li><hr>
+      <% target.order("title ASC").all.each do |c| %>
+        <li><%= link_to c.title, channel_path(c) %></li>
+      <% end %>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

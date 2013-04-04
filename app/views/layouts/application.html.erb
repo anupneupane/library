@@ -15,21 +15,11 @@
   <script src="js/html5shim.js"></script>
   <![endif]-->
 
-  <!-- Favicon -->
-  <!-- <link rel="shortcut icon" href="img/favicon/favicon.png"> -->
 </head>
 
 <body>
-  <%= render partial: 'layouts/menubar' %>
-  <div class="content">
-    <div class="container">
-      <%= render 'shared_partials/flash_messages' %>
-      <%= yield %>
-      <div class="border"></div>
-      <!--  render partial: 'layouts/products'  -->
-    </div>
-  </div>
-  <!-- render partial: 'layouts/social' -->
-  <!-- render partial: 'layouts/footer' -->
+
+  <%= yield %>
+
 </body>
 </html>
