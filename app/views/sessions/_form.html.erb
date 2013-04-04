@@ -1,10 +1,9 @@
 <%= form_tag login_path do %>
+<br />
   <div class="field">
-    <%= label_tag :username %><br>
+    <%= label_tag :username %>
     <%= text_field_tag :username, params[:username] %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
+    <%= label_tag :password %>
     <%= password_field_tag :password, params[:password] %>
   </div>
   <div class="actions">

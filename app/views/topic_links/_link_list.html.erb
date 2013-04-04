@@ -1,17 +1,25 @@
 <tr class="link_item">
   <td class="link_score task">
-    <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
+    <%= form_tag(topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )) do%>
       <%= hidden_field(:vote, :status, value: 1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
-      <%= image_submit_tag "upvote.png"%>
+      <% if logged_in? %>
+        <%= image_submit_tag "upvote.png"%>
+      <% else %>
+        <a href="#myModal" role="button" class="btn vote" data-toggle="modal"><%=image_tag "upvote.png"%></a>
+      <% end %>
     <% end %>
     
     <%= tl.score %>
   
-    <%= form_tag((topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )if logged_in? )|| "javascript:alert('Please log in to vote!');") do %>
+    <%= form_tag(topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )) do %>
       <%= hidden_field(:vote, :status, value: -1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
-      <%= image_submit_tag "downvote.png"%>
+      <% if logged_in? %>
+        <%= image_submit_tag "downvote.png"%>
+      <% else %>
+        <a href="#myModal" role="button" class="btn vote" data-toggle="modal"><%=image_tag "downvote.png"%></a>
+      <% end %>
     <% end%>
   </td>
   <td class="link_info task">

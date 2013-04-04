@@ -7,8 +7,7 @@
         <h3 id="myModalLabel">Submit a Link</h3>
     </div>
     <div class="modal-body">
-<%= render partial:'topic_links/form'
-%>
+        <%= render partial:'topic_links/form'%>
     </div>
     <% else %>
     <div class="modal-header">
@@ -17,6 +16,19 @@
     </div>
     <div class="modal-body">
         <%= render 'sessions/form' %>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> -->
+        <a href="#signUpModal" class="close sign-up" data-toggle="modal" data-dismiss="modal" aria-hidden="true">Don't have an account? Sign up here.</a>
+        <!-- </button> -->
     </div>
     <% end %>
+</div>
+
+<div id="signUpModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Create an Account</h3>
+    </div>
+    <div class="modal-body">
+        <%= render 'users/signup_form' %>
+    </div>
 </div>
