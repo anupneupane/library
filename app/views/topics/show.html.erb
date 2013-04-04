@@ -1,14 +1,19 @@
-<h2><%= @topic.title %></h2>
-<p class="big grey">submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
-<%= @topic.best_link.title if @topic.best_link %>
+<%= render partial: 'shared_partials/top_navbar', locals: {target: @topic.category.channel} %>
 
+<div class="row tasks">
+<div class="span12">
+  <h2><%= @topic.title %></h2>
+  <p class="big grey"><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
+  <p>Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
+  <%= @topic.best_link.title if @topic.best_link %>
   <% if @topic.authorize?(current_user) %>
     <%= link_to 'Edit Topic', edit_topic_path(@topic) %> |
     <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
-<br>
-<%= render partial: 'topic_links/form' %>
-
-<hr />
-<%#= raise @topic.topic_links.inspect %>
-<%= render partial: 'links_table', locals: {links: @topic.topic_links} %>
+  <br>
+  <%= render partial: 'topic_links/form' %>
+  <br>
+  <hr>
+</div>
+</div>
+  <%= render partial: 'links_table', locals: {links: @topic.topic_links} %>

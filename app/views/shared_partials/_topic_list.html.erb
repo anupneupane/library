@@ -1,13 +1,12 @@
 <div class="features-four">
-  <% target.each_slice(2) do |topics| %>
   <div class="row">
-    <% topics.each do |topic| %>
+    <% target.each do |topic| %>
       <div class="span5">
         <div class="f-block b-white">
           <h3><%= link_to topic.title, topic %></h3>
           <% if topic.has_best_link? %>
+            <p class="links">Number of links: <%= link_to topic.links.length, topic %></p>
             <h5>Best Link: <%= link_to topic.best_link.title, topic.best_link.link.url %></h5>
-            <p>Score: <%= topic.best_link.score %> | Submitted by: <%= topic.best_link.user.username %></p>
           <% end %>
           <% if has_admin_privileges? %>
             <p><%= link_to 'Edit', edit_topic_path(topic) %></p>
@@ -17,5 +16,4 @@
       </div>
   <% end %>
   </div>
-  <% end %>
 </div>
