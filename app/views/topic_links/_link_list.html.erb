@@ -20,7 +20,7 @@
     <p><%= tl.description %></p>
     
 
-     <div class="tmeta"><i class="icon-calendar"></i> <%= tl.created_at.strftime('%B %d, %Y') %> - <i class="icon-user"></i> Link submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
+     <div class="tmeta"><i class="icon-calendar"></i> <%= time_ago_in_words(tl.created_at) %> ago | <i class="icon-user"></i> Submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
 
     <% if tl.authorize?(current_user) %>
       <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> | 

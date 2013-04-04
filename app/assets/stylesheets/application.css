@@ -18,5 +18,6 @@
  *= require green
  *= require bootstrap-responsive
  *= require topics
+ *= require users
  *= require bootstrap_and_overrides
  */

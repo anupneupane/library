@@ -1,6 +1,4 @@
-<table>
-  <tr>
-    <th>Submitted Links</th>
-  </tr>
-    <%= render partial: 'users/user_items', collection: submitted_links, as: :i%>
-</table>
+<div class="profile-block">
+  <h5>Recently Submitted Links</h5>
+  <%= render partial: 'submitted_links_list', collection: submitted_links, as: :topic_link %>
+</div>

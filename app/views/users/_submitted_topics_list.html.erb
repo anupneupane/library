@@ -1,5 +1,7 @@
-<div class='submitted-topic'>
-  <p class='topic'><%= link_to topic.title, topic %></p>
-  <p class='category'><%= link_to topic.category.title, topic.category %>
-  <p class='best-link'><%= link_to topic.best_link.title, topic.best_link.link.url if topic.best_link%>
+<div class='submitted-topic task'>
+  <div class='topic'><h6><%= link_to topic.title, topic %></h6></div>
+  <div class='info'>
+  <p><i class="icon-calendar"></i> <%=time_ago_in_words(topic.created_at)%> ago | Category: <%= link_to topic.category.title, topic.category %></p>
+  <p>Best Link: <%= link_to truncate(topic.best_link.title, length: 60), topic.best_link.link.url if topic.best_link%>
+  </div>
 </div>
