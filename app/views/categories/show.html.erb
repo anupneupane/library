@@ -1,9 +1,16 @@
-<p>
-  <h2 class="category_title"><%= @category.title %></h2><hr>
-  <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
-</p>
+<%= render partial: 'shared_partials/top_navbar', locals: {target: @category.channel} %>
 
-
-
+<div class="container-fluid">
+  <div class="row-fluid">
+    <%= render partial: 'topics/left_navbar', locals: {target: @category.topics} %>    
+    <div class="span10">
+        <p>
+          <h2 class="category_title"><%= @category.title %></h2><hr>
+          <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
+        </p>
+    </div><!--/span-->
+  </div><!--/row-->
+  <hr>
+</div><!--/.fluid-container-->
 
 <%= link_to 'Edit', edit_category_path(@category) if has_admin_privileges? %>

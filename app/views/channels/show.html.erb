@@ -1,10 +1,15 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'shared_partials/top_navbar', locals: {target: @channel} %>
 
-<p>
-  <b>Title:</b>
-  <%= @channel.title %>
-</p>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <%= render partial: 'categories/left_navbar' %>    
+    <div class="span5">
+        <h1>Need to create a view</h1>
+    </div><!--/span-->
+    <div class="span5">
+        <h1>Need to create another view</h1>
+    </div><!--/span-->    
+  </div><!--/row-->
+  <hr>
+</div><!--/.fluid-container-->
 
-
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
