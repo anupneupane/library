@@ -25,6 +25,24 @@ users = User.create([
     :password => "basic"}
   ])
 
+twitter_auths = TwitterAuth.create([
+  { :user_id => 3,
+    :twitter_id => 1327166216,
+    :twitter_handle => "LauraLibrary1",
+    :token => "1327166216-Lk5keTQlnKKZvukrRyGtYv7Fd57rgCm43AN3qBp",
+    :secret => "XhjlAidR3mT47zwgChr0LvP15YhYShDG0hzFvTqkdA"},
+  { :user_id => 2,
+    :twitter_id => 1327184551,
+    :twitter_handle => "RahulLibrary1",
+    :token => "1327184551-40LXIl9rVqAFakw1O0jWwhT11CVt4eMXWnjCgKQ",
+    :secret => "h4sqMFBwZ3ScMELh9KUM18W3EK5FTOBvGES8AE2Ro"},
+  { :user_id => 1,
+    :twitter_id => 1327164006,
+    :twitter_handle => "JohnLibrary1",
+    :token => "1327164006-k79hKLlGkcP2jnmtfCinPfLiWyhV0s6kVDgwOeD",
+    :secret => "52Dw9Fg31RuMUGrkQtK7T3LPqRc890tGUAf4XxJE"}
+  ])
+
 channels = Channel.create([
                             {title: "Flatiron School"},
                             {title: "Electronics"}

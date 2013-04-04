@@ -1,5 +1,5 @@
 class TwitterAuth < ActiveRecord::Base
-  attr_accessible :twitter_id, :twitter_handle, :token, :secret
+  attr_accessible :twitter_id, :twitter_handle, :token, :secret, :user_id
   belongs_to :user
 
   def find_friends_on_twitter
