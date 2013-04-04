@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
     self.url.insert(0,"http://") if ! self.url.start_with?("http://" ,"https://")
   end
 
-  def valid?
+  def is_valid?
     self.prepend_http 
     begin
       uri = URI.parse(self.url)

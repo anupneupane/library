@@ -61,7 +61,7 @@ class TopicLinksController < ApplicationController
     @topic_link.topic = @topic
     @topic_link.user = current_user
 
-    if @link.valid? 
+    if @link.is_valid? 
       @topic_link.link = @link
       @topic_link.create_associate_or_reject_link
       redirect_to @topic
@@ -81,7 +81,7 @@ class TopicLinksController < ApplicationController
     @topic_link.update_attributes(params[:topic_link])
     @link = @topic_link.link
 
-    if @submitted_link.valid? 
+    if @submitted_link.is_valid? 
       @topic_link.link = @submitted_link
       @topic_link.create_associate_or_reject_link
       if @link.topic_links.length <1
