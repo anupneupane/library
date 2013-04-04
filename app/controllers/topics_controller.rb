@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
     @request_url = {url: topic_links_path(@topic.id)}
-    @user = User.new unless current_user
+    @user = User.new unless logged_in?
 
     respond_to do |format|
       format.html # show.html.erb
