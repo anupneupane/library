@@ -6,9 +6,26 @@
     <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
   <% end %>
   <% end %>
-<%= render partial: 'submitted_topics', locals: {submitted_topics: @user.topics} if @user.topics.length > 0%>
-<%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links} if @user.topic_links.length > 0%>
-<%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes.compact} if @user.up_votes.length > 0%>
-<%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes.compact} if @user.down_votes.length > 0%>
+
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span6">
+        <%= render partial: 'submitted_topics', locals: {submitted_topics: @user.topics}%>
+      </div>
+      <div class="span6">
+        <%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links}%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6">
+        <%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes.compact}%>
+      </div>
+      <div class="span6">
+        <%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes.compact}%>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Update Account', edit_user_path(@user) %>

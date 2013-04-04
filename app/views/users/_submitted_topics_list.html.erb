@@ -1,0 +1,5 @@
+<div class='submitted-topic'>
+  <p class='topic'><%= link_to topic.title, topic %></p>
+  <p class='category'><%= link_to topic.category.title, topic.category %>
+  <p class='best-link'><%= link_to topic.best_link.title, topic.best_link.link.url if topic.best_link%>
+</div>
