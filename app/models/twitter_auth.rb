@@ -5,7 +5,7 @@ class TwitterAuth < ActiveRecord::Base
   def find_friends_on_twitter
     client = Grackle::Client.new(:auth=>{
       type: :oauth,
-      consumer_key: TWITCONFIG['consumer_key'], consumer_secret: TWITCONFIG['consumer_secret'],
+      consumer_key: 'uBbQMkAZI1eRI7kJSzBzA', consumer_secret: '7Ol8c6U5CrYdqqDqOTKxOyDA9XDoGE8Fn4248zoOD4',
       token: self.token, token_secret: self.secret
     })
     client.friends.ids.json?.ids
@@ -20,7 +20,7 @@ class TwitterAuth < ActiveRecord::Base
   end
 
   def self.extract_user_ids(twitter_auth_instances)
-    twitter_auth_instances.collect{|i| i.user_id}
+    twitter_auth_instances.collect{|i| i.id}
   end
 
   def find_and_save_friends

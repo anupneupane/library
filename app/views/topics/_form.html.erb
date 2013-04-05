@@ -1,13 +1,12 @@
-<%= form_for(@topic) do |f| %>
-  <%= render "shared_partials/error_messages", :target => @topic %>
+<%= form_for(topic) do |f| %>
+  <%= render "shared_partials/error_messages", :target => topic %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
+    <%= f.label :category %>
+    <%= f.collection_select(:category_id, @channel.categories, :id, :title) %>
   </div>
-  <%= f.label :category %> <br>
-  <%= f.collection_select(:category_id, Category.all, :id, :title) %>
-
   <div class="actions">
     <%= f.submit %>
   </div>

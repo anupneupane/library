@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
   before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
   before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
+  before_filter :load_new_topic
 
   # GET /topics
   # GET /topics.json

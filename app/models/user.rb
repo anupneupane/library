@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
       secret: auth_hash['credentials']['secret']
     )
     @twit_auth.save
-    #@twit_auth.find_friends_on_twitter
+    @twit_auth.find_and_save_friends
   end
 
   def twitter_id

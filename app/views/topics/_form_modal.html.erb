@@ -1,0 +1,10 @@
+<div id="topicFormModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Submit a Topic</h3>
+    </div>
+    <div class="modal-body">
+        <%= render partial:'topics/form', locals: {topic: topic}%>
+    </div>
+</div>

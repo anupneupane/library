@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
       redirect_to request.referrer, notice: "Logged In!"
     else
       flash.now[:error] = "Email or password is invalid"
-      render "new"
+      @user = User.new
+      redirect_to request.referrer
     end
   end
 

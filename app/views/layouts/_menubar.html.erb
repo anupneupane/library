@@ -16,13 +16,13 @@
           </ul>
         </li>
         <% if @channel %>
-        <li><%= link_to 'Submit a Topic', new_topic_path %></li>
+          <li><a href='<%= ("#topicFormModal" if logged_in?) || "#loginModal" %>' data-toggle="modal">Submit A Topic</a></li>
         <% end %>
       </ul>
       <ul class="nav pull-right">
         <% if !logged_in? %>
-          <li><%= link_to "Sign Up", signup_path %></li>
-          <li><%= link_to "Log In", login_path %></li>
+          <li><a href="#signUpModal" data-toggle="modal">Sign Up</a></li>
+          <li><a href="#loginModal" data-toggle="modal">Log In</a></li>
         <% else %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged In as <%= current_user.username %><b class="caret"></b></a>

@@ -38,4 +38,8 @@ class ApplicationController < ActionController::Base
       redirect_to login_path, notice: "Please Log In" unless logged_in?
     end
 
+    def load_new_topic
+      @new_topic = Topic.new
+    end
+
 end
