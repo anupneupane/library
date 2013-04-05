@@ -1,0 +1,27 @@
+<% if params[:controller] == "channels" %> 
+  <% if params[:action] == "show" %>
+    <div class="span2">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <%= render partial: 'categories/left_navbar_content' %>
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->
+  <% else %>
+    <div class="span2">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">        
+          <%= render partial: 'channels/left_navbar_content' %>
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->                
+  <% end %>
+<% elsif params[:controller] == "categories" && params[:action] == "show" %>
+  <div class="span2">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">      
+        <%= render partial: 'topics/left_navbar_content' %>  
+                </ul>
+    </div><!--/.well -->
+  </div><!--/span-->      
+<% end %>
