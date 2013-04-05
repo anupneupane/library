@@ -80,9 +80,4 @@ class User < ActiveRecord::Base
     self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
   end
 
-  #not currently being used 4/2/13
-  def topics_voted
-    self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
-  end
-
 end
