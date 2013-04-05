@@ -8,12 +8,10 @@ class TwitterAuth < ActiveRecord::Base
       consumer_key: 'uBbQMkAZI1eRI7kJSzBzA', consumer_secret: '7Ol8c6U5CrYdqqDqOTKxOyDA9XDoGE8Fn4248zoOD4',
       token: self.token, token_secret: self.secret
     })
-    #binding.pry
     client.friends.ids.json?.ids
   end
 
   def matching_twitter_auths(twitter_ids)
-    # binding.pry
     stringified_ids = twitter_ids.join(', ')
     TwitterAuth.find_by_sql("SELECT users.id FROM twitter_auths INNER JOIN users ON twitter_auths.user_id=users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_id NOT IN (SELECT twitter_id FROM twitter_friendships INNER JOIN users ON twitter_friendships.friend_id = users.id INNER JOIN twitter_auths ON twitter_auths.user_id = users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_friendships.user_id IS #{self.user_id});")
 
