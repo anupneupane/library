@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  before_filter :load_user
   # GET /channels
   # GET /channels.json
   def index

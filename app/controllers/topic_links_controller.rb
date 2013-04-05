@@ -1,4 +1,5 @@
 class TopicLinksController < ApplicationController
+  before_filter :load_user
   before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :load_topic_link, :only => [:update, :destroy, :edit]
   before_filter :tl_admin_or_creator, :only => [:update, :destroy, :edit]

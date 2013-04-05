@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :has_admin_privileges?
 
+  def load_user
+    @user = User.new unless logged_in?
+  end
+
   private
 
     def check_if_admin

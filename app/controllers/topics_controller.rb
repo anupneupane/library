@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_filter :load_user
   before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
   before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
@@ -20,7 +21,6 @@ class TopicsController < ApplicationController
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
     @request_url = {url: topic_links_path(@topic.id)}
-    @user = User.new unless logged_in?
 
     respond_to do |format|
       format.html # show.html.erb
