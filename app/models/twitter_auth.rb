@@ -19,7 +19,6 @@ class TwitterAuth < ActiveRecord::Base
       twitter_friends = self.find_friends_on_twitter
       matches = self.matching_auths_with_user_id(twitter_friends)
       matches.each do |friend|
-        binding.pry
         (TwitterFriendship.create(user_id: self.user_id, friend_id: friend.user_id) if friend.authenticated?) || friend.destroy
       end
     end
