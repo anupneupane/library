@@ -1,12 +1,6 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <%= render partial: 'shared_partials/left_navbar' %>    
-    <div class="span10">
-      <h2><%= @category.title %></h2><hr>
-      <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
-    </div><!--/span-->
-  </div><!--/row-->
-  <hr>
-</div><!--/.fluid-container-->
+<div class="span10">
+  <h2><%= @category.title %></h2><hr>
+  <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
+</div><!--/span-->
 
 <%= link_to 'Edit', edit_category_path(@category) if has_admin_privileges? %>
