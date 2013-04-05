@@ -57,6 +57,7 @@ class UsersController < ApplicationController
   def twitter_auth
     auth = env['omniauth.auth']
     current_user.link_twitter(auth)
+    TwitterWorker.perform_async(current_user.id)
     redirect_to current_user
   end
 
