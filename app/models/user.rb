@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :role
 
   has_one :twitter_auth, dependent: :destroy
-  has_many :twitter_friendships
+  has_many :twitter_friendships, dependent: :destroy
   has_many :friends, through: :twitter_friendships, source: :friend
   has_many :votes
   has_many :voted_topic_links, through: :votes, class_name: 'TopicLink', foreign_key: 'user_id', source: :topic_link

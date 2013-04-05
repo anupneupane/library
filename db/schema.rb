@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403150218) do
+ActiveRecord::Schema.define(:version => 20130405171304) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.datetime "updated_at", :null => false
     t.integer  "channel_id"
   end
+
+  add_index "categories", ["channel_id"], :name => "index_categories_on_channel_id"
 
   create_table "channels", :force => true do |t|
     t.string   "title"
@@ -43,7 +45,10 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.integer  "user_id"
   end
 
+  add_index "topic_links", ["link_id"], :name => "index_topic_links_on_link_id"
+  add_index "topic_links", ["score"], :name => "index_topic_links_on_score"
   add_index "topic_links", ["topic_id"], :name => "index_topic_links_on_topic_id"
+  add_index "topic_links", ["user_id"], :name => "index_topic_links_on_user_id"
 
   create_table "topics", :force => true do |t|
     t.string   "title"
@@ -54,7 +59,9 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.integer  "user_id"
   end
 
+  add_index "topics", ["best_link_id"], :name => "index_topics_on_best_link_id"
   add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "twitter_auths", :force => true do |t|
     t.integer  "user_id"
@@ -73,6 +80,9 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "twitter_friendships", ["friend_id"], :name => "index_twitter_friendships_on_friend_id"
+  add_index "twitter_friendships", ["user_id"], :name => "index_twitter_friendships_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "username"
     t.datetime "created_at",      :null => false
@@ -89,5 +99,8 @@ ActiveRecord::Schema.define(:version => 20130403150218) do
     t.datetime "updated_at",    :null => false
     t.integer  "status"
   end
+
+  add_index "votes", ["topic_link_id"], :name => "index_votes_on_topic_link_id"
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
 
 end
