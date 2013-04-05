@@ -5,7 +5,11 @@
     <%= render partial: 'topics/left_navbar', locals: {target: @category.topics} %>    
     <div class="span10">
         <p>
-          <h2 class="category_title"><%= @category.title %></h2><hr>
+          <h2 class="category_title"><%= @category.title %></h2>
+          <% if has_admin_privileges? %>
+          <p><%= link_to 'Edit', edit_category_path(@category) %> | <%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+          <hr>
           <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
         </p>
     </div><!--/span-->
@@ -13,4 +17,3 @@
   <hr>
 </div><!--/.fluid-container-->
 
-<%= link_to 'Edit', edit_category_path(@category) if has_admin_privileges? %>

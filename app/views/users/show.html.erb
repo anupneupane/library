@@ -28,4 +28,5 @@
   </div>
 </div>
 
+<%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Update Account', edit_user_path(@user) %>

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :role
 
-  has_one :twitter_auth
+  has_one :twitter_auth, dependent: :destroy
   has_many :twitter_friendships
   has_many :friends, through: :twitter_friendships, source: :friend
   has_many :votes
