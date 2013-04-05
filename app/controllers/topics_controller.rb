@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :check_if_logged_in, :except => [:show, :index]
-  before_filter :load_topic, :only => [:update, :destroy, :edit]
+  before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
   before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
 
   # GET /topics
@@ -17,8 +17,6 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-    @topic = Topic.includes(:category).find(params[:id])
-    @category = @topic.category
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
     @request_url = {url: topic_links_path(@topic.id)}
@@ -43,7 +41,6 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
-    @topic = Topic.find(params[:id])
   end
 
   # POST /topics
@@ -66,7 +63,6 @@ class TopicsController < ApplicationController
   # PUT /topics/1
   # PUT /topics/1.json
   def update
-    @topic = Topic.find(params[:id])
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
@@ -83,7 +79,6 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
-    @topic = Topic.find(params[:id])
     @topic.destroy
 
     respond_to do |format|
@@ -93,8 +88,10 @@ class TopicsController < ApplicationController
   end
 
   private
-    def load_topic
-      @topic = Topic.find(params[:topic_id] || params[:id])
+    def load_variables
+      @topic = Topic.includes(:category => [:channel]).find(params[:topic_id] || params[:id])
+      @category = @topic.category
+      @channel = @category.channel
     end
 
     def topic_admin_or_creator
