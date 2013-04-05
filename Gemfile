@@ -12,6 +12,9 @@ gem 'grackle'
 gem 'nokogiri'
 gem 'public_suffix'
 gem 'will_paginate'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development do
   gem 'quiet_assets'

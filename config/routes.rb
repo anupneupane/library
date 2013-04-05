@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Library::Application.routes.draw do
   resources :channels
 
@@ -9,6 +11,7 @@ Library::Application.routes.draw do
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
   get '/auth/twitter/callback', :to => 'users#twitter_auth'
+ mount Sidekiq::Web, at: "/sidekiq"
 
   
 

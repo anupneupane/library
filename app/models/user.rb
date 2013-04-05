@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :role
 
-  has_one :twitter_auth
-  has_many :twitter_friendships
+  has_one :twitter_auth, dependent: :destroy
+  has_many :twitter_friendships, dependent: :destroy
   has_many :friends, through: :twitter_friendships, source: :friend
   has_many :votes
   has_many :voted_topic_links, through: :votes, class_name: 'TopicLink', foreign_key: 'user_id', source: :topic_link
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
       secret: auth_hash['credentials']['secret']
     )
     @twit_auth.save
-    #@twit_auth.find_friends_on_twitter
+    #@twit_auth.find_and_save_friends
   end
 
   def twitter_id
@@ -78,11 +78,6 @@ class User < ActiveRecord::Base
 
   def down_votes
     self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
-  end
-
-  #not currently being used 4/2/13
-  def topics_voted
-    self.votes.collect{ |v| v.topic_link }.collect{ |tl| tl.topic }.uniq
   end
 
 end

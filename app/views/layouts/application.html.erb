@@ -20,10 +20,13 @@
 
   <body>
     <%= render partial: 'shared_partials/login_modal' unless logged_in? %>
+    <%= render partial: 'shared_partials/signup_modal' unless logged_in? %>
+    <%= render partial: 'topics/form_modal', locals: {topic: Topic.new} if ( @channel && logged_in?)%>
+    <%= render partial: 'shared_partials/login_modal' unless logged_in? %>
     <%= render partial: 'layouts/menubar' %>
+    <%= render partial: 'shared_partials/left_navbar' %>  
     <div class="container-fluid">
       <div class="row-fluid">
-        <%= render partial: 'shared_partials/left_navbar' %>  
         <%= render partial: 'shared_partials/flash_messages' %>
         <%= yield %>
       </div><!--/row-->

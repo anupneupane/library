@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_filter :load_user
   before_filter :check_if_admin, only: [:create, :edit, :update, :destroy]
+  before_filter :load_new_topic
 
   # GET /categories
   # GET /categories.json
