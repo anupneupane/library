@@ -12,7 +12,7 @@ class TopicLink < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, class_name: 'User', foreign_key: 'topic_link_id', source: :user
 
-  validates_presence_of :title, :description
+  validates_presence_of :title
 
   def authorize?(user)
     user && (user.admin? || (self.user_id==user.id && is_score_zero?))

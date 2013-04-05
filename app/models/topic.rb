@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
 
   has_many :topic_links, dependent: :destroy
   has_many :links, :through => :topic_links
-  has_one :best_link, class_name: 'TopicLink'
+  belongs_to :best_link, class_name: 'TopicLink'
 
   validates_presence_of :title
 
