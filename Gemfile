@@ -15,6 +15,7 @@ gem 'will_paginate'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'whenever'
 
 group :development do
   gem 'quiet_assets'
