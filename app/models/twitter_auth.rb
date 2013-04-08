@@ -8,7 +8,7 @@ class TwitterAuth < ActiveRecord::Base
 
   def matching_auths_with_user_id(twitter_ids)
     stringified_ids = twitter_ids.join(', ')
-    TwitterAuth.find_by_sql("SELECT users.id AS user_id, twitter_auths.token, twitter_auths.secret FROM twitter_auths INNER JOIN users ON twitter_auths.user_id=users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_id NOT IN (SELECT twitter_id FROM twitter_friendships INNER JOIN users ON twitter_friendships.friend_id = users.id INNER JOIN twitter_auths ON twitter_auths.user_id = users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_friendships.user_id IS #{self.user_id});")
+    TwitterAuth.find_by_sql("SELECT users.id AS user_id, twitter_auths.token, twitter_auths.secret FROM twitter_auths INNER JOIN users ON twitter_auths.user_id=users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_id NOT IN (SELECT twitter_id FROM twitter_friendships INNER JOIN users ON twitter_friendships.friend_id = users.id INNER JOIN twitter_auths ON twitter_auths.user_id = users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_friendships.user_id IN (#{self.user_id}));")
 
     # TwitterAuth.joins(:user).where(:twitter_id => twitter_ids).pluck(:twitter_id)
     # User.joins('INNER JOIN twitter_friendships ON twitter_friendships.friend_id = users.id').joins(:twitter_auth).where('twitter_id IN (:twitter_ids) AND twitter_friendships.user_id IS :user_id', twitter_ids: twitter_ids, user_id:'5').pluck(:twitter_id)
