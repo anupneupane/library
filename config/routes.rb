@@ -17,7 +17,7 @@ Library::Application.routes.draw do
 
   resources :votes, only: :create
   resources :users, except: :index
-  resources :categories
+  resources :categories, except: :index
 
   resources :topics, except: :index do
     resources :topic_links, :only => [:new, :create, :edit, :update, :destroy], :path => "links", :as => "links" do

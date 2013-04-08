@@ -1,5 +1,9 @@
 <div class="span12">
   <h2><%= @category.title %></h2>
+  <% if has_admin_privileges? %>
+      <td><%= link_to 'Edit', edit_category_path(@category) %></td>
+      <td><%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   <hr>
   <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
 </div><!--/span-->
