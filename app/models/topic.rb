@@ -27,7 +27,7 @@ class Topic < ActiveRecord::Base
   end
 
   def order_topic_links_by_score
-    self.topic_links.all(:order => "score desc, updated_at desc")
+    self.topic_links.order("score desc, updated_at desc")
   end
 
 end
