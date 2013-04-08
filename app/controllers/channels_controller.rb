@@ -1,5 +1,8 @@
 class ChannelsController < ApplicationController
   before_filter :load_user
+  before_filter :check_if_admin, only: [:new, :create, :edit, :update, :destroy]
+
+
   # GET /channels
   # GET /channels.json
   def index
