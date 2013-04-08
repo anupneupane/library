@@ -1,20 +1,20 @@
 class CategoriesController < ApplicationController
   before_filter :load_user
-  before_filter :check_if_admin, only: [:create, :edit, :update, :destroy]
+  before_filter :check_if_admin, only: [:create, :edit, :update, :destroy, :new]
   before_filter :load_new_topic
   before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
 
   # GET /categories
   # GET /categories.json
-  def index
-    per_page = params[:per_page] || 5
-    @categories = Category.page(params[:page]).per_page(per_page.to_i)
+  # def index
+  #   per_page = params[:per_page] || 5
+  #   @categories = Category.page(params[:page]).per_page(per_page.to_i)
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @categories }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @categories }
+  #   end
+  # end
 
   # GET /categories/1
   # GET /categories/1.json
