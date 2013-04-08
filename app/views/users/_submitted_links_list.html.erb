@@ -1,8 +1,9 @@
 <div class='submitted-link task'>
   <table class='link'>
-    <td class="link_score">
+    <td class="link_score"><%= topic_link.score %>
+      <p class="score-text">score</p>
     </td>
-    <td><h6><%= link_to topic_link.title, topic_link.link.url %></h6></td>
+    <td><h6><%= link_to truncate(topic_link.title, length:45), topic_link.link.url %></h6></td>
   </table>
   
   
