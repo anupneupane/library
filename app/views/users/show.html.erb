@@ -1,3 +1,11 @@
+<h3><%= @user.username %></h3>
+Member since: <br>
+Following: 
+<% @user.friends.each do |friend| %>
+  <%= friend.username %>
+  <% end %> 
+<br>
+<hr>
 <% if @user == current_user %>
   <% if @user.authenticated_with_twitter? %>
   <p> You are connected to Twitter as <%= current_user.twitter_handle %>
