@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :load_variables, only: [:edit, :destroy, :update]
+  before_filter :same_user_or_admin, only: [:edit, :destroy, :update]
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -70,8 +73,19 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to root }
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def load_variables
+      @user = User.find(params[:id])
+    end
+
+    def same_user_or_admin
+      redirect_to user_path , notice: "You are not authorized to do that!" if !logged_in? || ! @user.authorize?(current_user)
+    end
+
 end

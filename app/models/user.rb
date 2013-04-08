@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     self.role_name == :admin
   end
 
+  def authorize?(current_user)
+    current_user && current_user.admin? || self.id == current_user.id
+  end
+
   def authenticated_with_twitter?
     !! self.twitter_auth
   end
