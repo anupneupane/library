@@ -6,7 +6,11 @@ class TwitterAuth < ActiveRecord::Base
     self.twitter_request.friends.ids.json?.ids
   end
 
-  def matching_auths_with_user_id(twitter_ids)
+  def find_followers_on_twitter
+    self.twitter_request.followers.ids.json?.ids
+  end
+
+  def collect_authenticated_friends(twitter_ids)
     stringified_ids = twitter_ids.join(', ')
     TwitterAuth.find_by_sql("SELECT users.id AS user_id, twitter_auths.token, twitter_auths.secret FROM twitter_auths INNER JOIN users ON twitter_auths.user_id=users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_id NOT IN (SELECT twitter_id FROM twitter_friendships INNER JOIN users ON twitter_friendships.friend_id = users.id INNER JOIN twitter_auths ON twitter_auths.user_id = users.id WHERE twitter_id IN (#{stringified_ids}) AND twitter_friendships.user_id IN (#{self.user_id}));")
 
@@ -14,15 +18,33 @@ class TwitterAuth < ActiveRecord::Base
     # User.joins('INNER JOIN twitter_friendships ON twitter_friendships.friend_id = users.id').joins(:twitter_auth).where('twitter_id IN (:twitter_ids) AND twitter_friendships.user_id IS :user_id', twitter_ids: twitter_ids, user_id:'5').pluck(:twitter_id)
   end
 
+
+  def collect_authenticated_followers(twitter_ids)
+    stringified_ids = twitter_ids.join(', ')
+    TwitterAuth.find_by_sql("SELECT users.id AS user_id, twitter_auths.token, twitter_auths.secret FROM twitter_auths INNER JOIN users ON twitter_auths.user_id=users.id WHERE twitter_id IN (#{stringified_ids});")
+
+    # TwitterAuth.joins(:user).where(:twitter_id => twitter_ids).pluck(:twitter_id)
+    # User.joins('INNER JOIN twitter_friendships ON twitter_friendships.friend_id = users.id').joins(:twitter_auth).where('twitter_id IN (:twitter_ids) AND twitter_friendships.user_id IS :user_id', twitter_ids: twitter_ids, user_id:'5').pluck(:twitter_id)
+  end
+
+
   def find_and_save_friends
     if self.authenticated?
       twitter_friends = self.find_friends_on_twitter
-      matches = self.matching_auths_with_user_id(twitter_friends)
-      matches.each do |friend|
+      friend_matches = self.collect_authenticated_friends(twitter_friends)
+      friend_matches.each do |friend|
         (TwitterFriendship.create(user_id: self.user_id, friend_id: friend.user_id) if friend.authenticated?) || friend.destroy
       end
     else
       self.destroy
+    end
+  end
+
+  def find_and_save_followers
+    twitter_followers = self.find_followers_on_twitter
+    follower_matches = self.collect_authenticated_followers(twitter_followers)
+    follower_matches.each do |follower|
+      (TwitterFriendship.create(user_id: follower.user_id, friend_id: self.user_id) if follower.authenticated?) || follower.destroy
     end
   end
 
@@ -39,7 +61,7 @@ class TwitterAuth < ActiveRecord::Base
   end
 
   def unauthenticate
-    self.user.twitter_friendships.destroy_all
+    TwitterFriendship.destroy_all(["friend_id = :id or user_id = :id", id: self.user_id])
     self.destroy
   end
 

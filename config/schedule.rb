@@ -24,8 +24,5 @@ set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log
 
 every 1.day, :at => '03:00 am' do
   rake "twitter:prune"
-end
-
-every 1.day, :at => '05:00 am' do
   rake "twitter:update"
 end
