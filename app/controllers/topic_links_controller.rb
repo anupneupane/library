@@ -1,31 +1,9 @@
 class TopicLinksController < ApplicationController
   before_filter :load_user
-  before_filter :check_if_logged_in, :except => [:show, :index]
+  before_filter :check_if_logged_in
   before_filter :load_topic_link, :only => [:update, :destroy, :edit]
   before_filter :tl_admin_or_creator, :only => [:update, :destroy, :edit]
   
-  # GET /topic_links
-  # GET /topic_links.json
-  def index
-    @topic_links = TopicLink.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @topic_links }
-    end
-  end
-
-  # GET /topic_links/1
-  # GET /topic_links/1.json
-  def show
-    @topic_link = TopicLink.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @topic_link }
-    end
-  end
-
   # GET /topic_links/new
   # GET /topic_links/new.json
   def new

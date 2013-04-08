@@ -1,4 +1,6 @@
 require 'bundler/capistrano' # for bundler support
+require 'sidekiq/capistrano' # to reload sidekiq on server on deploy
+
 load "deploy/assets"
 
 set :application, "library"
