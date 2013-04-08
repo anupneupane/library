@@ -26,7 +26,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
+ <%#= raise same_user_or_admin?.inspect %>
 
-<%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Update Account', edit_user_path(@user) %>
+<% if same_user_or_admin? %>
+  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Update Account', edit_user_path(@user) %>
+<% end %>

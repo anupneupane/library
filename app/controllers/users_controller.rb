@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :load_variables, only: [:edit, :destroy, :update]
-  before_filter :same_user_or_admin, only: [:edit, :destroy, :update]
+  before_filter :edit_or_update?, only: [:edit, :destroy, :update]
 
   # GET /users/1
   # GET /users/1.json
@@ -84,8 +84,8 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def same_user_or_admin
-      redirect_to user_path , notice: "You are not authorized to do that!" if !logged_in? || ! @user.authorize?(current_user)
+    def edit_or_update?
+      redirect_to user_path , notice: "You are not authorized to do that!" unless same_user_or_admin?
     end
 
 end
