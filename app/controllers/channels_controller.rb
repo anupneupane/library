@@ -81,4 +81,13 @@ class ChannelsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+
+  def load_variables
+    @topic = Topic.includes(:category => [:channel]).find(params[:topic_id] || params[:id])
+    @category = @topic.category
+    @channel = @category.channel
+  end
+
 end

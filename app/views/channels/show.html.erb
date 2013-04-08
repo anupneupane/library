@@ -1,6 +1,6 @@
-<div class="span5">
-    <h1>Need to create a view</h1>
+<div class="span10">
+  <% @channel.categories.each do |c| %>
+    <%= render partial: 'shared_partials/topic_list', locals: {target: c.topics} %>
+  <% end %>
+  
 </div><!--/span-->
-<div class="span5">
-    <h1>Need to create another view</h1>
-</div><!--/span-->  
