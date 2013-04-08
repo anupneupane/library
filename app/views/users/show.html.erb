@@ -1,11 +1,10 @@
 <% if @user == current_user %>
-
   <% if @user.authenticated_with_twitter? %>
   <p> You are connected to Twitter as <%= current_user.twitter_handle %>
   <% else %>
     <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
   <% end %>
-  <% end %>
+<% end %>
 
 <div class="row">
   <div class="span12">
@@ -27,7 +26,6 @@
     </div>
   </div>
 </div> 
- <%#= raise same_user_or_admin?.inspect %>
 
 <% if same_user_or_admin? %>
   <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
