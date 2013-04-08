@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :load_variables, only: [:edit, :destroy, :update]
+  before_filter :edit_or_update?, only: [:edit, :destroy, :update]
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -34,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       session[:user_id] = @user.id
-      redirect_to topics_path, notice: "Thanks!"
+      redirect_to request.referrer, notice: "Thanks!"
     else
       render "new", notice: "Error"
     end
@@ -71,8 +74,19 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to root }
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def load_variables
+      @user = User.find(params[:id])
+    end
+
+    def edit_or_update?
+      redirect_to user_path , notice: "You are not authorized to do that!" unless same_user_or_admin?
+    end
+
 end
