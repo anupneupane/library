@@ -23,14 +23,12 @@
     <%= render partial: 'shared_partials/signup_modal' unless logged_in? %>
     <%= render partial: 'topics/form_modal', locals: {topic: Topic.new} if ( @channel && logged_in?)%>
     <%= render partial: 'layouts/menubar' %>
-    <div class="content">
 
       <%= render partial: 'layouts/sidebar' %>  
+    <div class="content">
       <div class="container">
-          
         <%= render partial: 'shared_partials/flash_messages' %>
           <%= yield %>
-        <hr>
       </div><!--/container-->
     </div><!--/content-->
   </body>
