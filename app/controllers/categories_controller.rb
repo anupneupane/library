@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   before_filter :load_user
   before_filter :check_if_admin, only: [:create, :edit, :update, :destroy]
   before_filter :load_new_topic
+  before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
 
   # GET /categories
   # GET /categories.json
@@ -86,7 +87,6 @@ class CategoriesController < ApplicationController
   private
     def load_variables
       @category = Category.includes(:channel).find(params[:category_id] || params[:id])
-      @category = @topic.category
       @channel = @category.channel
     end
 end
