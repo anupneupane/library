@@ -1,0 +1,15 @@
+<li><p class="nav-header">Categories</p><hr>
+  <div class="dropdown">
+    <ul class="nav nav-list">
+      <% @channel.categories.order("title ASC").each do |c| %>
+        <li class="dropdown-submenu"><%= link_to c.title, category_path(c) %>
+          <ul class="dropdown-menu">
+            <% c.topics.order("title ASC").each do |t| %>
+              <li><%= link_to t.title, topic_path(t) %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</li>

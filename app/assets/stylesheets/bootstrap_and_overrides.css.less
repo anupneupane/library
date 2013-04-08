@@ -58,6 +58,7 @@
     top:-25px;
   }
 }
+
 .modal-body{
   margin: 0 0 20px 40px;
   a, a:hover{
@@ -74,15 +75,9 @@ font-weight: bold !important;
 letter-spacing: 3px;
 }
 
-.navbar {
-  margin-bottom: 20px;
-}
 
-.nav.nav-list li > a:hover {
-  background-color: #2F5028;
-}
 
-.nav.nav-list .nav-header {
+.nav-list .nav-header {
   padding-left: 10px;
   font-size: 16px;
   color: #2F5028;
@@ -102,6 +97,64 @@ letter-spacing: 3px;
   color: #2F5028;
   margin-left: 50px;
 }
+
+.navbar{
+  margin-bottom:20px;
+}
+
+.left-menu{
+  width:150px;
+  margin: 0 20px 0 20px;
+  display:inline-block;
+  float:left;
+}
+.navbar .navbar-inner {
+  padding-left:10px;
+    .nav-collapse .nav .app_name .dropdown-menu{
+    margin-top:1px;
+    li{
+      border-top: 1px solid #EEE;
+      padding:0;
+      a{
+        border:0;
+      }
+    }
+  }
+}
+
+.sidebar-nav .nav-list li .dropdown .nav-list .dropdown-submenu > .dropdown-menu{
+  left:106px;
+  top:3px;
+
+  li{
+    border-top: 1px solid #EEE;
+    padding:0;
+    a{
+      border:0;
+    }
+  }
+}
+.nav-header{
+  color: #666 !important;
+  letter-spacing: 3px
+}
+
+.dropdown-submenu{
+  padding:0;
+  a{
+    padding:0;
+  }
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover a, .nav-list li a:hover{
+  text-decoration: none;
+  color: none;
+  background-color: #2F5028;
+  background-image: none;
+  background-repeat: repeat-x;
+  filter: none;
+}
+
 
 /*hr {
   margin-left: 50px;

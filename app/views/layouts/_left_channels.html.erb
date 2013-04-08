@@ -1,0 +1,5 @@
+<li><p class="nav-header">Select a Channel</p><hr>
+  <ul class = "nav nav-list">
+    <%= render partial: 'layouts/left_channel_list', collection: Channel.order("title ASC").all, as: :c %>
+  </ul>
+</li>
