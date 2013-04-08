@@ -1,9 +1,9 @@
 <h3><%= @user.username %></h3>
-Member since: <br>
+Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<br>
 Following: 
 <% @user.friends.each do |friend| %>
-  <%= friend.username %>
-  <% end %> 
+  <%= link_to friend.username, user_path(friend) %><%= "," if friend != @user.friends.last %>
+<% end %>
 <br>
 <hr>
 <% if @user == current_user %>
