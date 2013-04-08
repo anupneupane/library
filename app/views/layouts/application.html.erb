@@ -18,22 +18,20 @@
     <![endif]-->
   </head>
 
-
-</head>
-<body>
   <body>
     <%= render partial: 'shared_partials/login_modal' unless logged_in? %>
     <%= render partial: 'shared_partials/signup_modal' unless logged_in? %>
     <%= render partial: 'topics/form_modal', locals: {topic: Topic.new} if ( @channel && logged_in?)%>
     <%= render partial: 'layouts/menubar' %>
-    <%= render partial: 'layouts/sidebar' %>  
-<div class="content">
-  <div class="container">
+    <div class="content">
 
+      <%= render partial: 'layouts/sidebar' %>  
+      <div class="container">
+          
         <%= render partial: 'shared_partials/flash_messages' %>
-        <%= yield %>
+          <%= yield %>
         <hr>
-      </div><!--/row-->
-    </div><!--/.fluid-container-->
+      </div><!--/container-->
+    </div><!--/content-->
   </body>
 </html>

@@ -1,10 +1,8 @@
-<div class="span3">
-  <div class="well sidebar-nav">
-      <ul class="nav nav-list">
-      <%= render partial: 'layouts/left_channels' unless @channel %>
-      <%= render partial: 'layouts/left_categories' if (@category || @channel)%>
-    </ul>
-  </div>
+<div class="well sidebar-nav left-menu">
+  <ul class="nav nav-list">
+    <%= render partial: 'layouts/left_channels' unless @channel %>
+    <%= render partial: 'layouts/left_categories' if (@category || @channel)%>
+  </ul>
 </div>
 
 
