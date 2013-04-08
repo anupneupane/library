@@ -10,9 +10,6 @@
           <% else %>
             <p><%= link_to "Vote or Submit a link!", topic %></p>
           <% end %>
-          <% if has_admin_privileges? %>
-            <p><%= link_to 'Edit', edit_topic_path(topic) %> | <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-          <% end %>
         </div>
       </div>
   <% end %>

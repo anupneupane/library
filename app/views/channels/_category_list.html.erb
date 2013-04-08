@@ -1,0 +1,12 @@
+<div class="features-four">
+  <div class="row">
+    <% target.each do |category| %>
+      <div class="span5">
+        <div class="f-block b-white">
+          <h3><%= link_to category.title, category %></h3>
+          <p class="links">Number of topics: <%= link_to category.topics.length, category %></p>
+        </div>
+      </div>
+  <% end %>
+  </div>
+</div>
