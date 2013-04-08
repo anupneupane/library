@@ -1,8 +1,8 @@
 <div class="features-four">
   <div class="row">
     <% target.each do |topic| %>
-      <div class="span5">
-        <div class="f-block b-white">
+      <div class="span6">
+        <div class="f-block b-white topic-block">
           <h3><%= link_to topic.title, topic %></h3>
           <p class="links">Number of links: <%= link_to topic.links.length, topic %></p>
           <% if topic.has_best_link? %>
