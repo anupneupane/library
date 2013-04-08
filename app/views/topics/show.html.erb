@@ -3,7 +3,7 @@
   <h2><%= @topic.title %></h2>
   <p class="big grey"><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
   <p>Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
-  <%= @topic.best_link.title if @topic.best_link %>
+  <p><%= @topic.best_link.title if @topic.best_link %></p>
   <% if @topic.authorize?(current_user) %>
     <%= render partial: 'topics/edit_form_modal', locals: {topic:@topic}%>
       <a href="#editTopicFormModal" data-toggle="modal">Edit</a> |
