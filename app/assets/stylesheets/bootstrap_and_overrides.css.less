@@ -75,9 +75,7 @@ font-weight: bold !important;
 letter-spacing: 3px;
 }
 
-.nav-list .nav-list li > a:hover {
-  background-color: #2F5028;
-}
+
 
 .nav-list .nav-header {
   padding-left: 10px;
@@ -110,6 +108,20 @@ letter-spacing: 3px;
   display:inline-block;
   float:left;
 }
+.navbar .navbar-inner {
+  padding-left:10px;
+    .nav-collapse .nav .app_name .dropdown-menu{
+    margin-top:1px;
+    li{
+      border-top: 1px solid #EEE;
+      padding:0;
+      a{
+        border:0;
+      }
+    }
+  }
+}
+
 .sidebar-nav .nav-list li .dropdown .nav-list .dropdown-submenu > .dropdown-menu{
   left:106px;
   top:3px;
@@ -126,6 +138,24 @@ letter-spacing: 3px;
   color: #666 !important;
   letter-spacing: 3px
 }
+
+.dropdown-submenu{
+  padding:0;
+  a{
+    padding:0;
+  }
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover a, .nav-list li a:hover{
+  text-decoration: none;
+  color: none;
+  background-color: #2F5028;
+  background-image: none;
+  background-repeat: repeat-x;
+  filter: none;
+}
+
+
 /*hr {
   margin-left: 50px;
   margin-top: 0px;
