@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @category = Category.includes(:topics => [{:best_link => :user}]).order("topics.title ASC").find(params[:id])
+    @category = Category.includes(:topics).order("topics.title ASC").find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

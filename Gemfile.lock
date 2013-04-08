@@ -37,6 +37,8 @@ GEM
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    bullet (4.5.0)
+      uniform_notifier
     celluloid (0.12.4)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
@@ -194,6 +196,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uniform_notifier (1.2.0)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -207,6 +210,7 @@ DEPENDENCIES
   bcrypt-ruby
   better_errors
   binding_of_caller
+  bullet
   coffee-rails (~> 3.2.1)
   grackle
   jquery-rails

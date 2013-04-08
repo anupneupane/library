@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+    @topic = Topic.includes(:topic_links => [:user, :link]).find(params[:id])
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
     @request_url = {url: topic_links_path(@topic.id)}
