@@ -84,4 +84,9 @@ class User < ActiveRecord::Base
     self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
   end
 
+  def collect_friend_ids
+    self.friends.collect { |f| f.id}
+  end
+
+
 end

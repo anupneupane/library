@@ -6,7 +6,7 @@
           <h3><%= link_to topic.title, topic %></h3>
           <p class="links">Number of links: <%= link_to topic.links.length, topic %></p>
           <% if topic.has_best_link? %>
-            <h5>Best Link: <%= link_to topic.best_link.title, topic.best_link.link.url %></h5>
+            <h5>Best Link: <%= link_to topic.best_link.title, topic.best_link.link.url, title: topic.best_link.title, rel: 'tooltip' %></h5>
           <% else %>
             <p><%= link_to "Vote or Submit a link!", topic %></p>
           <% end %>

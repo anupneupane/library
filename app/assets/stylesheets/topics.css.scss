@@ -16,17 +16,54 @@ td.link_info{
   padding-left:0;
   border-left:none;
 }
+
 td.link_score form{
   margin:0;
 }
+
 td.link_score{
   border-right:none;
-  width:50px;
+  width:10%;
   font-size:2em;
   text-align:center;
   vertical-align: middle;
 }
 
+.link_score.task.best_link{
+  border-left: #2F5028;
+  border-top: #2F5028;
+  border-bottom: #2F5028;
+  border-width: 5px;
+  border-style: solid;
+  border-right: none;
+  background-color: #DBFFE2;
+}
+
+.link_info.task.best_link{
+  border-top: #2F5028;
+  border-bottom: #2F5028;
+  border-right: #2F5028;
+  border-style: solid;
+  border-width: 5px;
+  border-left: none;
+  background-color: #DBFFE2;
+}
+
 a.vote, a.vote:hover{
   background:none;
+}
+
+p.topic_submission{
+  padding-top: 8px;
+  font-size: 13px;
+}
+
+.link_button{
+  font-size: 18px;
+  color: #2F5028;
+}
+
+.link_button:hover{
+  background-color: #2F5028;
+  color: white;
 }
