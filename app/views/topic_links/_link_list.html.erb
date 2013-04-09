@@ -1,5 +1,5 @@
 <tr class="link_item">
-  <td class="link_score task">
+  <td class="link_score task <%= "best_link" if tl == @topic.best_link %> ">
     <%= form_tag(topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )) do%>
       <%= hidden_field(:vote, :status, value: 1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
@@ -22,7 +22,7 @@
       <% end %>
     <% end%>
   </td>
-  <td class="link_info task">
+  <td class="link_info task <%= "best_link" if tl == @topic.best_link %> ">
     <h6><%= link_to(tl.title.titleize, tl.link.url) %></h6>
    
     <p><%= tl.description %></p>
