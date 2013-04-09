@@ -1,21 +1,18 @@
 <div class="row tasks">
-<div class="span12">
-  <h2><%= @topic.title %></h2>
-  <p class="big grey"><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
-  <p>Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
-  <p><%= @topic.best_link.title if @topic.best_link %></p>
-  <% if @topic.authorize?(current_user) %>
-    <%= render partial: 'topics/edit_form_modal', locals: {topic:@topic}%>
-      <a href="#editTopicFormModal" data-toggle="modal">Edit</a> |
-    <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
-
-  <br>
-  <a href=<%=("#tlFormModal" if logged_in?) || "#loginModal" %> role="button" class="btn" data-toggle="modal">Add a New Link</a>
-
-  <%= render partial: 'topic_links/form_modal' if logged_in?%>
-  <br>
-  <hr />
+  <div class="span12">
+    <p><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
+    <h1><%= @topic.title %></h1>
+    <a href=<%=("#tlFormModal" if logged_in?) || "#loginModal" %> role="button" class="btn link_button" data-toggle="modal">Add a New Link!</a>
+    <p class="topic_submission">Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %>
+    </p>
+    </p>
+    <% if @topic.authorize?(current_user) %>
+      <%= render partial: 'topics/edit_form_modal', locals: {topic:@topic}%>
+        <a href="#editTopicFormModal" data-toggle="modal">Edit</a> |
+      <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <%= render partial: 'topic_links/form_modal' if logged_in?%>
+    <hr />
+  </div>
 </div>
-</div>
-  <%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>
+<%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>

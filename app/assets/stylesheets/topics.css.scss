@@ -16,12 +16,13 @@ td.link_info{
   padding-left:0;
   border-left:none;
 }
+
 td.link_score form{
   margin:0;
 }
 td.link_score{
   border-right:none;
-  width:50px;
+  width:10%;
   font-size:2em;
   text-align:center;
   vertical-align: middle;
@@ -29,4 +30,13 @@ td.link_score{
 
 a.vote, a.vote:hover{
   background:none;
+}
+
+p.topic_submission{
+  padding-top: 8px;
+  font-size: 13px;
+}
+
+.link_button{
+  float: right;
 }
