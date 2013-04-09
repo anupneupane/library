@@ -14,7 +14,5 @@
   <a href=<%=("#tlFormModal" if logged_in?) || "#loginModal" %> role="button" class="btn" data-toggle="modal">Add a New Link</a>
 
   <%= render partial: 'topic_links/form_modal' if logged_in?%>
-  <br>
-  <hr />
 </div>
   <%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>

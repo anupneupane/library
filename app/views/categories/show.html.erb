@@ -1,4 +1,4 @@
-<div class="span12">
+<div>
   <h2><%= link_to @channel.title, @channel %> > <%= @category.title %></h2>
   <% if has_admin_privileges? %>
       <p><%= link_to 'Edit', edit_category_path(@category) %> |
