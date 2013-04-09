@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+$(document).ready(function(){
+    $('a').tooltip();
+});
 //= require jquery.isotope
 //= require jquery.prettyPhoto
 //= require jquery.cslider

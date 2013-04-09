@@ -23,7 +23,7 @@
     <% end%>
   </td>
   <td class="link_info task">
-    <h6><%= link_to(tl.title.titleize, tl.link.url) %></h6>
+    <h6><%= link_to tl.title.titleize, tl.link.url, title: tl.link.url, rel: 'tooltip' %></h6>
    
     <p><%= tl.description %></p>
     
