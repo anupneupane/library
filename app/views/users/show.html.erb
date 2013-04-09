@@ -4,8 +4,6 @@ Following:
 <% @user.friends.each do |friend| %>
   <%= link_to friend.username, user_path(friend) %><%= "," if friend != @user.friends.last %>
 <% end %>
-<br>
-<hr>
 <% if @user == current_user %>
   <% if @user.authenticated_with_twitter? %>
   <p> You are connected to Twitter as <%= current_user.twitter_handle %>
@@ -13,6 +11,12 @@ Following:
     <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
   <% end %>
 <% end %>
+<br>
+<% if same_user_or_admin? %>
+  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+  <%= link_to 'Update Account', edit_user_path(@user) %>
+<% end %>
+<hr>
 
 <div class="row">
   <div class="span12">
@@ -34,8 +38,3 @@ Following:
     </div>
   </div>
 </div> 
-
-<% if same_user_or_admin? %>
-  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Update Account', edit_user_path(@user) %>
-<% end %>
