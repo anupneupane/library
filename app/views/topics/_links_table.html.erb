@@ -1,16 +1,18 @@
 <div class="row tasks">
   <div class="span12">
-
-    <% if links.length > 0 %>
-      <b>All Links:</b>
+  <% if links.length > 0 %>
+    <table class="topic_links">
+      <%= render partial: 'topic_links/link_list', locals: {tl: @topic.best_link} %>
+    </table>
+    <hr>
+    <% if links.length > 1 %>
+      <b>Other Links:</b>
       <table class="topic_links">
-      <%= render partial: "topic_links/link_list", collection: links, as: :tl%>
-
+      <%= render partial: "topic_links/link_list", collection: links.where('id != ?', @topic.best_link.id), as: :tl%>
       </table>
-      
-    <% else %>
-       <b> There are no links for this topic yet!</b>
-
     <% end %>
+  <% else %>
+    <b> There are no links for this topic yet!</b>
+  <% end %>
   </div>
 </div>

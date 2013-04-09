@@ -10,7 +10,6 @@
       <%= link_to 'Delete', @topic, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
     <%= render partial: 'topic_links/form_modal' if logged_in?%>
-    <hr />
   </div>
 </div>
 <%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>
