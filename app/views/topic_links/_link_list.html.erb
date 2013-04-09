@@ -1,5 +1,5 @@
 <tr class="link_item">
-  <td class="link_score task">
+  <td class="link_score task <%= "best_link" if tl == @topic.best_link %> ">
     <%= form_tag(topic_link_votes_path(topic_id:@topic.id, link_id:tl.id )) do%>
       <%= hidden_field(:vote, :status, value: 1) %>
       <%= hidden_field(:vote, :user_id, value: session[:user_id]) %>
@@ -22,17 +22,14 @@
       <% end %>
     <% end%>
   </td>
-  <td class="link_info task">
+  <td class="link_info task <%= "best_link" if tl == @topic.best_link %> ">
     <h6><%= link_to tl.title.titleize, tl.link.url, title: tl.link.url, rel: 'tooltip' %></h6>
-   
     <p><%= tl.description %></p>
-    
-
-     <div class="tmeta"><i class="icon-calendar"></i> <%= time_ago_in_words(tl.created_at) %> ago | <i class="icon-user"></i> Submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
+    <div class="tmeta"><i class="icon-calendar"></i> <%= time_ago_in_words(tl.created_at) %> ago | <i class="icon-user"></i> Submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
 
     <% if tl.authorize?(current_user) %>
       <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> | 
-        <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
+      <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
     <% end %>
   </td>
 </tr>
