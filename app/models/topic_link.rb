@@ -57,4 +57,12 @@ class TopicLink < ActiveRecord::Base
     end
   end
 
+  def collect_up_voters
+    self.votes.where(status: 1).all.collect { |v| v.user_id } 
+  end
+
+  def friend_up_voters(current_user)
+    self.collect_up_voters & current_user.collect_friend_ids
+  end
+
 end

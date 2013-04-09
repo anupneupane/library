@@ -26,7 +26,12 @@
     <h6><%= link_to tl.title.titleize, tl.link.url, title: tl.link.url, rel: 'tooltip' %></h6>
     <p><%= tl.description %></p>
     <div class="tmeta"><i class="icon-calendar"></i> <%= time_ago_in_words(tl.created_at) %> ago | <i class="icon-user"></i> Submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
-
+    <% if current_user && tl.friend_up_voters(current_user).length > 0 %>
+      Up votes by people you follow:  
+      <% tl.friend_up_voters(current_user).each do |f| %> 
+        <%= link_to User.find(f).username, user_path(f) %><%= "," if f != tl.friend_up_voters(current_user).last %>
+      <% end %>
+    <% end %>
     <% if tl.authorize?(current_user) %>
       <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> | 
       <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
