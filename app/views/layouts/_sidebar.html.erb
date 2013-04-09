@@ -1,8 +1,9 @@
 <div>
-  <div class="well sidebar-nav left-menu">
+  <div class="well sidebar-nav">
   <ul class="nav nav-list">
+    <%= render partial: 'layouts/left_topics' if @category %>
     <%= render partial: 'layouts/left_channels' unless @channel %>
-    <%= render partial: 'layouts/left_categories' if @channel %>
+    <%= (render partial: 'layouts/left_categories', locals: {categories: @channel.categories}) if @channel %>
   </ul>
 </div>
 </div>

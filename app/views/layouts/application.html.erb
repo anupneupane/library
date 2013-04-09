@@ -24,12 +24,24 @@
     <%= render partial: 'topics/form_modal', locals: {topic: Topic.new} if ( @channel && logged_in?)%>
     <%= render partial: 'layouts/menubar' %>
 
-      <%= render partial: 'layouts/sidebar' %>  
     <div class="content">
-      <div class="container">
-        <%= render partial: 'shared_partials/flash_messages' %>
+      <div class="container-fluid">
+      <div class = "row-fluid table-wrap">
+        <div class="sidebar2">
+
+          <%= render partial: 'layouts/sidebar' %> 
+        </div>
+          
+
+        <div class="main">
+      <div class="main-content">
+          <%= render partial: 'shared_partials/flash_messages' %>
           <%= yield %>
-      </div><!--/container-->
-    </div><!--/content-->
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </body>
 </html>

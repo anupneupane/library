@@ -1,15 +1,7 @@
-<li><p class="nav-header">Categories</p><hr>
+<li><p class="nav-header">Categories in <%= @channel.title %> </p>
   <div class="dropdown">
     <ul class="nav nav-list">
-      <% @channel.categories.order("title ASC").each do |c| %>
-        <li class="dropdown-submenu"><%= link_to c.title, category_path(c) %>
-          <ul class="dropdown-menu">
-            <% c.topics.order("title ASC").each do |t| %>
-              <li><%= link_to t.title, topic_path(t) %></li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
+      <%= render partial: 'layouts/left_categories_list', collection: categories, as: :c %>
     </ul>
   </div>
 </li>

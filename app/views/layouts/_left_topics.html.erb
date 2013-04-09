@@ -1,0 +1,6 @@
+<li><p class="nav-header">Topics <br> in <br> <%= @category.title %> </p>
+  <ul class = "nav nav-list">
+    <%= render partial: 'layouts/left_unnested_list', collection: @category.topics, as: :c %>
+  </ul>
+</li>
+<hr>

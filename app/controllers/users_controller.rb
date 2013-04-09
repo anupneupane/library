@@ -5,8 +5,20 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.includes([:votes => [:topic_link => [:link, :topic => :category]]],
-                          [:topic_links => [:link, :topic => [:best_link, :category]]],
+    @user = User.includes([:votes => 
+                            [:topic_link => 
+                              [:link, :topic => :category]
+                            ]
+                          ],
+                          [:topic_links => 
+                            [:link, 
+                            :topic => 
+                              [:best_link, :category]
+                            ]
+                          ],
+                          [:topics =>
+                            [:best_link, :category]
+                          ],
                           [:twitter_auth]).find(params[:id])
 
     respond_to do |format|

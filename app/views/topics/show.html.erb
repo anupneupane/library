@@ -1,5 +1,5 @@
-<div class="row tasks">
-<div class="span12">
+<div class="tasks">
+
   <h2><%= @topic.title %></h2>
   <p class="big grey"><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
   <p>Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
@@ -16,6 +16,5 @@
   <%= render partial: 'topic_links/form_modal' if logged_in?%>
   <br>
   <hr />
-</div>
 </div>
   <%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>
