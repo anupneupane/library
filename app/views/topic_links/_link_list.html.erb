@@ -27,7 +27,12 @@
     <p><%= tl.description %></p>
     <div class="tmeta"><i class="icon-calendar"></i> <%= time_ago_in_words(tl.created_at) %> ago | <i class="icon-user"></i> Submitted by <%= link_to tl.user.username, user_path(tl.user_id) %></div>
     <% if current_user && tl.friend_up_voters(current_user).length > 0 %>
-      Up votes by people you follow:  
+      Voted up by <%= tl.friends_score(current_user) %> 
+      <% if tl.friend_up_voters(current_user).length > 1 %>
+        people you follow:  
+      <% else %>
+        person you follow:
+      <% end %>
       <% tl.friend_up_voters(current_user).each do |f| %> 
         <%= link_to User.find(f).username, user_path(f) %><%= "," if f != tl.friend_up_voters(current_user).last %>
       <% end %>

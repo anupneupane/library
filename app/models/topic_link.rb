@@ -65,4 +65,8 @@ class TopicLink < ActiveRecord::Base
     self.collect_up_voters & current_user.collect_friend_ids
   end
 
+  def friends_score(current_user)
+    self.friend_up_voters(current_user).size
+  end
+
 end
