@@ -8,7 +8,7 @@ Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<b
   <% if @user.authenticated_with_twitter? %>
   <p> You are connected to Twitter as <%= current_user.twitter_handle %></p>
   <% else %>
-    <%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %>
+    <p><%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %></p>
   <% end %>
 <% end %>
 <% if same_user_or_admin? %>
