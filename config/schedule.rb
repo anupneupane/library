@@ -22,6 +22,6 @@
 set :environment, "production"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every 1.day at: '3:00am' do
+every 1.day, at: '3:00am' do
   rake "twitter:update_all"
 end
