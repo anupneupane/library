@@ -22,8 +22,6 @@
 set :environment, "production"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every 5.minutes do
-  command "/usr/bin/some_great_command"
-  rake "twitter:prune"
-  rake "twitter:update"
+every 1.day, at: '3:00am' do
+  rake "twitter:update_all"
 end
