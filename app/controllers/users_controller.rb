@@ -5,21 +5,21 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.includes([:friends=> 
-                            [:votes => 
-                              [:topic_link => 
+    @user = User.includes([:friends=>
+                            [:votes =>
+                              [:topic_link =>
                                 [:topic]
                               ]
                             ]
                           ],
-                          [:votes => 
-                            [:topic_link => 
+                          [:votes =>
+                            [:topic_link =>
                               [:link, :topic => :category]
                             ]
                           ],
-                          [:topic_links => 
-                            [:link, 
-                            :topic => 
+                          [:topic_links =>
+                            [:link,
+                            :topic =>
                               [:best_link, :category]
                             ]
                           ],
@@ -53,12 +53,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    session[:prior_page] ||= request.referrer
     @user = User.new(params[:user])
     if @user.save
       session[:user_id] = @user.id
-      redirect_to request.referrer, notice: "Thanks!"
+      redirect_to session[:prior_page], notice: "Thanks!"
+      session.delete(:prior_page)
     else
-      render "new", notice: "Error"
+      render "new"
     end
   end
 
