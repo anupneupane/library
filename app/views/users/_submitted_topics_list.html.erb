@@ -2,6 +2,8 @@
   <div class='topic'><h6><%= link_to topic.title, topic %></h6></div>
   <div class='info'>
   <p><i class="icon-calendar"></i> <%=time_ago_in_words(topic.created_at)%> ago | Category: <%= link_to topic.category.title, topic.category %></p>
-  <p>Best Link: <%= link_to truncate(topic.best_link.title, length: 60), topic.best_link.link.url if topic.best_link%>
+  <% if topic.best_link %>
+    <p>Best Link: <%= link_to truncate(topic.best_link.title, length: 60), topic.best_link.link.url %></p>
+  <% end %>
   </div>
 </div>
