@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :topic_links #topic links created by user
   has_secure_password
-  
+
   validates_uniqueness_of :username, :case_sensitive => false
   validates_presence_of :username
   validates_format_of :username, :with => /\A[A-Za-z0-9][A-Za-z0-9_-]*\Z/
@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
     User.user_roles.key(self.role)
   end
 
-  def set_as_admin 
+  def set_as_admin
     self.role = USER_ROLES[:admin]
   end
 
-  def set_as_basic 
+  def set_as_basic
     self.role = USER_ROLES[:basic]
   end
 
