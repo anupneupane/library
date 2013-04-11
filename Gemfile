@@ -34,6 +34,8 @@ end
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
   gem 'guard-rspec'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :production do
