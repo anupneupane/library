@@ -3,7 +3,7 @@ require 'sidekiq/capistrano' # to reload sidekiq on server on deploy
 
 load "deploy/assets"
 
-set :application, "library"
+set :application, "library-app"
 set :repository,  "git@github.com:flatiron-school/library.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -18,9 +18,9 @@ set :use_sudo, false
 
 default_run_options[:pty] = true
 
-role :web, "198.211.103.217"                          # Your HTTP server, Apache/etc
-role :app, "198.211.103.217"                          # This may be the same as your `Web` server
-role :db,  "198.211.103.217", :primary => true # This is where Rails migrations will run
+role :web, "198.211.100.163"                          # Your HTTP server, Apache/etc
+role :app, "198.211.100.163"                          # This may be the same as your `Web` server
+role :db,  "198.211.100.163", :primary => true # This is where Rails migrations will run
 
 
 # if you want to clean up old releases on each deploy uncomment this:
@@ -36,7 +36,7 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-  
+
   task :symlink_configs, :roles => :app do
     run "ln -nfs #{shared_path}/database.yml #{release_path}/config"
     run "ln -nfs #{shared_path}/twitter.yml #{release_path}/config"
@@ -44,6 +44,7 @@ namespace :deploy do
   end
 end
 
-task :upload_twitter_yml, :roles => :app do
+task :upload_confs, :roles => :app do
   upload('config/twitter.yml', "#{shared_path}/twitter.yml")
+  upload('config/database.yml', "#{shared_path}/database.yml")
 end
