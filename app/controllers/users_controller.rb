@@ -5,7 +5,14 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.includes([:votes => 
+    @user = User.includes([:friends=> 
+                            [:votes => 
+                              [:topic_link => 
+                                [:topic]
+                              ]
+                            ]
+                          ],
+                          [:votes => 
                             [:topic_link => 
                               [:link, :topic => :category]
                             ]

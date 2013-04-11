@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     :admin => 10
   }
 
+  def links_upvoted_by_friends
+    self.friends.collect{|f| f.up_votes}.flatten
+  end
+
   def self.user_roles
     USER_ROLES
   end
@@ -77,11 +81,11 @@ class User < ActiveRecord::Base
   end
 
   def up_votes
-    self.votes.select{ |v| v.status == 1}.collect{|v| v.topic_link}
+    self.votes.includes(:topic_link).where("votes.status = 1").collect{|v| v.topic_link}
   end
 
   def down_votes
-    self.votes.select{ |v| v.status == -1}.collect{|v| v.topic_link}
+    self.votes.includes(:topic_link).where("votes.status = -1").collect{|v| v.topic_link}
   end
 
   def collect_friend_ids
