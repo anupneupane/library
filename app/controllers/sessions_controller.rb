@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       TwitterFriendWorker.perform_async(user.id)
       redirect_to request.referrer, notice: "Logged In!"
     else
-      flash.now[:error] = "Email or password is invalid"
+      flash[:error] = "Email or password is invalid"
       @user = User.new
       redirect_to request.referrer
     end
