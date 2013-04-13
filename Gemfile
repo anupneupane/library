@@ -29,6 +29,7 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'bullet'
+  gem 'meta_request'
 end
 
 group :test, :development do
