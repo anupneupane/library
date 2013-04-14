@@ -24,7 +24,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'awesome_print'
-  gem 'sqlite3'
+  gem 'pg'
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'thin'
