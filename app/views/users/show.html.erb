@@ -1,6 +1,6 @@
 <h3><%= @user.username %></h3>
 Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<br>
-<%= "Following: " if @user.friends.length > 0 %> 
+<%= "Following: " if @user.friends.length > 0 %>
 <% @user.friends.each do |friend| %>
   <%= link_to friend.username, user_path(friend) %><%= "," if friend != @user.friends.last %>
 <% end %>
@@ -11,8 +11,9 @@ Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<b
     <p><%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %></p>
   <% end %>
 <% end %>
-<% if same_user_or_admin? %>
-  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+</br>
+<% if has_admin_privileges? %>
+  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
   <%= link_to 'Update Account', edit_user_path(@user) %>
 <% end %>
 <hr>
@@ -36,4 +37,4 @@ Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<b
       </div>
     </div>
   </div>
-</div> 
+</div>

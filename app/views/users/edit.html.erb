@@ -1,5 +1,8 @@
-<h1>Editing user</h1>
+<h1>Edit Accout for <%= @user.username %> </h1>
+</br>
 
 <%= render 'signup_form' %>
+
+<%= button_to 'Delete My Account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <%= link_to 'Back to My Profile', @user %>
