@@ -14,10 +14,6 @@ class Topic < ActiveRecord::Base
     user && (user.admin? || (self.user_id==user.id && has_no_topic_links?))
   end
 
-  def has_best_link?
-    self.best_link != nil && self.best_link.score > 0
-  end
-
   def has_no_topic_links?
     self.links.length == 0
   end
@@ -28,6 +24,10 @@ class Topic < ActiveRecord::Base
 
   def order_topic_links_by_score
     self.topic_links.order("score desc, updated_at desc")
+  end
+
+  def best_link
+    self.order_topic_links_by_score.first if self.order_topic_links_by_score.first.score > 0
   end
 
 end
