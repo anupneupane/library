@@ -3,6 +3,8 @@
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
+    <%= f.label :channel %>
+    <%= f.collection_select(:channel_id, Channel.all, :id, :title) %>
   </div>
   <div class="actions">
     <%= f.submit %>
