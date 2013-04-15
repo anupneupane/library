@@ -1,5 +1,9 @@
 <div>
-  <h2><%= @channel.title %>
+  <h2><%= @channel.title %></h2>
+  <% if has_admin_privileges? %>
+    <p><%= link_to 'Edit', edit_channel_path(@channel) %> |
+    <%= link_to 'Destroy', @channel, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
   <hr>
 <%= render partial: 'channels/category_list', locals: {target: @channel.categories} %>
 </div><!--/span-->
