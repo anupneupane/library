@@ -2,6 +2,8 @@ class TwitterAuth < ActiveRecord::Base
   attr_accessible :twitter_id, :twitter_handle, :token, :secret, :user_id
   belongs_to :user
 
+  validates_uniqueness_of :twitter_handle
+
   def find_friends_on_twitter
     self.twitter_request.friends.ids.json?.ids
   end

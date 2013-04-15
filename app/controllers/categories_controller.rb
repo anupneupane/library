@@ -1,8 +1,6 @@
 class CategoriesController < ApplicationController
   before_filter :load_user
   before_filter :check_if_admin, only: [:create, :edit, :update, :destroy, :new]
-  before_filter :load_new_topic
-  before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
 
   # GET /categories
   # GET /categories.json
@@ -19,8 +17,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @category = Category.includes(:topics).order("topics.title ASC").find(params[:id])
-
+    @category = Category.includes(:channel=>[:categories=>[:topics]], :topics => [:topic_links, :best_link => [:link]]).order("topics.title ASC").find_by_id(params[:id])
+    @channel = @category.channel
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @category }
@@ -40,6 +38,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @category = Category.includes(:channel=>[:categories=>[:topics]], :topics => [:topic_links]).order("topics.title ASC").find_by_id(params[:id])
+    @channel = @category.channel
   end
 
   # POST /categories
@@ -61,6 +61,8 @@ class CategoriesController < ApplicationController
   # PUT /categories/1
   # PUT /categories/1.json
   def update
+    @category = Category.includes(:channel=>[:categories=>[:topics]], :topics => [:topic_links]).order("topics.title ASC").find_by_id(params[:id])
+    @channel = @category.channel
 
     respond_to do |format|
       if @category.update_attributes(params[:category])
@@ -76,7 +78,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
+    @category = Category.includes(:channel=>[:categories=>[:topics]], :topics => [:topic_links]).order("topics.title ASC").find_by_id(params[:id])
 
     respond_to do |format|
       format.html { redirect_to categories_url }
@@ -84,9 +86,4 @@ class CategoriesController < ApplicationController
     end
   end
 
-  private
-    def load_variables
-      @category = Category.includes(:channel).find(params[:category_id] || params[:id])
-      @channel = @category.channel
-    end
 end

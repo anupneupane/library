@@ -76,21 +76,28 @@ class User < ActiveRecord::Base
     (self.twitter_auth.twitter_handle if self.authenticated_with_twitter?) || nil
   end
 
+  def collect_friend_ids
+    self.friends.collect { |f| f.id}
+  end
+
   def self.find_by_twitter_id(id)
     User.joins(:twitter_auth).where("twitter_auths.twitter_id = :id", id: id).first || nil
   end
 
   def up_votes
-    self.votes.includes(:topic_link).where("votes.status = 1").collect{|v| v.topic_link}
+    self.votes.includes(:topic_link => [:topic => [:category]]).where("votes.status = 1")
+  end
+
+  def upvoted_tls
+    self.up_votes.collect{|v| v.topic_link}
   end
 
   def down_votes
-    self.votes.includes(:topic_link).where("votes.status = -1").collect{|v| v.topic_link}
+    self.votes.includes(:topic_link => [:topic => [:category]]).where("votes.status = -1")
   end
 
-  def collect_friend_ids
-    self.friends.collect { |f| f.id}
+  def downvoted_tls
+    self.down_votes.collect{|v| v.topic_link}
   end
-
 
 end

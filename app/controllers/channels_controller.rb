@@ -38,7 +38,7 @@ class ChannelsController < ApplicationController
 
   # GET /channels/1/edit
   def edit
-    @channel = Channel.find(params[:id])
+    @channel = Channel.includes([:categories => [:topics]]).find(params[:id])
   end
 
   # POST /channels
@@ -60,7 +60,7 @@ class ChannelsController < ApplicationController
   # PUT /channels/1
   # PUT /channels/1.json
   def update
-    @channel = Channel.find(params[:id])
+    @channel = Channel.includes([:categories => [:topics]]).find(params[:id])
 
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
@@ -76,7 +76,7 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
-    @channel = Channel.find(params[:id])
+    @channel = Channel.includes([:categories => [:topics]]).find(params[:id])
     @channel.destroy
 
     respond_to do |format|

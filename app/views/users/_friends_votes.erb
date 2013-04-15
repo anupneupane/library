@@ -1,0 +1,7 @@
+<div class="submitted-topic task">
+  <h6><%= link_to l.title, l.topic %></h6>
+  Upvoted by: 
+  <% l.voters.each do |u| %>
+    <%= link_to u.username, u %><%= "," if u != l.voters.last %>
+  <% end %>
+</div>

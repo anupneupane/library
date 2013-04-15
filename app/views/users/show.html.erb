@@ -15,7 +15,20 @@ Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<b
   <%= link_to 'Update Account', edit_user_path(@user) %></p>
 <% end %>
 <hr>
-
+<% if logged_in? && @user == current_user %>
+<div class="row">
+  <div class="span12">
+    <div class="row indent-submissions">
+      <div class="span6">
+        <%= render partial: 'friends_upvotes', locals: {links: @friends_upvoted_links} %>
+      </div>
+      <div class="span6">
+        <%= render partial: 'friends_downvotes', locals: {links: @friends_downvoted_links} %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 <div class="row">
   <div class="span12">
     <div class="row indent-submissions">
@@ -26,9 +39,13 @@ Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<b
         <%= render partial: 'submitted_links', locals: {submitted_links: @user.topic_links.limit(5).order("created_at DESC")}%>
       </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
     <div class="row indent-submissions">
       <div class="span6">
-        <%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes.compact}%>
+        <%= render partial: 'up_voted_links', locals: {upvotes: @user.up_votes.order(:updated_at).limit(5).compact}%>
       </div>
       <div class="span6">
         <%= render partial: 'down_voted_links', locals: {downvotes: @user.down_votes.compact}%>

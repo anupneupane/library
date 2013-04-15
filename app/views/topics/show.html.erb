@@ -1,7 +1,7 @@
 <div class="tasks">
-  <p class="big grey"><%= link_to @topic.category.channel.title, channel_path(@topic.category.channel) %> > <%= link_to @topic.category.title, category_path(@topic.category) %></p>
+  <p class="big grey"><%= link_to @channel.title, @channel %> > <%= link_to @category.title, @category %></p>
   <h1><%= @topic.title %></h1>
-  <p class="topic_submission">Submitted by <%= link_to @topic.user.username, user_path(@topic.user_id) %></p>
+  <p class="topic_submission">Submitted by <%= link_to @topic.user.username, @topic.user %></p>
   <% if @topic.authorize?(current_user) %>
     <%= render partial: 'topics/edit_form_modal', locals: {topic:@topic}%>
       <a href="#editTopicFormModal" data-toggle="modal">Edit</a> |
@@ -13,4 +13,4 @@
 
   <%= render partial: 'topic_links/form_modal' if logged_in?%>
 </div>
-  <%= render partial: 'links_table', locals: {links: @topic.order_topic_links_by_score} %>
+  <%= render partial: 'links_table', locals: {links: @topic_links} %>

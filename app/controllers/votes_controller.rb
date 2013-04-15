@@ -1,8 +1,8 @@
 class VotesController < ApplicationController
   def create
-    submitted_vote_status = params[:vote][:status].to_i
-    @topic = Topic.find(params[:topic_id])
     @topic_link = TopicLink.find(params[:link_id])
+    @topic = @topic_link.topic
+    submitted_vote_status = params[:vote][:status].to_i
     @prior_vote = Vote.find_prior_vote(params[:vote][:user_id], params[:link_id])
     
     if @prior_vote && @prior_vote.same_as_submitted_vote?(submitted_vote_status)
@@ -11,7 +11,11 @@ class VotesController < ApplicationController
       @topic_link.cast_vote(@prior_vote, params[:vote], submitted_vote_status)
       notice = "Vote successful."      
     end
+<<<<<<< HEAD
     @topic.best_link
+=======
+    @topic.best_link = @topic.topic_links.first
+>>>>>>> refactored some sql stuff, updated the user view a bit
     @topic.save
     respond_to do |format|
       format.html { redirect_to @topic, notice: notice}

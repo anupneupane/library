@@ -1,0 +1,4 @@
+<div class="submitted-topic task">
+  <h6><%= link_to l.topic_link.title, l.topic_link.topic %></h6>
+  <p><i class="icon-calendar"></i> <%=time_ago_in_words(Vote.where(user_id: current_user.id, topic_link_id:l.topic_link.id).first.created_at)%> ago | <%= link_to l.topic_link.topic.category.channel.title, l.topic_link.topic.category.channel %> > <%= link_to l.topic_link.topic.category.title, l.topic_link.topic.category %> > <%= link_to l.topic_link.topic.title, l.topic_link.topic%></p>
+</div>

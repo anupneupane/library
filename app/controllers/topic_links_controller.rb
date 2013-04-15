@@ -3,6 +3,7 @@ class TopicLinksController < ApplicationController
   before_filter :check_if_logged_in
   before_filter :load_topic_link, :only => [:update, :destroy, :edit]
   before_filter :tl_admin_or_creator, :only => [:update, :destroy, :edit]
+
   
   # GET /topic_links/new
   # GET /topic_links/new.json
@@ -35,7 +36,7 @@ class TopicLinksController < ApplicationController
   def create
     @link = Link.new(url: params[:link][:url].strip.downcase)
     @link.prepend_http
-    @topic = Topic.find(params[:topic_id])  
+    @topic = Topic.includes(:category => :channel).find(params[:topic_id])  
     @topic_link = TopicLink.new(params[:topic_link])
     @topic_link.topic = @topic
     @topic_link.user = current_user
@@ -45,8 +46,9 @@ class TopicLinksController < ApplicationController
       @topic_link.create_associate_or_reject_link
       redirect_to @topic
     else 
+      redirect_to @topic
       flash[:error] = "Invalid URL"
-      render 'topics/show'
+      
     end
   end
 
@@ -90,9 +92,6 @@ class TopicLinksController < ApplicationController
   end
 
   private
-    def load_topic_link
-      @topic_link = TopicLink.find(params[:topic_link_id] || params[:id])
-    end
 
     def tl_admin_or_creator
       redirect_to root_path, notice: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))

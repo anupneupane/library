@@ -5,7 +5,6 @@
       <%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <% end %>
   <hr>
-  <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics} %>
-</div><!--/span-->
-
+  <%= render partial: 'shared_partials/topic_list', locals: {target: @category.topics}%>
+</div>
 

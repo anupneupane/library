@@ -1,7 +1,4 @@
-<table>
-  <tr>
-    <th>Up Votes</th>
-  </tr>
-        <%= render partial: "users/user_items", collection: upvotes, as: :i%>
-
-</table>
+<div class="profile-block">
+  <h5>Recent Upvotes</h5>
+  <%= render partial:'voted_links', collection: @user.up_votes.limit(5), as: :l %>
+</div>

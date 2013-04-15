@@ -14,6 +14,8 @@ class TopicLink < ActiveRecord::Base
 
   validates_presence_of :title
 
+  default_scope order('topic_links.score DESC, topic_links.updated_at DESC')
+
   def authorize?(user)
     user && (user.admin? || (self.user_id==user.id && is_score_zero?))
   end
@@ -57,12 +59,9 @@ class TopicLink < ActiveRecord::Base
     end
   end
 
-  def collect_up_voters
-    self.votes.where(status: 1).all.collect { |v| v.user_id } 
-  end
-
   def friend_up_voters(current_user)
-    self.collect_up_voters & current_user.collect_friend_ids
+    @friends ||= current_user.collect_friend_ids
+    @friend_up_voters ||= self.votes.includes(:user).where(status: 1, user_id: @friends)
   end
 
   def friends_score(current_user)

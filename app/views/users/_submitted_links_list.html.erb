@@ -8,7 +8,6 @@
   
   
   <div class='info'>
-    <p><i class="icon-calendar"></i> <%=time_ago_in_words(topic_link.created_at)%> ago | Category: <%= link_to topic_link.topic.category.title, topic_link.topic.category %></p>
-    <p>Topic: <%= link_to truncate(topic_link.topic.title, length: 60), topic_link.topic %> </p>
+    <p><i class="icon-calendar"></i> <%=time_ago_in_words(topic_link.created_at)%> ago | <%= link_to topic_link.topic.category.title, topic_link.topic.category %> > <%= link_to truncate(topic_link.topic.title, length: 60), topic_link.topic %> </p>
   </div>
 </div>

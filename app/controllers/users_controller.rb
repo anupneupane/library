@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+<<<<<<< HEAD
     @user = User.includes([:friends=>
                             [:votes =>
                               [:topic_link =>
@@ -21,12 +22,28 @@ class UsersController < ApplicationController
                             [:link,
                             :topic =>
                               [:best_link, :category]
+=======
+    @user = User.includes([:votes => 
+                            [:topic_link => 
+                              [:link, :topic => [:category => :channel]]
+                            ]
+                          ],
+                          [:topic_links => 
+                            [:link, 
+                            :topic => 
+                              [:category=>
+                                [:channel]
+                              ]
+>>>>>>> refactored some sql stuff, updated the user view a bit
                             ]
                           ],
                           [:topics =>
-                            [:best_link, :category]
+                            [:category=>[:channel], :best_link => [:link]]
                           ],
                           [:twitter_auth]).find(params[:id])
+
+    @friends_upvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).where(votes: {user_id: @user.friends.collect{|u|u.id}, status:1}).limit(5).flatten
+    @friends_downvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).order().where(votes: {user_id: @user.friends.collect{|u|u.id}, status:-1}).limit(5).flatten
 
     respond_to do |format|
       format.html # show.html.erb
@@ -101,11 +118,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-    def load_variables
-      @user = User.find(params[:id])
-    end
-
     def edit_or_update?
       redirect_to user_path , notice: "You are not authorized to do that!" unless same_user_or_admin?
     end

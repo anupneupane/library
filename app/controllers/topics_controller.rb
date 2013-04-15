@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :load_user
   before_filter :check_if_logged_in, :except => [:show, :index]
-  before_filter :load_variables, :only => [:update, :destroy, :edit, :show]
   before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
   before_filter :load_new_topic
 
@@ -19,7 +18,11 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-    @topic = Topic.includes(:topic_links => [:user, :link]).find(params[:id])
+    @topic = Topic.includes(:user, :category => [:topics, :channel =>[:categories=>[:topics]]], :topic_links=>[:link, :user]).find(params[:id])
+    #@friend_votes = @topic.topic_links.votes.includes([:user]).where(votes:{user_id: current_user.collect_friend_ids})
+    @topic_links = @topic.topic_links
+    @category = @topic.category
+    @channel = @category.channel
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
     @request_url = {url: topic_links_path(@topic.id)}
@@ -43,6 +46,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+
   end
 
   # POST /topics
@@ -90,11 +94,7 @@ class TopicsController < ApplicationController
   end
 
   private
-    def load_variables
-      @topic = Topic.includes(:category => [:channel]).find(params[:topic_id] || params[:id])
-      @category = @topic.category
-      @channel = @category.channel
-    end
+
 
     def topic_admin_or_creator
       redirect_to @topic, notice: "You are not authorized to do that!" if ! @topic.authorize?(current_user)

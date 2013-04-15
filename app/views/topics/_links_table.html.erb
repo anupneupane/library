@@ -1,15 +1,15 @@
 <div class="tasks">
   <div>
     <% if links.length > 0 %>
-      <% if @topic.best_link %>
+      <% if @topic.has_best_link? %>
         <table class="topic_links">
-          <%= render partial: 'topic_links/link_list', locals: {tl: @topic.best_link} %>
+          <%= render partial: 'topic_links/link_list', locals: {tl: links.first} %>
         </table>
         <hr>
         <% if links.length > 1 %>
           <b>Other Links:</b>
           <table class="topic_links">
-            <%= render partial: "topic_links/link_list", collection: links.where('id != ?', @topic.best_link.id), as: :tl%>
+            <%= render partial: "topic_links/link_list", collection: links.shift, as: :tl%>
           </table>
         <% end %>
       <% else %>
