@@ -18,6 +18,7 @@
         <% if @channel %>
           <li><a href='<%= ("#topicFormModal" if logged_in?) || "#loginModal" %>' data-toggle="modal">Submit A Topic</a></li>
         <% end %>
+        <li><%= render partial: 'layouts/search' %></li>
       </ul>
       <ul class="nav pull-right">
         <% if !logged_in? %>

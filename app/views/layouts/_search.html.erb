@@ -1,0 +1,6 @@
+<%= form_tag category_path, method: :put do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  <p>
+<% end %>
