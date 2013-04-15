@@ -5,24 +5,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-<<<<<<< HEAD
-    @user = User.includes([:friends=>
-                            [:votes =>
-                              [:topic_link =>
-                                [:topic]
-                              ]
-                            ]
-                          ],
-                          [:votes =>
-                            [:topic_link =>
-                              [:link, :topic => :category]
-                            ]
-                          ],
-                          [:topic_links =>
-                            [:link,
-                            :topic =>
-                              [:best_link, :category]
-=======
+
     @user = User.includes([:votes => 
                             [:topic_link => 
                               [:link, :topic => [:category => :channel]]
@@ -34,7 +17,6 @@ class UsersController < ApplicationController
                               [:category=>
                                 [:channel]
                               ]
->>>>>>> refactored some sql stuff, updated the user view a bit
                             ]
                           ],
                           [:topics =>
