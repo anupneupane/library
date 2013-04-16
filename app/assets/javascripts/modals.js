@@ -24,23 +24,24 @@ $(document).ready(function(){
   );
   $('body').on('click','.topic-submit-link',
     function(){
-      loadModal('/'+$(this).attr('data-channel')+'/submit-topic.html');
+      loadModal('/channels/'+$(this).attr('data-channel')+'/topics/new.html');
+
     }
   );
     $('body').on('click','.topic-edit-link',
     function(){
-      loadModal('/edit-topic/'+$(this).attr('data-topic')+'.html');
+      loadModal('/topics/'+$(this).attr('data-topic')+'/edit.html');
     }
   );
 
   $('body').on('click','.topic-link-submit-link',
     function(){
-      loadModal('/'+$(this).attr('data-topic')+'/submit-topic-link.html');
+      loadModal('/topics/'+$(this).attr('data-topic')+'/links/new.html');
     }
   );
   $('body').on('click','.topic-link-edit-link',
     function(){
-      loadModal('/edit-topic-link/'+$(this).attr('data-topic-link')+'.html');
+      loadModal('/topics/'+$(this).attr('data-topic')+'/links/'+$(this).attr('data-topic-link')+'/edit.html');
     }
   );
 });
