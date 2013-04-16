@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
-  before_filter :load_variables, only: [:edit, :destroy, :update]
   before_filter :edit_or_update?, only: [:edit, :destroy, :update]
 
   # GET /users/1
   # GET /users/1.json
   def show
 
-    @user = User.includes([:votes => 
-                            [:topic_link => 
+    @user = User.includes([:votes =>
+                            [:topic_link =>
                               [:link, :topic => [:category => :channel]]
                             ]
                           ],
-                          [:topic_links => 
-                            [:link, 
-                            :topic => 
+                          [:topic_links =>
+                            [:link,
+                            :topic =>
                               [:category=>
                                 [:channel]
                               ]
