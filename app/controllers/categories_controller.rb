@@ -79,9 +79,10 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1.json
   def destroy
     @category = Category.includes(:channel=>[:categories=>[:topics]], :topics => [:topic_links]).order("topics.title ASC").find_by_id(params[:id])
+    @category.destroy
 
     respond_to do |format|
-      format.html { redirect_to categories_url }
+      format.html { redirect_to @category.channel }
       format.json { head :no_content }
     end
   end

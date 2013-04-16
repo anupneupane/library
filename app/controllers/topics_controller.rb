@@ -83,12 +83,10 @@ class TopicsController < ApplicationController
   # DELETE /topics/1.json
   def destroy
     @category = @topic.category
-    if @topic.destroy
-      redirect_to @category
-    end
+    @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to topics_url }
+      format.html { redirect_to @category }
       format.json { head :no_content }
     end
   end
