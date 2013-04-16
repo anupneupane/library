@@ -1,0 +1,10 @@
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Editing a Link</h3>
+    </div>
+    <div class="modal-body">
+        <%= render partial:'topic_links/form', locals: {path:topic_link_path(@topic, @topic_link)}%>
+    </div>
+</div>

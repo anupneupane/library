@@ -1,9 +1,9 @@
-<%= form_for(@topic_link, @request_url) do |f| %>
+<%= form_for(@topic_link, url: path) do |f| %>
     <%= render "shared_partials/error_messages", :target => @topic_link %>
     <div class="field">
         <%= fields_for @link do |l|%>
         <%= l.label "Url:" %>
-        <%= l.text_field :url, value: 'http://' %>
+        <%= l.text_field :url %>
         <% end %>
     <%= f.label "Title:" %>
     <%= f.text_field :title %><br>

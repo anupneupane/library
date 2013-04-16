@@ -9,10 +9,9 @@ class TopicLinksController < ApplicationController
   # GET /topic_links/new.json
   def new
     @topic_link = TopicLink.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @topic_link }
-    end
+    @topic = Topic.find(params[:topic_id])
+    @link = Link.new
+    render template: 'modals/topic-link-submit', layout:false
   end
 
  # when editing a topic link, want to check if edited topic_link already exists.  if it already
@@ -21,14 +20,10 @@ class TopicLinksController < ApplicationController
   # GET /topic_links/1/edit
   def edit
     @topic_link = TopicLink.find(params[:id])
-    @topic = @topic_link.topic
+    @topic=@topic_link.topic
     @category = @topic_link.topic.category
     @link = @topic_link.link
-    @request_url = {url: topic_link_path(@topic.id, @topic_link)}
-    respond_to do |format|
-      format.html # edit.html.erb
-      format.json { render json: @topic_link }
-    end
+    render template: 'modals/topic-link-edit', layout:false
   end
 
   # POST /topic_links
@@ -93,6 +88,9 @@ class TopicLinksController < ApplicationController
 
   private
 
+    def load_topic_link
+      @topic_link = TopicLink.find(params[:id])
+    end
     def tl_admin_or_creator
       redirect_to root_path, notice: "You are not authorized to do that!" if (! @topic_link.authorize?(current_user))
     end

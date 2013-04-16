@@ -1,10 +1,10 @@
-<div id="tlFormModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Submit a Link</h3>
     </div>
     <div class="modal-body">
-        <%= render partial:'topic_links/form'%>
+        <%= render partial:'topic_links/form', locals: {path:topic_links_path(@topic)}%>
     </div>
 </div>

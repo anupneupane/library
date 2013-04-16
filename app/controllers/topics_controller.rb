@@ -24,7 +24,6 @@ class TopicsController < ApplicationController
     @channel = @category.channel
     @topic_link = TopicLink.new
     @link = @topic_link.build_link
-    @request_url = {url: topic_links_path(@topic.id)}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,6 +41,9 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    @channel = @topic.category.channel
+    render template:'modals/topic-edit', layout:false
+
   end
 
   # POST /topics

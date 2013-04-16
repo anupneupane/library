@@ -38,7 +38,7 @@
       <% end %>
     <% end %>
     <% if tl.authorize?(current_user) %>
-      <p><%= link_to "Edit", edit_topic_link_path(@topic, tl) %> |
+      <p><a hred="#" data-topic-link="<%=tl.id%>" class="topic-link-edit-link">Edit</a> |
       <%= link_to "Delete", topic_link_path(@topic, tl), method: :delete, data: { confirm: 'Are you sure?' }%></p>
     <% end %>
   </td>
