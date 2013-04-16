@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   def new
+    @user = User.new
+    render template:'modals/login-modal', layout: false
     if current_user
       redirect_to root_path
     end

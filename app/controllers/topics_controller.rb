@@ -2,7 +2,6 @@ class TopicsController < ApplicationController
   before_filter :load_user
   before_filter :check_if_logged_in, :except => [:show, :index]
   before_filter :topic_admin_or_creator, :only => [:update, :destroy, :edit]
-  before_filter :load_new_topic
 
   # GET /topics
   # GET /topics.json
@@ -37,16 +36,12 @@ class TopicsController < ApplicationController
   # GET /topics/new.json
   def new
     @topic = Topic.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @topic }
-    end
+    @channel = Channel.find(params[:channel_id])
+    render template:'modals/topic-submit', layout:false
   end
 
   # GET /topics/1/edit
   def edit
-
   end
 
   # POST /topics
@@ -85,7 +80,10 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
-    @topic.destroy
+    @category = @topic.category
+    if @topic.destroy
+      redirect_to @category
+    end
 
     respond_to do |format|
       format.html { redirect_to topics_url }
@@ -94,9 +92,9 @@ class TopicsController < ApplicationController
   end
 
   private
-
-
     def topic_admin_or_creator
+
+      @topic = Topic.find(params[:id])
       redirect_to @topic, notice: "You are not authorized to do that!" if ! @topic.authorize?(current_user)
     end
 end

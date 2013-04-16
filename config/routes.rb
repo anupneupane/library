@@ -7,6 +7,7 @@ Library::Application.routes.draw do
   root :to => 'channels#index'
 
   get "signup" => "users#new"
+  get "submit-topic/:channel_id" => "topics#new", :as => "submit_topic"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
@@ -18,7 +19,6 @@ Library::Application.routes.draw do
   resources :votes, only: :create
   resources :users, except: :index
   resources :categories, except: :index
-
   resources :topics, except: :index do
     resources :topic_links, :only => [:new, :create, :edit, :update, :destroy], :path => "links", :as => "links" do
       resources :votes, :only => [:create, :destroy]

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :load_variables, only: [:edit, :destroy, :update]
   before_filter :edit_or_update?, only: [:edit, :destroy, :update]
 
   # GET /users/1
@@ -37,11 +36,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
+    render template:'modals/signup-modal', layout: false
   end
 
   # GET /users/1/edit

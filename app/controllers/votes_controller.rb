@@ -11,11 +11,8 @@ class VotesController < ApplicationController
       @topic_link.cast_vote(@prior_vote, params[:vote], submitted_vote_status)
       notice = "Vote successful."      
     end
-<<<<<<< HEAD
-    @topic.best_link
-=======
-    @topic.best_link = @topic.topic_links.first
->>>>>>> refactored some sql stuff, updated the user view a bit
+
+    @topic.best_link = @topic.topic_links.first if @topic.topic_links.first.score > 1
     @topic.save
     respond_to do |format|
       format.html { redirect_to @topic, notice: notice}
