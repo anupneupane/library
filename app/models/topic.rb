@@ -26,8 +26,10 @@ class Topic < ActiveRecord::Base
     self.topic_links.order("score desc, updated_at desc")
   end
 
-  def has_best_link?
-    !! self.best_link
+  def best_link
+    if ! self.has_no_topic_links?
+     self.order_topic_links_by_score.first if self.order_topic_links_by_score.first.score > 0
+    end
   end
 
 end
