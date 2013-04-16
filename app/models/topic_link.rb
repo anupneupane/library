@@ -2,7 +2,7 @@ require 'open-uri'
 
 class TopicLink < ActiveRecord::Base
   attr_accessible :link_id, :score, :topic_id, :title, :description, :link_attributes, :user_id
-  
+
   belongs_to :topic
   belongs_to :link
   accepts_nested_attributes_for :link
@@ -51,7 +51,6 @@ class TopicLink < ActiveRecord::Base
   def create_associate_or_reject_link
     existing_link = Link.find_by_url(self.link.url)
     if existing_link && self.topic.includes_link?(existing_link) #link exists and already belongs to this topic
-      
       false #don't save it
     else
       self.link = existing_link if existing_link #link exists but does not belong to this topic

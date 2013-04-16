@@ -33,8 +33,8 @@
       <% else %>
         person you follow:
       <% end %>
-      <%tl.friend_up_voters(current_user).each do |f| %> 
-        <%= link_to User.find(f.user_id).username, user_path(f) %><%= "," if f != tl.friend_up_voters(current_user).last %>
+      <%tl.friend_up_voters(current_user).each do |f| %>
+        <%= link_to User.find(f.user_id).username, user_path(f.user_id) %><%= "," if f != tl.friend_up_voters(current_user).last %>
       <% end %>
     <% end %>
     <% if tl.authorize?(current_user) %>
