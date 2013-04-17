@@ -24,7 +24,6 @@ class UsersController < ApplicationController
                           ],
                           [:twitter_auth]).find(params[:id])
 
-    TwitterFriendWorker.perform_async(@user.id)
     @friends_upvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).where(votes: {user_id: @user.friends.collect{|u|u.id}, status:1}).limit(5).flatten
     @friends_downvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).order().where(votes: {user_id: @user.friends.collect{|u|u.id}, status:-1}).limit(5).flatten
 
@@ -77,10 +76,21 @@ class UsersController < ApplicationController
 
   def twitter_auth
     auth = env['omniauth.auth']
-    current_user.link_twitter(auth)
-    TwitterFriendWorker.perform_async(current_user.id)
-    TwitterFollowerWorker.perform_async(current_user.id)
-    redirect_to current_user
+      if ! auth.extra.raw_info.errors
+        TwitterSetupWorker.perform_async(current_user.id, auth)
+        TwitterFriendWorker.perform_async(current_user.id)
+        TwitterFollowerWorker.perform_async(current_user.id)
+
+        redirect_to current_user
+      elsif auth.extra.raw_info.errors[0].code = 88
+        TwitterAuth.rate_limit_exceeded = true
+        redirect_to current_user, notice: "Twitter rate limit exceeded, try again in a few minutes."
+      end
+  end
+
+  def twitter_info
+    @user = User.find(params[:user_id])
+    render template: 'users/twitter-info', layout: false
   end
 
   # DELETE /users/1

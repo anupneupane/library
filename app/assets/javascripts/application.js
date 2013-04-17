@@ -25,6 +25,7 @@
 //= require easing
 //= require custom
 //= require modals
+//= require users
 //= require_self
 $(document).ready(function(){
     $('a').tooltip();

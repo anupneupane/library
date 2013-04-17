@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       login(user)
-      TwitterFriendWorker.perform_async(user.id)
+      #TwitterFriendWorker.perform_async(user.id)
       redirect_to request.referrer, notice: "Logged In!"
     else
       flash[:error] = "Email or password is invalid"

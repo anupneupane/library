@@ -1,6 +1,17 @@
 class TwitterAuth < ActiveRecord::Base
   attr_accessible :twitter_id, :twitter_handle, :token, :secret, :user_id
   belongs_to :user
+  validates_presence_of :twitter_handle
+  
+  @@rate_limit_exceeded = false
+
+  def self.rate_limit_exceeded=(value)
+    @@rate_limit_exceeded = value
+  end
+
+  def self.rate_limit_exceeded
+    @@rate_limit_exceeded
+  end
 
   def find_friends_on_twitter
     self.twitter_request.friends.ids.json?.ids
@@ -69,8 +80,14 @@ class TwitterAuth < ActiveRecord::Base
     begin
       self.twitter_request.account.verify_credentials?
       true
-    rescue
+    rescue Grackle::TwitterError => e
+     if e.status == 429
+      TwitterAuth.rate_limit_exceeded = true
+      true
+     else
       false
+     end
+
     end
   end
   def twitter_request

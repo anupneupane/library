@@ -1,0 +1,10 @@
+<% if @user.authenticated_with_twitter? %>
+  <%= image_tag('img/twitter-bird-blue-on-white.png') %><%= link_to @user.twitter_handle, "https://www.twitter.com/#{@user.twitter_handle}" %>
+<% elsif @user == current_user%>
+  <p><%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %></p>
+<% end %>
+<p><%= "Following: " if @user.friends.length > 0 %>
+<% @user.friends.each do |friend| %>
+  <%= link_to friend.username, user_path(friend) %><%= "," if friend != @user.friends.last %>
+<% end %>
+</p>

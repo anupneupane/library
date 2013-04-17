@@ -19,9 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :environment, "production"
+set :environment, "development"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every 1.day, at: '3:00am' do
+every 2.minutes do
   rake "twitter:update_all"
 end

@@ -4,13 +4,14 @@ Library::Application.routes.draw do
   resources :channels
 
 
-  root :to => 'channels#index'
+  root :to => "channels#index"
   get "signup" => "users#new"
   get "channels/:channel_id/topics/new" => "topics#new", as: "submit_topic"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
-  get '/auth/twitter/callback', :to => 'users#twitter_auth'
+  get "/auth/twitter/callback", :to => "users#twitter_auth"
+  get "/users/:user_id/twitter-info.html" => "users#twitter_info"
  mount Sidekiq::Web, at: "/sidekiq"
 
   

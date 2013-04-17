@@ -1,15 +1,7 @@
 <h3><%= @user.username %></h3>
-<% if @user.authenticated_with_twitter? %>
-  <%= image_tag('img/twitter-bird-blue-on-white.png') %><%= link_to @user.twitter_handle, "https://www.twitter.com/#{@user.twitter_handle}" %>
-  <% elsif @user == current_user%>
-    <p><%= link_to 'Connect your Twitter account to see your friends\' activity', '/auth/twitter' %></p>
-  <% end %>
-</br>
+<div id="twitter-info" data-user="<%=@user.id%>">
+</div>
 Member since: <%= distance_of_time_in_words(@user.created_at, Time.now) %> ago<br>
-<%= "Following: " if @user.friends.length > 0 %>
-<% @user.friends.each do |friend| %>
-  <%= link_to friend.username, user_path(friend) %><%= "," if friend != @user.friends.last %>
-<% end %>
 <% if has_admin_privileges? %>
   <p><%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
   <%= link_to 'Update Account', edit_user_path(@user) %></p>
