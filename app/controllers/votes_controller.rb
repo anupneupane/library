@@ -11,7 +11,6 @@ class VotesController < ApplicationController
       @topic_link.cast_vote(@prior_vote, params[:vote], submitted_vote_status)
       notice = "Vote successful."
     end
-    @topic.best_link
     @topic.save
     respond_to do |format|
       format.html { redirect_to @topic, notice: notice}
