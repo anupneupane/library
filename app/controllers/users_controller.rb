@@ -76,6 +76,7 @@ class UsersController < ApplicationController
 
   def twitter_auth
     auth = env['omniauth.auth']
+    binding.pry
       if ! auth.extra.raw_info.errors
         TwitterSetupWorker.perform_async(current_user.id, auth)
         TwitterFriendWorker.perform_async(current_user.id)
