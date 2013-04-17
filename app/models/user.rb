@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
     self.friends.collect { |f| f.id}
   end
 
+  def remove_friendships
+    TwitterFriendship.destroy_all(["friend_id = :id or user_id = :id", id: self.id])
+  end
+
   def self.find_by_twitter_id(id)
     User.joins(:twitter_auth).where("twitter_auths.twitter_id = :id", id: id).first || nil
   end
