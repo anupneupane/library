@@ -38,7 +38,7 @@ class TwitterAuth < ActiveRecord::Base
         (TwitterFriendship.create(user_id: self.user_id, friend_id: friend.user_id) if friend.authenticated?) || friend.destroy
       end
     else
-      self.destroy
+      self.unauthenticate
     end
   end
 

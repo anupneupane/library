@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
 
   def link_twitter(auth_hash)
     @twit_auth = TwitterAuth.find_or_initialize_by_user_id(self.id)
+    binding.pry
     @twit_auth.update_attributes(
       twitter_id: auth_hash['uid'],
       twitter_handle: auth_hash['info']['nickname'],
@@ -65,7 +66,7 @@ class User < ActiveRecord::Base
       secret: auth_hash['credentials']['secret']
     )
     @twit_auth.save
-    #@twit_auth.find_and_save_friends
+    @twit_auth.find_and_save_friends
   end
 
   def twitter_id

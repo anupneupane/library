@@ -23,6 +23,7 @@ class UsersController < ApplicationController
                           ],
                           [:twitter_auth]).find(params[:id])
 
+    TwitterFriendWorker.perform_async(@user.id)
     @friends_upvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).where(votes: {user_id: @user.friends.collect{|u|u.id}, status:1}).limit(5).flatten
     @friends_downvoted_links = TopicLink.includes(:link, :voters, :topic => [:category => [:channel]], :votes => [:user]).order().where(votes: {user_id: @user.friends.collect{|u|u.id}, status:-1}).limit(5).flatten
 
