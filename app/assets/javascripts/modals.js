@@ -8,7 +8,6 @@ $(document).ready(function(){
         $('#modal-wrapper').html(data);
         $('#myModal').modal('show');
       });
-    
   }
 
   $('.login-link').click(
