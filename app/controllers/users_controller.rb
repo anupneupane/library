@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  #before_filter :load_user
   before_filter :edit_or_update?, only: [:edit, :destroy, :update]
 
   # GET /users/1
@@ -42,7 +43,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -97,7 +97,8 @@ class UsersController < ApplicationController
 
   private
     def edit_or_update?
-      redirect_to user_path , notice: "You are not authorized to do that!" unless same_user_or_admin?
+      @user = User.find(params[:id])
+      redirect_to user_path, notice: "You are not authorized to do that!" unless same_user_or_admin?
     end
 
 end
