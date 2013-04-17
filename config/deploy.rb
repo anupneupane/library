@@ -48,3 +48,6 @@ task :upload_confs, :roles => :app do
   upload('config/twitter.yml', "#{shared_path}/twitter.yml")
   upload('config/database.yml', "#{shared_path}/database.yml")
 end
+
+        require './config/boot'
+        require 'airbrake/capistrano'
