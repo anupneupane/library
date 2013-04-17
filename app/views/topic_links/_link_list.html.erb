@@ -6,7 +6,7 @@
       <% if logged_in? %>
         <%= image_submit_tag "upvote.png"%>
       <% else %>
-        <a href="#loginModal" role="button" class="btn vote" data-toggle="modal"><%=image_tag "upvote.png"%></a>
+        <a href="#loginModal" role="button" class="btn vote login-link" data-toggle="modal"><%=image_tag "upvote.png"%></a>
       <% end %>
     <% end %>
 
@@ -18,7 +18,7 @@
       <% if logged_in? %>
         <%= image_submit_tag "downvote.png"%>
       <% else %>
-        <a href="#loginModal" role="button" class="btn vote" data-toggle="modal"><%=image_tag "downvote.png"%></a>
+        <a href="#" role="button" class="btn vote login-link" data-toggle="modal"><%=image_tag "downvote.png"%></a>
       <% end %>
     <% end%>
   </td>
