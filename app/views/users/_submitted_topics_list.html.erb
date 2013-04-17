@@ -6,7 +6,7 @@
   <% end %>
   <p><i class="icon-calendar"></i> <%=time_ago_in_words(topic.created_at)%> ago
     <% if topic.topic_links.count > 0 %>
-   | <%= topic.topic_links.length %> <%= %(link) if topic.topic_links.length == 1 || %(links) %>
+   | <%= topic.topic_links.length %> <%= (%(link) if topic.topic_links.length == 1) || %(links) %>
    <% end %> | 
      <%= link_to topic.category.channel.title, topic.category.channel %> > <%= link_to topic.category.title, topic.category %>
   </p>
