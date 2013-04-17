@@ -16,6 +16,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'whenever'
+gem 'airbrake'
 
 group :development do
   gem 'quiet_assets'
