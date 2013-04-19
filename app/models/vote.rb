@@ -26,7 +26,7 @@ class Vote < ActiveRecord::Base
       "down"
     end
   end
-  
+
 end
 
 

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :email, :password, :password_confirmation, :role
+  attr_accessible :username, :email, :password, :password_confirmation
 
   has_one :twitter_auth, dependent: :destroy
   has_many :twitter_friendships, dependent: :destroy

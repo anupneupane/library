@@ -13,7 +13,7 @@ class Link < ActiveRecord::Base
   end
 
   def is_valid?
-    self.prepend_http 
+    self.prepend_http
     begin
       uri = URI.parse(self.url)
       PublicSuffix.parse(uri.host)
@@ -24,4 +24,3 @@ class Link < ActiveRecord::Base
   end
 
 end
-  
