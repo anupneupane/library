@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.attr_accessible :role
+
 users = User.create([
   { :username => "john",
     :email => "john.ferguson@flatironschool.com",
@@ -208,7 +210,7 @@ topic_links = TopicLink.create([
                                 {link_id: 25, topic_id: 7, user_id: 3, title: "Variables | The Bastards Book of Ruby", description: "A great explanation of variables in Ruby"},
                                 {link_id: 26, topic_id: 6, user_id: 4, title: "Class and Instance Variables In Ruby // RailsTips by John Nunemaker", description: "Class Variables and Instance Variables covered in detail"},
                                 {link_id: 27, topic_id: 7, user_id: 1, title: "Instance variables", description: "Very brief explanation of instance variables"},
-                                {link_id: 28, topic_id: 8, user_id: 2, title: "Class: String (Ruby 2.0)", description: "Very detailed documentation about Ruby Strings"}, 
+                                {link_id: 28, topic_id: 8, user_id: 2, title: "Class: String (Ruby 2.0)", description: "Very detailed documentation about Ruby Strings"},
                                 {link_id: 29, topic_id: 8, user_id: 3, title: "Strings in Ruby", description: "Thorough explanation of Strings in Ruby and the methods to use with them"},
                                 {link_id: 30, topic_id: 8, user_id: 4, title: "Strings | The Bastards Book of Ruby", description: "How to work with Strings in Ruby"},
                                 {link_id: 31, topic_id: 8, user_id: 1, title: "Ruby Strings", description: "Details on all the methods available for Strings in Ruby"},
