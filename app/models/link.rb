@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id         :integer          not null, primary key
+#  url        :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
   # require 'public_suffix'
 
 class Link < ActiveRecord::Base
